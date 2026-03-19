@@ -1,0 +1,17 @@
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\SVMFunctions.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_linear_init_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Include\arm_math.h
+gc_chass\svmfunctions.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+gc_chass\svmfunctions.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gc_chass\svmfunctions.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+gc_chass\svmfunctions.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+gc_chass\svmfunctions.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h
+gc_chass\svmfunctions.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\float.h
+gc_chass\svmfunctions.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\limits.h
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_linear_predict_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_polynomial_init_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_polynomial_predict_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_rbf_init_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_rbf_predict_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_sigmoid_init_f32.c
+gc_chass\svmfunctions.o: D:\Keil_v5\Packs\ARM\CMSIS\5.7.0\CMSIS\DSP\Source\SVMFunctions\arm_svm_sigmoid_predict_f32.c

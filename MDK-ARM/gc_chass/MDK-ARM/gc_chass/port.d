@@ -1,0 +1,12 @@
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/port.c
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h
+gc_chass\port.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+gc_chass\port.o: D:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+gc_chass\port.o: ../Core/Inc/FreeRTOSConfig.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/projdefs.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/portable.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/deprecated_definitions.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F/portmacro.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/mpu_wrappers.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/task.h
+gc_chass\port.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/list.h
