@@ -257,9 +257,13 @@ void GimbalPitch_Control() {
     
     float imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
     float target_pos = gimbalpitch->pitch_ref - imu_error;
-	float imu_error_vel = ins->Gyro[Y_INS] * PI / 180.0f;
-	motor[Motor1].ctrl.vel_set = -imu_error_vel;                //µÖÏûË²¼äÕðµ´µÄ½ÇËÙ¶È
-    motor[Motor1].ctrl.pos_set =Gimbal_DMLimitPitch(target_pos);//·ÅÖÃÎ»ÖÃ
+
+    // 4. ÏÞ·ù£¨·ÀÖ¹ pitch_ref Æ¯ÒÆµ¼ÖÂ×²Ç½£©
+    target_pos = Gimbal_DMLimitPitch(target_pos);
+    
+//	float torque_out = PID_GetPIDOutput(&gimbalpitch->spdPID);
+//	float realpitch =Gimbal_DMLimitPitch(PID_GetPIDOutput(&gimbalpitch->spdPID));
+	motor[Motor1].ctrl.pos_set =target_pos ;
 			
 }
 /**
