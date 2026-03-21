@@ -17,6 +17,7 @@
 #include "periph_DMmotor.h"
 #include "module_dm4310.h"
 #include "util_can.h"
+#include "app_remote.h"
 
 GimbalPitch_GimbalPitchTypeDef GimbalPitch_gimbalPitchControlData;
 GimbalYaw_GimbalYawTypeDef GimbalYaw_gimbalYawControlData;
@@ -144,7 +145,7 @@ void GimbalPitch_SetPitchRef(float pitch_ref) {
 //	float DMAX_PITCH_DEG = Const_DMPITCH_DMAXANGLE;
 	
     gimbalpitch->pitch_ref += pitch_ref;
-	LimitMaxMin(gimbalpitch->pitch_ref, 0.8,-1.2);
+	LimitMaxMin(gimbalpitch->pitch_ref, 1.2,-0.3);
 }
 /**
   * @brief      Set the target value of gimbal yaw
@@ -257,13 +258,12 @@ void GimbalPitch_Control() {
     
     float imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
     float target_pos = gimbalpitch->pitch_ref - imu_error;
-
-    // 4. ÏÞ·ù£¨·ÀÖ¹ pitch_ref Æ¯ÒÆµ¼ÖÂ×²Ç½£©
-    target_pos = Gimbal_DMLimitPitch(target_pos);
+   
+	//float v_ref = vef_pitch_ref / 0.002f;
+	float v_imu = -ins->Gyro[Y_INS] * PI / 180.0f;
     
-//	float torque_out = PID_GetPIDOutput(&gimbalpitch->spdPID);
-//	float realpitch =Gimbal_DMLimitPitch(PID_GetPIDOutput(&gimbalpitch->spdPID));
-	motor[Motor1].ctrl.pos_set =target_pos ;
+   // motor[Motor1].ctrl.vel_set = v_imu;
+	motor[Motor1].ctrl.pos_set =Gimbal_DMLimitPitch(target_pos) ;
 			
 }
 /**

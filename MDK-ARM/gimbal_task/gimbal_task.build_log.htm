@@ -17,11 +17,11 @@ Library Manager: ArmAr.exe V5.06 update 5 (build 528)
 Hex Converter:   FromElf.exe V5.06 update 5 (build 528)
 CPU DLL:         SARMCM3.DLL V5.40.0.3
 Dialog DLL:      DCM.DLL V1.17.5.0
-Target DLL:      STLink\ST-LINKIII-KEIL_SWO.dll V3.3.0.0
+Target DLL:      Segger\JL2CM3.dll V2.99.44.0
 Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
-C:\Users\ghko5\Desktop\Omni_Infantry\gimbal_task\MDK-ARM\gimbal_task.uvprojx
+C:\Users\ghko5\Documents\Github\DJ-Omni_Infantry\MDK-ARM\gimbal_task.uvprojx
 Project File Date:  01/28/2026
 
 <h2>Output:</h2>
@@ -29,54 +29,7 @@ Project File Date:  01/28/2026
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-compiling list.c...
-compiling app_autoaim.c...
-compiling periph_autoaim.c...
-compiling stm32f4xx_it.c...
-compiling main.c...
-../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
-  void Debug_Init();
-../Src/main.c: 1 warning, 0 errors
-compiling app_init.c...
-../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
-  #endif
-../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
-  void Debug_Init();
-..\Src\Application\app_init.c: 2 warnings, 0 errors
-compiling protocol_common.c...
-compiling app_remote.c...
-../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Src\Application\app_remote.c(224): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	test_pitch_ref =(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
-..\Src\Application\app_remote.c: 2 warnings, 0 errors
-compiling app_gimbal.c...
-../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Src\Application\app_gimbal.c: 1 warning, 0 errors
-compiling util_debug.c...
-../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
-  void Debug_Init();
-..\Src\Utility\util_debug.c: 1 warning, 0 errors
-compiling module_gimbal.c...
-../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Src\Modules\module_gimbal.c(147): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	
-imitMaxMin(gimbalpitch->pitch_ref, 0.8,-1.2);
-..\Src\Modules\module_gimbal.c: 2 warnings, 0 errors
-compiling app_Debug.c...
-../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
-  void Debug_Init();
-../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Src\Application\app_Debug.c: 2 warnings, 0 errors
-linking...
-gimbal_task\gimbal_task.axf: Warning: L6304W: Duplicate input file gimbal_task\list_1.o ignored.
-Program Size: Code=70032 RO-data=6116 RW-data=1364 ZI-data=63452  
-Finished: 0 information, 1 warning and 0 error messages.
-FromELF: creating hex file...
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 12 Warning(s).
+"gimbal_task\gimbal_task.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -100,7 +53,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:10
+Build Time Elapsed:  00:00:02
 </pre>
 </body>
 </html>

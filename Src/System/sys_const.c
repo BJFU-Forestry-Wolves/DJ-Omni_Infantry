@@ -71,9 +71,9 @@ float KP_MIN                                                =0.0f  ;
 float KP_MAX                                                =500.0f;
 float KD_MIN                                                =0.0f  ;
 float KD_MAX                                                =5.0f   ;
-float Const_DMPITCH_UMAXANGLE                       = 0.72f;
-float Const_DMPITCH_DMAXANGLE                       = -0.6f;
-float Const_PITCH_MOTOR_INIT_OFFSETf              = -0.0f;
+float Const_DMPITCH_UMAXANGLE                       = 0.8f;
+float Const_DMPITCH_DMAXANGLE                       = -0.03f;
+float Const_PITCH_MOTOR_INIT_OFFSETf              = -0.2f;     //越小PITCH开始时头会抬高
 /************************************************************************************************/
 // pitch gimbal param
 const float Const_GimbalPitchSpdParam[4][5] = {

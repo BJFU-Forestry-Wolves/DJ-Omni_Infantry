@@ -35,6 +35,7 @@ void Remote_RemoteShooterModeSet(void);
 void Remote_RemoteProcess(void);
 void Remote_KeyMouseProcess(void);
 
+extern float vef_pitch_ref;
 #endif
 
 #ifdef __cplusplus

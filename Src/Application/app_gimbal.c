@@ -32,7 +32,7 @@ void Gimbal_Task(void const * argument) {
 
         GimbalPitch_Control();
 			  GimbalYaw_Control();
-        //GimbalPitch_Output();
+        GimbalPitch_Output();
 		dm_motor_ctrl_send(&hcan1, &motor[Motor1]);
 		
       osDelay(2);

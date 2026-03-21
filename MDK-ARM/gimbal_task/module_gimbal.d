@@ -91,3 +91,9 @@ gimbal_task\module_gimbal.o: ../Inc/tim.h
 gimbal_task\module_gimbal.o: ../Inc/Modules/module_dm4310.h
 gimbal_task\module_gimbal.o: ../Inc/Periphal/periph_DMmotor.h
 gimbal_task\module_gimbal.o: ../Inc/Utility/util_can.h
+gimbal_task\module_gimbal.o: ../Inc/Application/app_remote.h
+gimbal_task\module_gimbal.o: ../Inc/Periphal/periph_remote.h
+gimbal_task\module_gimbal.o: ../Inc/Utility/util_uart.h
+gimbal_task\module_gimbal.o: C:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
+gimbal_task\module_gimbal.o: ../Inc/Periphal/periph_servo.h
+gimbal_task\module_gimbal.o: ../Inc/Utility/util_pwm.h

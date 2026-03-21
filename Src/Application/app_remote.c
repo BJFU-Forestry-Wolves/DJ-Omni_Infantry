@@ -169,7 +169,7 @@ void Remote_MouseShooterModeSet() {
 * @retval     NULL
 */
 uint16_t test;
-float test_pitch_ref;
+float vef_pitch_ref;
 void Remote_RemoteShooterModeSet() {
 
 
@@ -221,7 +221,7 @@ void Remote_RemoteShooterModeSet() {
     buscomm->yaw_ref += Gimbal_LimitYaw((float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN + (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.004f*0.2f);
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
-	test_pitch_ref =(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
+	vef_pitch_ref =(float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
     pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;      //(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;      
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
 	GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
