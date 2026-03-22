@@ -68,7 +68,6 @@ void Shooter_Control() {
     
     Shooter_FeederControl();
 
-    Shooter_ShooterMotorOutput();
 }
 
 
@@ -468,6 +467,6 @@ void Shooter_ShooterMotorOutput() {
 
     if (shooter->shooter_control == 1) {
         Motor_SendMotorGroupOutput(&Motor_ShootMotors);
-			  //Motor_SendMotorGroupOutput(&Motor_ShootMotors1);
+		
     }
 }

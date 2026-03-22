@@ -137,23 +137,23 @@ void Remote_MouseShooterModeSet() {
 //        Shooter_ChangeFeederMode(Feeder_FINISH);
 //        return;
 //    }
-    if ((fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
-        Shooter_ChangeFeederMode(Feeder_FINISH);
-        return;
-    }
+//    if ((fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
+//        Shooter_ChangeFeederMode(Feeder_FINISH);
+//        return;
+//    }
 
     static int count_mouse_L = 0;
     if (data->mouse.l == 1) {
         count_mouse_L++;
-        if (count_mouse_L >= 50) {
+        if (count_mouse_L >= 15) {
             Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
-            count_mouse_L = 50;
+            count_mouse_L = 15;
         }
     }
     else {
-        if (0 < count_mouse_L && count_mouse_L < 50) {
+        if (0 < count_mouse_L && count_mouse_L < 15) {
             Shooter_SingleShootReset();
-            Shooter_ChangeFeederMode(Feeder_SINGLE);
+            Shooter_ChangeFeederMode(Feeder_SINGLE);    //15次鼠标点击以内为单发
         }
         else Shooter_ChangeFeederMode(Feeder_FINISH);
         count_mouse_L = 0;
@@ -266,8 +266,8 @@ void Remote_RemoteProcess() {
 		      GimbalYaw_SetYawRef(buscomm->yaw_ref);
           float pitch_ref;
           pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.002f;
-          GimbalPitch_SetPitchRef(Gimbal_LimitPitch(pitch_ref));  
-					   //Chassis_SetChassisRef()
+          float cospitch = pitch_ref*PI/180;   //角度转为弧度
+	      GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
             break;
         }
         case Remote_SWITCH_MIDDLE: {
@@ -281,8 +281,8 @@ void Remote_RemoteProcess() {
 		      GimbalYaw_SetYawRef(buscomm->yaw_ref);
           float pitch_ref;
           pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;
-					
-          GimbalPitch_SetPitchRef(Gimbal_LimitPitch(pitch_ref));  
+			float cospitch = pitch_ref*PI/180;   //角度转为弧度               																	
+	      GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));  
 					break;
         }
         case Remote_SWITCH_DOWN: {
@@ -295,9 +295,9 @@ void Remote_RemoteProcess() {
           buscomm->yaw_ref += Gimbal_LimitYaw((float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN);
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
-          pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;
-					
-    GimbalPitch_SetPitchRef(Gimbal_LimitPitch(pitch_ref));
+    pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;
+	float cospitch = pitch_ref*PI/180;   //角度转为弧度
+	GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
 							
             break;
         }
@@ -427,7 +427,9 @@ void Remote_KeyMouseProcess() {
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
     pitch_ref = ((float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT - autoaim_pitch);
-    GimbalPitch_SetPitchRef(Gimbal_LimitPitch(pitch_ref));
+	float cospitch = pitch_ref*PI/180;   //角度转为弧度
+	GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
+
 
 		//shoot control(fric)
     if (data->key.f == 1)      

@@ -37,7 +37,7 @@ const float Const_HeatCtrlStopLimit                 = 10;
 const float Const_ShooterSlowSpeed                  = 0.0f;
 const float Const_ShooterFastSpeed                  = 0.0f;
 
-const float MOUSE_PITCH_ANGLE_TO_FACT             = 0.0001f;
+const float MOUSE_PITCH_ANGLE_TO_FACT             = 0.0025f;
 float MOUSE_YAW_ANGLE_TO_FACT               	  = 0.0025f;
 const float MOUSE_CHASSIS_TO_FACT                 = 0.00022;       
 const float MOUSE_CHASSIS_ACCELERATE              = 0.02f;

@@ -21,6 +21,7 @@ void Shoot_Task(void const * argument) {
 
     forever {
         Shooter_Control();
+		Shooter_ShooterMotorOutput(); //两个摩擦轮，并不是拨弹电机
       osDelay(2);
     }
 }
