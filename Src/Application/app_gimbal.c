@@ -30,10 +30,10 @@ void Gimbal_Task(void const * argument) {
 			  SendVisionData(&visionDataSend);    //将数据发给视觉
 		dm_motor_detect(&motor[Motor1]);
 
-        GimbalPitch_Control();
-			  GimbalYaw_Control();
-        GimbalPitch_Output();
-		dm_motor_ctrl_send(&hcan1, &motor[Motor1]);
+       // GimbalPitch_Control();
+		//	  GimbalYaw_Control();
+        //GimbalPitch_Output();
+		//dm_motor_ctrl_send(&hcan1, &motor[Motor1]);
 		
       osDelay(2);
     }
