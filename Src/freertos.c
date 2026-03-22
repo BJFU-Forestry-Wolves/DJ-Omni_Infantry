@@ -175,8 +175,8 @@ void MX_FREERTOS_Init(void) {
   Referee_TaskHaHandle = osThreadCreate(osThread(Referee_TaskHa), NULL);
 
   /* definition and creation of Debug_TASKS */
-//  osThreadDef(Debug_TASKS, Debug_Task, osPriorityIdle, 0, 128);
-//  Debug_TASKSHandle = osThreadCreate(osThread(Debug_TASKS), NULL);
+  osThreadDef(Debug_TASKS, Debug_Task, osPriorityIdle, 0, 128);
+  Debug_TASKSHandle = osThreadCreate(osThread(Debug_TASKS), NULL);
 
   /* definition and creation of Chassis_TaskHan */
   osThreadDef(Chassis_TaskHan, Chassis_Task, osPriorityRealtime, 0, 128);

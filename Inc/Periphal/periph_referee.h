@@ -414,41 +414,7 @@ uint32_t Referee_PackStringGraphicData(graphic_data_struct_t *pgraph, uint32_t g
                                        Draw_Color color, uint16_t font_size, uint8_t length,
                                        uint8_t width, uint16_t start_x, uint16_t start_y);
 
-void Draw_ClearLayer(uint8_t layer);
-void Draw_ClearAll(void);
-void Draw_Delete(uint32_t graph_id);
-void Draw_AddLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                  uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y);
-void Draw_ModifyLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                     uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y);
-void Draw_AddRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                       uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y);
-void Draw_ModifyRectangle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                          uint16_t start_x, uint16_t start_y, uint16_t end_x, uint16_t end_y);
-void Draw_AddCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                    uint16_t center_x, uint16_t center_y, uint16_t radius);
-void Draw_ModifyCircle(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                       uint16_t center_x, uint16_t center_y, uint16_t radius);
-void Draw_AddEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                     uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y);
-void Draw_ModifyEllipse(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
-                        uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y);
-void Draw_AddArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t start_angle, uint16_t end_angle, 
-                 uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y);
-void Draw_ModifyArc(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t start_angle, uint16_t end_angle, 
-                    uint8_t width, uint16_t center_x, uint16_t center_y, uint16_t radius_x, uint16_t radius_y);
-void Draw_AddFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint16_t decimal_digit, 
-                   uint8_t width, uint16_t start_x, uint16_t start_y, float value);
-void Draw_ModifyFloat(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, uint16_t decimal_digit, 
-                      uint8_t width, uint16_t start_x, uint16_t start_y, float value);
-void Draw_AddInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size,
-                 uint8_t width, uint16_t start_x, uint16_t start_y, int value);
-void Draw_ModifyInt(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size,
-                    uint8_t width, uint16_t start_x, uint16_t start_y, int value);
-void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
-                    uint8_t width, uint16_t start_x, uint16_t start_y, const char str[]);
-void Draw_ModifyString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size,
-                       uint8_t width, uint16_t start_x, uint16_t start_y, const char str[]);
+
 
 uint8_t Referee_IsRefereeOffline(void);
 uint8_t Referee_CheckDataLengthByCmdID(uint16_t cmd_id, uint16_t data_length);

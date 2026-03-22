@@ -24,7 +24,8 @@ void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
         Remote_RXCallback(huart);
     }
     if (huart == Const_Referee_UART_HANDLER) {
-        Referee_RXCallback(huart);
+        //Referee_RXCallback(huart);
+		 Remote_RXCallback(huart);
 //		Debug_RXCallback(huart);
     }
 }
