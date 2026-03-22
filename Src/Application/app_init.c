@@ -57,7 +57,7 @@ void Init_InitAll() {
 	/*****Just for DM ******/
 	dm_motor_init();
 	dm_motor_enable(&hcan1, &motor[Motor1]);
-	
+		 
 }
 
 

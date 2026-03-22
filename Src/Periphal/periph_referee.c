@@ -285,7 +285,7 @@ void Referee_InitReferee() {
     Referee_ResetRefereeData();
     referee->last_update_time = HAL_GetTick();
     Uart_InitUartDMA(Const_Referee_UART_HANDLER);
-    Uart_ReceiveDMA(Const_Referee_UART_HANDLER, Remote_RxData, Const_Remote_RX_BUFF_LEN);
+    Uart_ReceiveDMA(Const_Referee_UART_HANDLER, Referee_RxData, Const_Referee_RX_BUFF_LEN);
 }
 
 

@@ -10,6 +10,7 @@
 
 
 #include "periph_remote.h"
+#include "periph_referee.h"
 #include "main.h"
 #include "usart.h"
 extern DMA_HandleTypeDef hdma_usart3_rx;
@@ -90,14 +91,14 @@ uint16_t testrxdatalen;
 void Remote_RXCallback(UART_HandleTypeDef* huart) {
     
     /* handle uart data from DMA */
-    uint16_t rxdatalen = Const_Remote_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
+    uint16_t rxdatalen = Const_Referee_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
 	testrxdatalen =  rxdatalen;
 	for (uint16_t i = 0; i < rxdatalen; i++){
-       if (Remote_RxData[i] == 0xA9){
-          Remote_DecodeRemoteData(Remote_RxData+i, rxdatalen-i);
+       if (Referee_RxData[i] == 0xA9){
+          Remote_DecodeRemoteData(Referee_RxData+i, 21);
 	   }
    }
-    /* restart dma transmission */
+    /* restart dma transmission */        
    __HAL_UART_CLEAR_IDLEFLAG(huart);
 }
 

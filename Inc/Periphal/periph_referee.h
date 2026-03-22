@@ -21,7 +21,7 @@ extern "C" {
 #include "string.h"
 
 extern UART_HandleTypeDef* Const_Referee_UART_HANDLER;
-
+extern uint8_t Referee_RxData[300];
 /********** START OF REFEREE CMD STRUCT DEFINITION **********/
 
 typedef __packed struct {
