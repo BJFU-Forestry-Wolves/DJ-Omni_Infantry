@@ -382,7 +382,7 @@ void Shooter_SingleShootCtrl() {
         //return;     // do nothing
     }
     if (!shooter->single_shoot_done) {   // not shoot yet
-        PID_AddPIDRef(&shooter->feedAngPID, 45.0f);
+        PID_AddPIDRef(&shooter->feedAngPID, 55.0f);
         PID_SetPIDFdb(&shooter->feedAngPID, Motor_FeedMotor.encoder.consequent_angle);
         shooter->single_shoot_done = 1;
     }

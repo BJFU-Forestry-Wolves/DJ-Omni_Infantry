@@ -94,7 +94,7 @@ void Remote_RXCallback(UART_HandleTypeDef* huart) {
 	testrxdatalen =  rxdatalen;
 	for (uint16_t i = 0; i < rxdatalen; i++){
        if (Remote_RxData[i] == 0xA9){
-          Remote_DecodeRemoteData(Remote_RxData, rxdatalen);
+          Remote_DecodeRemoteData(Remote_RxData+i, rxdatalen-i);
 	   }
    }
     /* restart dma transmission */

@@ -11,7 +11,7 @@ void Chassis_Task(void const * argument) {
 
     for(;;) {
 			Chassis_Control();
-      Chassis_Output();
+      //Chassis_Output();
       osDelay(2);
     }
 }

@@ -132,15 +132,6 @@ void Remote_MouseShooterModeSet() {
     Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
 
-    // Prevent launching without opening the friction wheel
-//    if ((shooter->shooter_mode != Shoot_REFEREE) || (fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
-//        Shooter_ChangeFeederMode(Feeder_FINISH);
-//        return;
-//    }
-//    if ((fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
-//        Shooter_ChangeFeederMode(Feeder_FINISH);
-//        return;
-//    }
 
     static int count_mouse_L = 0;
     if (data->mouse.l == 1) {

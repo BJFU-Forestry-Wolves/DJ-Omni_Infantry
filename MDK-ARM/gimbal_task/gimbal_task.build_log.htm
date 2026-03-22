@@ -29,20 +29,17 @@ Project File Date:  03/22/2026
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-compiling app_remote.c...
+compiling module_shoot.c...
+compiling app_gimbal.c...
 ../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
   #endif
-..\Src\Application\app_remote.c(224): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-  	vef_pitch_ref =(float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
-..\Src\Application\app_remote.c(416): warning:  #1-D: last line of file ends without a newline
-  }
-..\Src\Application\app_remote.c: 3 warnings, 0 errors
+..\Src\Application\app_gimbal.c: 1 warning, 0 errors
 linking...
 gimbal_task\gimbal_task.axf: Warning: L6304W: Duplicate input file gimbal_task\list_1.o ignored.
-Program Size: Code=65880 RO-data=4720 RW-data=1364 ZI-data=63956  
+Program Size: Code=65824 RO-data=4720 RW-data=1364 ZI-data=63956  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 4 Warning(s).
+"gimbal_task\gimbal_task.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -66,7 +63,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:04
+Build Time Elapsed:  00:00:03
 </pre>
 </body>
 </html>
