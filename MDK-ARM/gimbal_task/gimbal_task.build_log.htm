@@ -29,21 +29,100 @@ Project File Date:  03/23/2026
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-assembling startup_stm32f407xx.s...
 compiling list.c...
-compiling usart.c...
+compiling freertos.c...
+compiling stm32f4xx_it.c...
+compiling app_watchDog.c...
+compiling app_referee.c...
+compiling module_shoot.c...
+compiling app_chassis.c...
+compiling main.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+../Src/main.c: 1 warning, 0 errors
+compiling module_referee.c...
+compiling app_power_limiting.c...
+../Inc/Algorithm/alg_power_limting.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Inc/Application/app_power_limiting.h(11): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Application\app_power_limiting.c(10): warning:  #1-D: last line of file ends without a newline
+  }
+..\Src\Application\app_power_limiting.c: 3 warnings, 0 errors
+compiling app_remote.c...
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Application\app_remote.c(215): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	vef_pitch_ref =(float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
+..\Src\Application\app_remote.c(407): warning:  #1-D: last line of file ends without a newline
+  }
+..\Src\Application\app_remote.c: 3 warnings, 0 errors
+compiling app_autoaim.c...
+compiling periph_autoaim.c...
+compiling app_init.c...
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+..\Src\Application\app_init.c: 2 warnings, 0 errors
+compiling app_Debug.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Application\app_Debug.c: 2 warnings, 0 errors
+compiling module_gimbal.c...
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Modules\module_gimbal.c(148): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	
+imitMaxMin(gimbalpitch->pitch_ref, 1.2,-0.3);
+..\Src\Modules\module_gimbal.c: 2 warnings, 0 errors
+compiling app_gimbal.c...
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Application\app_gimbal.c: 1 warning, 0 errors
+compiling module_chassis.c...
+../Inc/Algorithm/alg_power_limting.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Modules\module_chassis.c: 1 warning, 0 errors
+compiling periph_referee.c...
+compiling periph_motor.c...
+../Inc/Algorithm/alg_power_limting.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif
+../Inc/Modules/module_dm4310.h(28): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Periphal\periph_motor.c(392): warning:  #177-D: variable "can_handle"  was declared but never referenced
+  		CAN_HandleTypeDef* can_handle = &hcan1;
+..\Src\Periphal\periph_motor.c: 3 warnings, 0 errors
+compiling periph_remote.c...
+..\Src\Periphal\periph_remote.c(190): warning:  #177-D: variable "mouse_mid"  was declared but never referenced
+  	uint8_t mouse_mid = (buff[16] >> 4) & 0x03;
+..\Src\Periphal\periph_remote.c: 1 warning, 0 errors
 compiling util_uart.c...
 ../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
   void Debug_Init();
 ..\Src\Utility\util_uart.c(186): warning:  #1-D: last line of file ends without a newline
   	 //__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE)&& __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE)
 ..\Src\Utility\util_uart.c: 2 warnings, 0 errors
+compiling alg_power_limiting.c...
+../Inc/Algorithm/alg_power_limting.h(31): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Src\Algorithm\alg_power_limiting.c(25): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+       Pl_tyre->Power_current=Pl_tyre->K1*Cal_Motor->encoder.current*Cal_Motor->encoder.current+(Cal_Motor->encoder.speed*Cal_Motor->encoder.current)/9.55+Pl_tyre->a;
+..\Src\Algorithm\alg_power_limiting.c(56): warning:  #1-D: last line of file ends without a newline
+  }
+..\Src\Algorithm\alg_power_limiting.c: 3 warnings, 0 errors
+compiling util_debug.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+..\Src\Utility\util_debug.c: 1 warning, 0 errors
 linking...
 gimbal_task\gimbal_task.axf: Warning: L6304W: Duplicate input file gimbal_task\list_1.o ignored.
 Program Size: Code=66224 RO-data=5768 RW-data=1372 ZI-data=63956  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 3 Warning(s).
+"gimbal_task\gimbal_task.axf" - 0 Error(s), 26 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -67,7 +146,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:03
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>
