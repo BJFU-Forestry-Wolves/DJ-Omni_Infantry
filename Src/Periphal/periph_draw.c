@@ -264,12 +264,10 @@ void Referee_SetAimMode(uint8_t mode) {
  
 const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 20, 2, 1000, 840};  //名称，字节，宽度，x，y
 const uint8_t AIM_MODE_LAYER        = 2;
-const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_GREEN;
-const char *AIM_MODE_TEXT_STR       = "AIM_MODE:";
-const char *NORMAL_AIM_TEXT_STR     = "NORMAL";
-const char *ARMOR_AIM_TEXT_STR      = "ARMOR";
-const char *BIG_BUFF_AIM_TEXT_STR   = "BIG_BUF";
-const char *SMALL_BUFF_AIM_TEXT_STR = "SMALL_BUF";
+const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_BLACK;
+
+const char *NORMAL_AIM_TEXT_STR     = " GUGUGAGA ";
+
 
 /**
   * @brief      打包显示字符串图形命令
