@@ -10,15 +10,14 @@
 
 
 #include "periph_remote.h"
-#include "periph_referee.h"
 #include "main.h"
 #include "usart.h"
 extern DMA_HandleTypeDef hdma_usart3_rx;
 UART_HandleTypeDef* Const_Remote_UART_HANDLER       = &huart3;
 HAL_StatusTypeDef errcode_1;
 /*          Remote control related constants    */
-const uint16_t Const_Remote_RX_BUFF_LEN             = 63 ;
-const uint16_t Const_Remote_RX_FRAME_LEN            = 21;
+#define Const_Remote_RX_BUFF_LEN             		54
+const uint16_t Const_Remote_RX_FRAME_LEN            = 18;
 const uint16_t Const_Remote_CHANNEL_VALUE_LIMIT     = 640;
 const uint16_t Const_Remote_CHANNEL_VALUE_OFFSET    = 1024;
 const uint16_t Const_Remote_CHANNEL_ERROR_LIMIT     = 700;
@@ -54,6 +53,15 @@ Remote_RemoteDataTypeDef* Remote_GetRemoteDataPtr() {
 void Remote_InitRemote() {
     Remote_ResetRemoteData();
     Remote_RemoteData.last_update_time = HAL_GetTick();
+	  //HAL_UART_Receive_IT(&huart3,Remote_RxData,18);
+//	  errcode_1=HAL_UARTEx_ReceiveToIdle_DMA(Const_Remote_UART_HANDLER,Remote_RxData,Const_Remote_RX_BUFF_LEN);
+//	  __HAL_DMA_DISABLE_IT(&hdma_usart3_rx,DMA_IT_HT);
+//	while (errcode_1 != HAL_OK)
+//    {
+//        HAL_UART_AbortReceive(&huart3);        
+//        errcode_1 = HAL_UARTEx_ReceiveToIdle_DMA(Const_Remote_UART_HANDLER,Remote_RxData,Const_Remote_RX_BUFF_LEN);
+//    }
+    //HAL_UARTEx_ReceiveToIdle_DMA(Const_Remote_UART_HANDLER,Remote_RxData,Const_Remote_RX_BUFF_LEN);
     Uart_InitUartDMA(Const_Remote_UART_HANDLER);
     Uart_ReceiveDMA(Const_Remote_UART_HANDLER, Remote_RxData, Const_Remote_RX_BUFF_LEN);
 }
@@ -82,27 +90,46 @@ uint8_t Remote_IsRemoteOffline() {
     return rc->state == Remote_STATE_CONNECTED;
 }
 
-uint16_t testrxdatalen;
+
 /**
   * @brief      Remote control receiving callback function
   * @param      huart: Pointer to UART handle
   * @retval     NULL
   */
 void Remote_RXCallback(UART_HandleTypeDef* huart) {
-    
+    /* clear DMA transfer complete flag */
+    __HAL_DMA_DISABLE(huart->hdmarx);
+
     /* handle uart data from DMA */
-    uint16_t rxdatalen = Const_Referee_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
-	testrxdatalen =  rxdatalen;
-	for (uint16_t i = 0; i < rxdatalen; i++){
-       if (Referee_RxData[i] == 0xA9){
-          Remote_DecodeRemoteData(Referee_RxData+i, 21);
-		   
-	   }
-   }
-    /* restart dma transmission */        
-   __HAL_UART_CLEAR_IDLEFLAG(huart);
+    int rxdatalen = Const_Remote_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
+    Remote_DecodeRemoteData(Remote_RxData, rxdatalen);
+
+    /* restart dma transmission */
+    __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_Remote_RX_BUFF_LEN);
+    __HAL_DMA_ENABLE(huart->hdmarx);
 }
 
+
+/**
+  * @brief      Judge whether the remote control data is wrong
+  * @param      rc: pointer to remote control object
+  * @retval     Error or not (1 is yes, 0 is no)
+  */
+uint8_t Remote_IsRemoteError() {
+    Remote_RemoteDataTypeDef *rc = Remote_GetRemoteDataPtr();
+    const uint8_t REMOTE_OK      = 0;
+    const uint8_t REMOTE_ERROR   = 1;
+
+    for (int i = 0; i < 5; ++i)
+        if (abs(rc->remote.ch[i]) > Const_Remote_CHANNEL_ERROR_LIMIT) {
+            return REMOTE_ERROR;
+        }
+    for (int i = 0; i < 2; ++i)
+        if (rc->remote.s[i] == Remote_SWITCH_NULL) {
+            return REMOTE_ERROR;
+        }
+    return REMOTE_OK;
+}
 
 
 /**
@@ -147,7 +174,7 @@ void Remote_DecodeKeyboardData(Remote_KeyboardTypeDef* key, uint16_t v) {
     key->b      = (v & KEY_MASK_B    ) > 0;
 }
 
-int16_t TEST;
+
 /**
   * @brief      Remote control decoding function
   * @param      rc: The pointer points to the remote control data object
@@ -161,36 +188,31 @@ void Remote_DecodeRemoteData(uint8_t* buff, int rxdatalen) {
     if (rxdatalen != Const_Remote_RX_FRAME_LEN) {
         return;                                     //Data length error
     }
-    // 2. 帧头校验：固定值为 0xA9 和 0x53 
-    if (buff[0] != 0xA9 || buff[1] != 0x53) {
-        return;
-    }
+    
     rc->state           = Remote_STATE_PENDING;
     rc->last_update_time = HAL_GetTick();   
-    rc->remote.ch[0] = Remote_CancelChannelOffset(((uint16_t)buff[2] | (uint16_t)buff[3] << 8) & 0x07FF); 
-    TEST =	Remote_CancelChannelOffset(((uint16_t)buff[2] | (uint16_t)buff[3] << 8) & 0x07FF);
-    rc->remote.ch[1] = Remote_CancelChannelOffset(((uint16_t)buff[3] >> 3 | (uint16_t)buff[4] << 5) & 0x07FF);    
-    rc->remote.ch[2] = Remote_CancelChannelOffset(((uint16_t)buff[4] >> 6 | (uint16_t)buff[5] << 2 | (uint16_t)buff[6] << 10) & 0x07FF);    
-    rc->remote.ch[3] = Remote_CancelChannelOffset(((uint16_t)buff[6] >> 1 | (uint16_t)buff[7] << 7) & 0x07FF);
-    rc->remote.s[0] = Remote_ToSwitchState((buff[7] >> 4) & 0x03);
-	rc->keskey.pause_btn= (buff[7] >> 6) & 0x01; //暂停按钮
-    rc->keskey.custom_l = (buff[7] >> 7) & 0x01; //自定义按键-左
-    rc->keskey.custom_r = (buff[8] & 0x01);      //自定义按键-右
-	rc->keskey.trigger_btn = (buff[9] >> 4) & 0x01; //扳机键
-	// 拨轮数据 (Channel 4) [cite: 296]
-    rc->remote.ch[4] = ((uint16_t)buff[8] >> 1 | (uint16_t)buff[9] << 7) & 0x07FF;
-    rc->remote.ch[4] = Remote_CancelChannelOffset(rc->remote.ch[4]);
-	
-    rc->mouse.x = ((int16_t)buff[10] | (int16_t)buff[11] << 8);
-    rc->mouse.y = ((int16_t)buff[12] | (int16_t)buff[13] << 8);
-    rc->mouse.z = ((int16_t)buff[14] | (int16_t)buff[15] << 8);
-    // 鼠标按键 [cite: 296]
-    rc->mouse.l = buff[16] & 0x03;
-    rc->mouse.r = (buff[16] >> 2) & 0x03;
-	uint8_t mouse_mid = (buff[16] >> 4) & 0x03;
-   /* --- 键盘数据解析 (偏移量 136 bits -> buff[17]) --- [cite: 296] */
-    Remote_DecodeKeyboardData(&(rc->key), ((uint16_t)buff[17]) | ((uint16_t)buff[18] << 8));
-   
+    rc->remote.ch[0]    = Remote_CancelChannelOffset(((uint16_t)buff[0] | (uint16_t)buff[1] << 8) & 0x07FF);
+    rc->remote.ch[1]    = Remote_CancelChannelOffset(((uint16_t)buff[1] >> 3 | (uint16_t)buff[2] << 5) & 0x07FF);
+    rc->remote.ch[2]    = Remote_CancelChannelOffset(((uint16_t)buff[2] >> 6 | (uint16_t)buff[3] << 2 | (uint16_t)buff[4] << 10) & 0x07FF);
+    rc->remote.ch[3]    = Remote_CancelChannelOffset(((uint16_t)buff[4] >> 1 | (uint16_t)buff[5] << 7) & 0x07FF);
+    rc->remote.s[0]     = Remote_ToSwitchState((buff[5] >> 6) & 0x03);
+    rc->remote.s[1]     = Remote_ToSwitchState((buff[5] >> 4) & 0x03);
+    rc->mouse.x         = ((int16_t)buff[6] | (int16_t)buff[7] << 8);
+    rc->mouse.y         = ((int16_t)buff[8] | (int16_t)buff[9] << 8);
+    rc->mouse.z         = ((int16_t)buff[10] | (int16_t)buff[11] << 8);
+    rc->mouse.l         = buff[12];
+    rc->mouse.r         = buff[13];
+    Remote_DecodeKeyboardData(&(rc->key), ((int16_t)buff[14]) | ((int16_t)buff[15] << 8));
+    /*buff[16],buff[17] Is Dial wheel*/
+    rc->remote.ch[4]    = Remote_CancelChannelOffset(((uint16_t)buff[16] | (uint16_t)buff[17] << 8) & 0x07FF);
+
+    if (rc->remote.ch[4] == -1024) rc->remote.ch[4] = 0;
+
+    if (Remote_IsRemoteError()) {
+        rc->state       = Remote_STATE_ERROR;
+        Remote_ResetRemoteData();
+        return;
+    }
     rc->state           = Remote_STATE_CONNECTED;
 }
 

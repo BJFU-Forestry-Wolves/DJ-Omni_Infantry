@@ -46,7 +46,8 @@ void Init_InitAll() {
     Referee_InitReferee();
 //    Servo_InitAllServos();
 //	Debug_Init() ; 
- 
+
+  	Referee_Setup();  
 	GimbalPitch_InitGimbalPitch();
 	GimbalYaw_InitGimbalYaw();
     Shooter_InitShooter();
@@ -57,7 +58,7 @@ void Init_InitAll() {
 	/*****Just for DM ******/
 	dm_motor_init();
 	dm_motor_enable(&hcan1, &motor[Motor1]);
-		 
+	
 }
 
 

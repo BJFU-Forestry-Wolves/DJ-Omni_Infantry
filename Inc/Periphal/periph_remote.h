@@ -29,9 +29,10 @@ typedef enum {
 } Remote_RemoteStateEnum;
 
 typedef enum {
-    Remote_SWITCH_LEFT      = 0,
-    Remote_SWITCH_MIDDLE    = 1,
-    Remote_SWITCH_RIGHT     = 2
+    Remote_SWITCH_NULL      = 0,
+    Remote_SWITCH_UP        = 1,
+    Remote_SWITCH_DOWN      = 2,
+    Remote_SWITCH_MIDDLE    = 3
 } Remote_SwitchStateEnum;
 
 typedef struct {
@@ -41,7 +42,7 @@ typedef struct {
 typedef struct {
     struct {
         int16_t                 ch[5];  //Channel 0 channel 1 channel 2 channel 3 paddle wheel
-        Remote_SwitchStateEnum  s[1];   //Switch 0 switch 1
+        Remote_SwitchStateEnum  s[2];   //Switch 0 switch 1
     } remote;
 
     struct {
@@ -55,12 +56,6 @@ typedef struct {
     Remote_KeyboardTypeDef key;//key board
     Remote_RemoteStateEnum state;
     uint32_t last_update_time;
-	struct{
-	uint8_t pause_btn    ;
-	uint8_t custom_l     ;
-	uint8_t custom_r     ;
-	uint8_t trigger_btn  ;
-	}keskey;
 } Remote_RemoteDataTypeDef;
 
 extern const uint16_t Const_Remote_RX_BUFF_LEN;
@@ -71,7 +66,7 @@ extern const uint16_t Const_Remote_CHANNEL_ERROR_LIMIT;
 extern const uint16_t Const_Remote_REMOTE_OFFLINE_TIME;
 
 extern UART_HandleTypeDef* Const_Remote_UART_HANDLER;
-extern uint8_t Remote_RxData[63];
+
 Remote_RemoteDataTypeDef* Remote_GetRemoteDataPtr(void);
 void Remote_InitRemote(void);
 Remote_SwitchStateEnum Remote_ToSwitchState(uint8_t sw);

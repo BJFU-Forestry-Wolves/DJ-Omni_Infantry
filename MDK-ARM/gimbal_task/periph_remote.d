@@ -51,7 +51,3 @@ gimbal_task\periph_remote.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/
 gimbal_task\periph_remote.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h
 gimbal_task\periph_remote.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 gimbal_task\periph_remote.o: C:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
-gimbal_task\periph_remote.o: ../Inc/Periphal/periph_referee.h
-gimbal_task\periph_remote.o: ../Inc/Utility/util_uart.h
-gimbal_task\periph_remote.o: ../Inc/Algorithm/alg_crc.h
-gimbal_task\periph_remote.o: C:\Keil5\ARM\ARMCC\Bin\..\include\string.h
