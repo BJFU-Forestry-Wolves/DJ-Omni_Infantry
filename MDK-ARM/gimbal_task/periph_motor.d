@@ -82,16 +82,7 @@ gimbal_task\periph_motor.o: ../Inc/System/sys_const.h
 gimbal_task\periph_motor.o: C:\Keil5\ARM\ARMCC\Bin\..\include\stdio.h
 gimbal_task\periph_motor.o: C:\Keil5\ARM\ARMCC\Bin\..\include\stdlib.h
 gimbal_task\periph_motor.o: ../Inc/Algorithm/alg_power_limting.h
-gimbal_task\periph_motor.o: ../Inc/Periphal/periph_servo.h
-gimbal_task\periph_motor.o: ../Inc/Utility/util_pwm.h
-gimbal_task\periph_motor.o: ../Inc/tim.h
-gimbal_task\periph_motor.o: ../Inc/Modules/module_chassis.h
-gimbal_task\periph_motor.o: ../Inc/Periphal/periph_motor.h
-gimbal_task\periph_motor.o: ../Inc/Algorithm/alg_pid.h
-gimbal_task\periph_motor.o: ../Inc/Periphal/periph_referee.h
-gimbal_task\periph_motor.o: ../Inc/Utility/util_uart.h
-gimbal_task\periph_motor.o: ../Inc/Algorithm/alg_crc.h
-gimbal_task\periph_motor.o: ../Inc/System/sys_const.h
 gimbal_task\periph_motor.o: ../Inc/Modules/module_dm4310.h
 gimbal_task\periph_motor.o: ../Inc/Periphal/periph_DMmotor.h
 gimbal_task\periph_motor.o: ../Inc/Utility/util_pwm.h
+gimbal_task\periph_motor.o: ../Inc/tim.h

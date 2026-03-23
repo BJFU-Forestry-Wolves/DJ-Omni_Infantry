@@ -721,11 +721,6 @@
               <FilePath>..\Src\Application\app_chassis.c</FilePath>
             </File>
             <File>
-              <FileName>app_power_limiting.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\Application\app_power_limiting.c</FilePath>
-            </File>
-            <File>
               <FileName>app_Debug.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Application\app_Debug.c</FilePath>
@@ -934,16 +929,6 @@
               <FileName>protocol_transmit.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Src\Protocol\protocol_transmit.c</FilePath>
-            </File>
-          </Files>
-        </Group>
-        <Group>
-          <GroupName>Power_Limiting</GroupName>
-          <Files>
-            <File>
-              <FileName>alg_power_limiting.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\Src\Algorithm\alg_power_limiting.c</FilePath>
             </File>
           </Files>
         </Group>

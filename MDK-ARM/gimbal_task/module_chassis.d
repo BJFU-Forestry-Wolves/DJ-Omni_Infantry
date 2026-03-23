@@ -83,11 +83,3 @@ gimbal_task\module_chassis.o: ../Drivers/CMSIS/DSP/Include/dsp/quaternion_math_f
 gimbal_task\module_chassis.o: ../Inc/Algorithm/alg_filter.h
 gimbal_task\module_chassis.o: ../Inc/Algorithm/alg_pid.h
 gimbal_task\module_chassis.o: ../Inc/Algorithm/alg_power_limting.h
-gimbal_task\module_chassis.o: ../Inc/Periphal/periph_servo.h
-gimbal_task\module_chassis.o: ../Inc/Utility/util_pwm.h
-gimbal_task\module_chassis.o: ../Inc/tim.h
-gimbal_task\module_chassis.o: ../Inc/Modules/module_chassis.h
-gimbal_task\module_chassis.o: ../Inc/Periphal/periph_referee.h
-gimbal_task\module_chassis.o: ../Inc/Utility/util_uart.h
-gimbal_task\module_chassis.o: ../Inc/Algorithm/alg_crc.h
-gimbal_task\module_chassis.o: ../Inc/System/sys_const.h

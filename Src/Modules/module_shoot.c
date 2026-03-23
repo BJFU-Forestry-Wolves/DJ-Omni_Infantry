@@ -91,7 +91,7 @@ float Shooter_GetShootSpeedOffset() {
     Referee_RefereeDataTypeDef *referee = Referee_GetRefereeDataPtr();
     float offset_speed;
 
-    switch (referee->shooter_heat0_speed_limit) {
+    switch (referee->status.shooter_limit) {
         case 15: 
             offset_speed = shooter->shoot_speed_offset.speed_15mm_offset;
             break;
@@ -159,7 +159,7 @@ float Shooter_GetRefereeSpeed() {
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
 
     float speed;
-    switch (referee->shooter_heat0_speed_limit) {
+    switch (referee->status.shooter_limit) {
         case 15: 
             speed = shooter->shooter_speed_15mpers;
             break;
@@ -191,8 +191,8 @@ void Shooter_UpdataControlData() {
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
     Referee_RefereeDataTypeDef *referee = Referee_GetRefereeDataPtr();
 	
-    shooter->heat_ctrl.shooter_17mm_cooling_heat = (float)referee->shooter_heat0;
-    shooter->heat_ctrl.shooter_17mm_cooling_rate = (float)referee->shooter_heat0_cooling_limit;
+    shooter->heat_ctrl.shooter_17mm_cooling_heat = (float)referee->status.shoot_heat;
+    shooter->heat_ctrl.shooter_17mm_cooling_rate = (float)referee->status.shooter_limit;
     
     Shooter_FeederMotorLockedJudge();
 }
@@ -340,19 +340,15 @@ void Shooter_ShootControl() {
 
     switch (shooter->shooter_mode) {
       case Shoot_NULL:
-          GPIO_Reset(LASER);
           Shooter_SetShooterSpeed(0);
           break;
       case Shoot_FAST:
-          GPIO_Set(LASER);
           Shooter_SetShooterSpeed(-220);
           break;
       case Shoot_SLOW:
-          GPIO_Set(LASER);
           Shooter_SetShooterSpeed(-50);
           break;
       case Shoot_REFEREE:
-          GPIO_Set(LASER);
           Shooter_SetShooterSpeed(Shooter_GetRefereeSpeed() + Shooter_GetShootSpeedOffset());
           break;
       default:

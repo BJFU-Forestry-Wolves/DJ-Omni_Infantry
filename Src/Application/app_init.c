@@ -47,7 +47,6 @@ void Init_InitAll() {
 //    Servo_InitAllServos();
 //	Debug_Init() ; 
 
-  	Referee_Setup();  
 	GimbalPitch_InitGimbalPitch();
 	GimbalYaw_InitGimbalYaw();
     Shooter_InitShooter();

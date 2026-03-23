@@ -163,11 +163,7 @@ void Motor_SetMotorOutput(Motor_MotorTypeDef* pmotor, float output) {
     pmotor->output = output;
 }
 void Motor_SetMotorOutputChassic(Motor_MotorTypeDef* pmotor, float output) {
-	  if(Chassic_pl.K!=0){
-    pmotor->output = output*Chassic_pl.K;
-		}
-	  else 
-	    pmotor->output = output;
+	  pmotor->output = output;
 }
 
 /**

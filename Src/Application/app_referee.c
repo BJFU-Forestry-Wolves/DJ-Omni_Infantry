@@ -8,7 +8,6 @@ void Referee_Task(void const * argument) {
 	
 	forever{
 		if (referee_reset_flag) {
-			Referee_Setup();
 			referee_reset_flag = 0;
 			HAL_Delay(100);
 		}

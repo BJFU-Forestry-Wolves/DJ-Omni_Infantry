@@ -371,10 +371,10 @@ void Tidy_send_vision(VisionDataSend_Typedef *visionDataSend)
 //	else{
 //	visionDataSend->shoot_speed              =(uint8_t)bref_data.init_speed*10;	
 //	}
-	visionDataSend->robotID=(uint8_t)bref_data.robot_id;
-	if(referee->bullet_speed != 0)
-	last_shoot_speed = referee->bullet_speed;
-	else if(referee->bullet_speed == 0)
+	
+	if(referee->status.shoot_heat != 0)
+	last_shoot_speed = referee->status.shoot_heat;
+	else if(referee->status.shoot_heat == 0)
 	last_shoot_speed = 15.0f;
 
 //  visionDataSend.CRCcode                 = 0;       //CRCÐ£Ñé;

@@ -22,14 +22,23 @@ Dialog DLL:      TCM.DLL V1.56.4.0
  
 <h2>Project:</h2>
 C:\Users\ghko5\Documents\Github\DJ-Omni_Infantry\MDK-ARM\gimbal_task.uvprojx
-Project File Date:  01/28/2026
+Project File Date:  03/23/2026
 
 <h2>Output:</h2>
 *** Using Compiler 'V5.06 update 5 (build 528)', folder: 'C:\Keil5\ARM\ARMCC\Bin'
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 0 Warning(s).
+compiling periph_referee.c...
+..\Src\Periphal\periph_referee.c(398): warning:  #177-D: variable "seq"  was declared but never referenced
+      uint8_t seq = buff[3];
+..\Src\Periphal\periph_referee.c: 1 warning, 0 errors
+linking...
+gimbal_task\gimbal_task.axf: Warning: L6304W: Duplicate input file gimbal_task\list_1.o ignored.
+Program Size: Code=65572 RO-data=5724 RW-data=1316 ZI-data=62740  
+Finished: 0 information, 1 warning and 0 error messages.
+FromELF: creating hex file...
+"gimbal_task\gimbal_task.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -53,7 +62,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Build Time Elapsed:  00:00:04
 </pre>
 </body>
 </html>
