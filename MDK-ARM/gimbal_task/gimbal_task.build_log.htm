@@ -29,7 +29,57 @@ Project File Date:  03/23/2026
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 0 Warning(s).
+compiling list.c...
+compiling periph_draw.c...
+../Inc/Periphal/periph_draw.h(105): warning:  #1295-D: Deprecated declaration Referee_UpdateAimLine - give arg types
+  void Referee_UpdateAimLine();
+../Inc/Periphal/periph_draw.h(106): warning:  #1295-D: Deprecated declaration Referee_SetupAimLine - give arg types
+  void Referee_SetupAimLine();
+../Inc/Periphal/periph_draw.h(107): warning:  #1295-D: Deprecated declaration Draw_ClearAll - give arg types
+  void Draw_ClearAll();
+../Inc/Periphal/periph_draw.h(112): warning:  #1295-D: Deprecated declaration Referee_Update - give arg types
+  void Referee_Update();
+../Inc/Periphal/periph_draw.h(113): warning:  #1295-D: Deprecated declaration Referee_Setup - give arg types
+  void Referee_Setup();
+..\Src\Periphal\periph_draw.c(173): error:  #147-D: declaration is incompatible with "uint32_t Referee_PackGraphicData(graphic_data_struct_t *, uint32_t, Draw_OperateType, Draw_GraphicType, uint8_t, Draw_Color, uint16_t, uint16_t, uint8_t, uint16_t, uint16_t, uint16_t, uint16_t, uint16_t)"  (declared at line 118 of "../Inc/Periphal/periph_draw.h")
+  uint32_t Referee_PackGraphicData(graphic_data_struct_t *pgraph, uint32_t graph_id, 
+..\Src\Periphal\periph_draw.c(215): error:  #147-D: declaration is incompatible with "void Draw_AddLine(uint32_t, uint8_t, Draw_Color, uint8_t, uint16_t, uint16_t, uint16_t, uint16_t)"  (declared at line 108 of "../Inc/Periphal/periph_draw.h")
+  void Draw_AddLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t width, 
+..\Src\Periphal\periph_draw.c(304): warning:  #1-D: last line of file ends without a newline
+  }
+..\Src\Periphal\periph_draw.c: 6 warnings, 2 errors
+compiling module_gimbal.c...
+..\Src\Modules\module_gimbal.c(148): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	
+imitMaxMin(gimbalpitch->pitch_ref, 1.2,-0.3);
+..\Src\Modules\module_gimbal.c: 1 warning, 0 errors
+compiling app_init.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+../Inc/Periphal/periph_draw.h(105): warning:  #1295-D: Deprecated declaration Referee_UpdateAimLine - give arg types
+  void Referee_UpdateAimLine();
+../Inc/Periphal/periph_draw.h(106): warning:  #1295-D: Deprecated declaration Referee_SetupAimLine - give arg types
+  void Referee_SetupAimLine();
+../Inc/Periphal/periph_draw.h(107): warning:  #1295-D: Deprecated declaration Draw_ClearAll - give arg types
+  void Draw_ClearAll();
+../Inc/Periphal/periph_draw.h(112): warning:  #1295-D: Deprecated declaration Referee_Update - give arg types
+  void Referee_Update();
+../Inc/Periphal/periph_draw.h(113): warning:  #1295-D: Deprecated declaration Referee_Setup - give arg types
+  void Referee_Setup();
+..\Src\Application\app_init.c: 6 warnings, 0 errors
+compiling app_Debug.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+..\Src\Application\app_Debug.c: 1 warning, 0 errors
+compiling util_debug.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+..\Src\Utility\util_debug.c: 1 warning, 0 errors
+compiling app_remote.c...
+..\Src\Application\app_remote.c(224): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+  	vef_pitch_ref =(float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
+..\Src\Application\app_remote.c: 1 warning, 0 errors
+"gimbal_task\gimbal_task.axf" - 2 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -53,7 +103,8 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:02
+Target not created.
+Build Time Elapsed:  00:00:12
 </pre>
 </body>
 </html>
