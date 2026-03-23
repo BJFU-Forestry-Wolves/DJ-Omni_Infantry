@@ -96,6 +96,7 @@ void Remote_RXCallback(UART_HandleTypeDef* huart) {
 	for (uint16_t i = 0; i < rxdatalen; i++){
        if (Referee_RxData[i] == 0xA9){
           Remote_DecodeRemoteData(Referee_RxData+i, 21);
+		   
 	   }
    }
     /* restart dma transmission */        

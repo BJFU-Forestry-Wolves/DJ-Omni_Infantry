@@ -24,8 +24,8 @@ void Uart_RxIdleCallback(UART_HandleTypeDef* huart) {
         Remote_RXCallback(huart);
     }
     if (huart == Const_Referee_UART_HANDLER) {
-        //Referee_RXCallback(huart);
-		 Remote_RXCallback(huart);
+        Referee_RXCallback(huart);
+//		 Remote_RXCallback(huart);
 //		Debug_RXCallback(huart);
     }
 }
@@ -172,14 +172,15 @@ void Uart_ReceiveDMA(UART_HandleTypeDef* huart, uint8_t rxdata[], uint32_t size)
   */
 void Uart_ReceiveHandler(UART_HandleTypeDef *huart) {
     // clear idle it flag after uart receive a frame data
-    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE) && __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE)) {     //UART_IT_RXNE
+    if (__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE)&& __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE) ) {     //UART_IT_RXNE
         /* clear idle it flag avoid idle interrupt all the time */
         __HAL_UART_CLEAR_IDLEFLAG(huart);
         /* handle received data in idle interrupt */
         Uart_RxIdleCallback(huart);
     }
-//		else {
-//		    __HAL_UART_CLEAR_FLAG(huart,UART_FLAG_RXNE);
-//		}
+		else {
+		    __HAL_UART_CLEAR_FLAG(huart,UART_FLAG_RXNE);
+		}
 }
 
+	 //__HAL_UART_GET_FLAG(huart, UART_FLAG_IDLE)&& __HAL_UART_GET_IT_SOURCE(huart, UART_IT_IDLE)

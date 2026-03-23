@@ -509,21 +509,19 @@ void Referee_DecodeRefereeData(uint8_t* buff, uint16_t rxdatalen) {
   * @retval     нч
   */
 void Referee_RXCallback(UART_HandleTypeDef* huart) {
-    /* clear DMA transfer complete flag */
-    __HAL_DMA_DISABLE(huart->hdmarx);
-
-    /* handle dbus data dbus_buf from DMA */
+	
 
     uint16_t rxdatalen = Const_Referee_RX_BUFF_LEN - Uart_DMACurrentDataCounter(huart->hdmarx->Instance);
    for (uint16_t i = 0; i < rxdatalen; i++){
        if (Referee_RxData[i] == Const_Referee_FRAME_HEADER_SOF){
-           Referee_DecodeRefereeData(Referee_RxData + i, rxdatalen - i);
-        }
+           Referee_DecodeRefereeData(Referee_RxData + i, rxdatalen);
+		 }
+	 
     }
-   //Referee_DecodeRefereeData(Referee_RxData, rxdatalen);
 
+	 __HAL_UART_CLEAR_IDLEFLAG(huart);
     /* restart dma transmission */
-    __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_Referee_RX_BUFF_LEN);
+ //   __HAL_DMA_SET_COUNTER(huart->hdmarx, Const_Referee_RX_BUFF_LEN);
     //HAL_DMA_Start(huart->hdmarx,(uint32_t)&huart->Instance->DR,(uint32_t)Referee_RxData,Const_Referee_RX_BUFF_LEN);
-    __HAL_DMA_ENABLE(huart->hdmarx);
+ //   __HAL_DMA_ENABLE(huart->hdmarx);
 }
