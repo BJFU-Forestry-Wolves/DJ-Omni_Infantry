@@ -60,7 +60,7 @@ I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
 I (../Inc/Application/app_autoaim.h)(0x69C0F531)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
@@ -463,7 +463,7 @@ I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
@@ -1383,7 +1383,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
 I (../Inc/Protocol/protocol_common.h)(0x69C0F531)
 I (../Inc/System/sys_dwt.h)(0x69C0F531)
-F (..\Src\Application\app_init.c)(0x69C1AB31)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_init.o --omf_browse gimbal_task\app_init.crf --depend gimbal_task\app_init.d)
+F (..\Src\Application\app_init.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_init.o --omf_browse gimbal_task\app_init.crf --depend gimbal_task\app_init.d)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
@@ -1434,7 +1434,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 I (../Inc/Application/app_init.h)(0x69C0F531)
 I (../Inc/System/sys_softTimer.h)(0x69C0F531)
 I (../Inc/System/sys_dwt.h)(0x69C0F531)
@@ -1479,19 +1479,19 @@ I (../Inc/gpio.h)(0x69C0F531)
 I (../Inc/etc/reg_bmi088.h)(0x69C0F531)
 I (../Inc/Periphal/periph_remote.h)(0x69C0F536)
 I (C:\Keil5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Periphal/periph_servo.h)(0x69C0F531)
 I (../Inc/Modules/module_gimbal.h)(0x69C0F531)
 I (../Inc/Modules/module_shoot.h)(0x69C0F531)
 I (../Inc/Modules/module_chassis.h)(0x69C0F531)
-I (../Inc/Modules/module_referee.h)(0x69C1A40D)
+I (../Inc/Modules/module_referee.h)(0x69C1C073)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
 I (../Inc/Application/app_remote.h)(0x69C1BC81)
 I (../Inc/Protocol/protocol_common.h)(0x69C0F531)
 I (../Inc/Utility/util_debug.h)(0x69C0F531)
-I (../Inc/Periphal/periph_draw.h)(0x69C1A865)
-F (..\Src\Application\app_gimbal.c)(0x69C0F63D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_gimbal.o --omf_browse gimbal_task\app_gimbal.crf --depend gimbal_task\app_gimbal.d)
+I (../Inc/Periphal/periph_draw.h)(0x69C1C073)
+F (..\Src\Application\app_gimbal.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_gimbal.o --omf_browse gimbal_task\app_gimbal.crf --depend gimbal_task\app_gimbal.d)
 I (../Inc/Application/app_gimbal.h)(0x69C0F531)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x69C0F535)
@@ -1577,13 +1577,13 @@ I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 F (..\Src\Application\app_ins.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_ins.o --omf_browse gimbal_task\app_ins.crf --depend gimbal_task\app_ins.d)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
 I (../Inc/main.h)(0x69C0F531)
@@ -1841,7 +1841,7 @@ I (../Drivers/CMSIS/DSP/Include/dsp/svm_defines.h)(0x69C0F52F)
 I (../Drivers/CMSIS/DSP/Include/dsp/transform_functions.h)(0x69C0F52F)
 I (../Drivers/CMSIS/DSP/Include/dsp/filtering_functions.h)(0x69C0F52F)
 I (../Drivers/CMSIS/DSP/Include/dsp/quaternion_math_functions.h)(0x69C0F52F)
-I (../Inc/Application/app_referee.h)(0x69C17DB4)
+I (../Inc/Application/app_referee.h)(0x69C1C073)
 I (../Inc/Modules/module_shoot.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_pid.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_filter.h)(0x69C0F531)
@@ -1850,16 +1850,16 @@ I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
 I (../Inc/Modules/module_gimbal.h)(0x69C0F531)
 I (../Inc/Modules/module_chassis.h)(0x69C0F531)
-I (../Inc/Modules/module_referee.h)(0x69C1A40D)
+I (../Inc/Modules/module_referee.h)(0x69C1C073)
 I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 F (..\Src\Application\app_shoot.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_shoot.o --omf_browse gimbal_task\app_shoot.crf --depend gimbal_task\app_shoot.d)
 I (../Inc/Application/app_shoot.h)(0x69C0F531)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x69C0F535)
@@ -1942,8 +1942,8 @@ I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
-F (..\Src\Application\app_referee.c)(0x69C1ABD3)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_referee.o --omf_browse gimbal_task\app_referee.crf --depend gimbal_task\app_referee.d)
-I (../Inc/Application/app_referee.h)(0x69C17DB4)
+F (..\Src\Application\app_referee.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_referee.o --omf_browse gimbal_task\app_referee.crf --depend gimbal_task\app_referee.d)
+I (../Inc/Application/app_referee.h)(0x69C1C073)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x69C0F535)
 I (C:\Keil5\ARM\ARMCC\include\stddef.h)(0x588B8344)
@@ -1991,12 +1991,12 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_spi.h)(0x69C0F531)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69C0F531)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69C0F531)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69C0F531)
-I (../Inc/Periphal/periph_draw.h)(0x69C1A865)
+I (../Inc/Periphal/periph_draw.h)(0x69C1C073)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
-F (..\Src\Application\app_autoaim.c)(0x69C14091)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_autoaim.o --omf_browse gimbal_task\app_autoaim.crf --depend gimbal_task\app_autoaim.d)
+F (..\Src\Application\app_autoaim.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_autoaim.o --omf_browse gimbal_task\app_autoaim.crf --depend gimbal_task\app_autoaim.d)
 I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x69C0F535)
@@ -2047,14 +2047,14 @@ I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim.h)(0x69C0F531)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h)(0x69C0F531)
 I (../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/main.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
-F (..\Src\Application\app_chassis.c)(0x69C0F63D)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_chassis.o --omf_browse gimbal_task\app_chassis.crf --depend gimbal_task\app_chassis.d)
+F (..\Src\Application\app_chassis.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\app_chassis.o --omf_browse gimbal_task\app_chassis.crf --depend gimbal_task\app_chassis.d)
 I (../Inc/Application/app_chassis.h)(0x69C0F531)
 I (../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h)(0x69C0F535)
@@ -2225,7 +2225,7 @@ I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Application/app_remote.h)(0x69C1BC81)
 I (../Inc/Periphal/periph_remote.h)(0x69C0F536)
@@ -2234,8 +2234,8 @@ I (../Inc/Periphal/periph_servo.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
-F (..\Src\Modules\module_referee.c)(0x69C1A40A)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_referee.o --omf_browse gimbal_task\module_referee.crf --depend gimbal_task\module_referee.d)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
+F (..\Src\Modules\module_referee.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_referee.o --omf_browse gimbal_task\module_referee.crf --depend gimbal_task\module_referee.d)
 F (..\Src\Modules\module_gimbal.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_gimbal.o --omf_browse gimbal_task\module_gimbal.crf --depend gimbal_task\module_gimbal.d)
 I (../Inc/Algorithm/alg_pid.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_math.h)(0x69C0F531)
@@ -2323,12 +2323,12 @@ I (../Inc/Application/app_ins.h)(0x69C0F531)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 I (../Inc/Application/app_remote.h)(0x69C1BC81)
 I (../Inc/Periphal/periph_remote.h)(0x69C0F536)
 I (C:\Keil5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
 I (../Inc/Periphal/periph_servo.h)(0x69C0F531)
-F (..\Src\Modules\module_shoot.c)(0x69C1406F)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_shoot.o --omf_browse gimbal_task\module_shoot.crf --depend gimbal_task\module_shoot.d)
+F (..\Src\Modules\module_shoot.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_shoot.o --omf_browse gimbal_task\module_shoot.crf --depend gimbal_task\module_shoot.d)
 I (../Inc/Modules/module_shoot.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_pid.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_math.h)(0x69C0F531)
@@ -2410,7 +2410,7 @@ I (../Inc/can.h)(0x69C0F531)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/System/sys_const.h)(0x69C0F531)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Utility/util_gpio.h)(0x69C0F531)
 I (../Inc/gpio.h)(0x69C0F531)
@@ -2496,7 +2496,7 @@ I (../Drivers/CMSIS/DSP/Include/dsp/filtering_functions.h)(0x69C0F52F)
 I (../Drivers/CMSIS/DSP/Include/dsp/quaternion_math_functions.h)(0x69C0F52F)
 I (../Inc/Algorithm/alg_filter.h)(0x69C0F531)
 I (../Inc/Algorithm/alg_pid.h)(0x69C0F531)
-I (../Inc/Algorithm/alg_power_limting.h)(0x69C134D2)
+I (../Inc/Algorithm/alg_power_limting.h)(0x69C1C073)
 F (..\Src\Modules\module_dm4310.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\module_dm4310.o --omf_browse gimbal_task\module_dm4310.crf --depend gimbal_task\module_dm4310.d)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
@@ -2548,10 +2548,10 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
-F (..\Src\Periphal\periph_motor.c)(0x69C13506)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_motor.o --omf_browse gimbal_task\periph_motor.crf --depend gimbal_task\periph_motor.d)
+F (..\Src\Periphal\periph_motor.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_motor.o --omf_browse gimbal_task\periph_motor.crf --depend gimbal_task\periph_motor.d)
 I (../Inc/Periphal/periph_motor.h)(0x69C0F531)
 I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
@@ -2633,8 +2633,8 @@ I (../Inc/Algorithm/alg_filter.h)(0x69C0F531)
 I (../Inc/System/sys_const.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (C:\Keil5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
-I (../Inc/Algorithm/alg_power_limting.h)(0x69C134D2)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Algorithm/alg_power_limting.h)(0x69C1C073)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
@@ -2658,7 +2658,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/timers.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/queue.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/main.h)(0x69C0F531)
@@ -2782,8 +2782,8 @@ I (../Inc/Utility/util_flash.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\stdio.h)(0x588B8344)
 I (C:\Keil5\ARM\ARMCC\include\stdarg.h)(0x588B8344)
 I (../Inc/System/sys_dwt.h)(0x69C0F531)
-F (..\Src\Periphal\periph_referee.c)(0x69C1703C)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_referee.o --omf_browse gimbal_task\periph_referee.crf --depend gimbal_task\periph_referee.d)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+F (..\Src\Periphal\periph_referee.c)(0x69C1C075)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_referee.o --omf_browse gimbal_task\periph_referee.crf --depend gimbal_task\periph_referee.d)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/main.h)(0x69C0F531)
@@ -2994,8 +2994,8 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535
 I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
 I (../Inc/System/sys_const.h)(0x69C0F531)
-F (..\Src\Periphal\periph_draw.c)(0x69C1BF60)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_draw.o --omf_browse gimbal_task\periph_draw.crf --depend gimbal_task\periph_draw.d)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+F (..\Src\Periphal\periph_draw.c)(0x69C1C143)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\periph_draw.o --omf_browse gimbal_task\periph_draw.crf --depend gimbal_task\periph_draw.d)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Utility/util_uart.h)(0x69C0F531)
 I (../Inc/usart.h)(0x69C0F531)
 I (../Inc/main.h)(0x69C0F531)
@@ -3047,7 +3047,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
-I (../Inc/Periphal/periph_draw.h)(0x69C1A865)
+I (../Inc/Periphal/periph_draw.h)(0x69C1C073)
 F (..\Src\Utility\util_can.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\util_can.o --omf_browse gimbal_task\util_can.crf --depend gimbal_task\util_can.d)
 I (../Inc/Utility/util_can.h)(0x69C0F531)
 I (../Inc/can.h)(0x69C0F531)
@@ -3128,7 +3128,7 @@ I (../Drivers/CMSIS/DSP/Include/dsp/filtering_functions.h)(0x69C0F52F)
 I (../Drivers/CMSIS/DSP/Include/dsp/quaternion_math_functions.h)(0x69C0F52F)
 I (../Inc/Algorithm/alg_filter.h)(0x69C0F531)
 I (../Inc/Protocol/protocol_common.h)(0x69C0F531)
-I (../Inc/Modules/module_dm4310.h)(0x69C17E26)
+I (../Inc/Modules/module_dm4310.h)(0x69C1C073)
 I (../Inc/Periphal/periph_DMmotor.h)(0x69C0F531)
 I (../Inc/Utility/util_pwm.h)(0x69C0F531)
 I (../Inc/tim.h)(0x69C0F531)
@@ -3372,7 +3372,7 @@ I (../Middlewares/Third_Party/FreeRTOS/Source/include/semphr.h)(0x69C0F535)
 I (../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h)(0x69C0F535)
 I (../Inc/Periphal/periph_remote.h)(0x69C0F536)
 I (C:\Keil5\ARM\ARMCC\include\stdlib.h)(0x588B8344)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (C:\Keil5\ARM\ARMCC\include\string.h)(0x588B8344)
 I (../Inc/Utility/util_debug.h)(0x69C0F531)
@@ -3466,7 +3466,7 @@ I (../Inc/tim.h)(0x69C0F531)
 I (../Inc/Application/app_autoaim.h)(0x69C0F531)
 I (../Inc/Periphal/periph_autoaim.h)(0x69C0F531)
 I (../Inc/struct_typedef.h)(0x69C0F531)
-I (../Inc/Periphal/periph_referee.h)(0x69C1762C)
+I (../Inc/Periphal/periph_referee.h)(0x69C1C073)
 I (../Inc/Algorithm/alg_crc.h)(0x69C0F531)
 I (../Inc/Application/app_ins.h)(0x69C0F531)
 F (..\Src\System\sys_dwt.c)(0x69C0F535)(--c99 -c --cpu Cortex-M4.fp.sp -D__MICROLIB -g -O0 --apcs=interwork --split_sections -I ../Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc -I ../Drivers/STM32F4xx_HAL_Driver/Inc/Legacy -I ../Middlewares/Third_Party/FreeRTOS/Source/include -I ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS -I ../Middlewares/Third_Party/FreeRTOS/Source/portable/RVDS/ARM_CM4F -I ../Drivers/CMSIS/Device/ST/STM32F4xx/Include -I ../Drivers/CMSIS/Include -I ../Inc/Algorithm -I ../Inc/Application -I ../Inc/etc -I ../Inc/Library -I ../Inc/Modules -I ../Inc/Periphal -I ../Inc/Protocol -I ../Inc/System -I ../Inc/Utility -I ../Drivers/CMSIS/DSP/Include-I.\RTE\_gimbal_task-IC:\Keil5\ARM\PACK\ARM\CMSIS\6.1.0\CMSIS\Core\Include-IC:\Keil5\ARM\PACK\Keil\STM32F4xx_DFP\2.17.1\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="540" -DSTM32F407xx -D_RTE_ -DUSE_HAL_DRIVER -DSTM32F407xx -D__TARGET_FPU_VFP -D__CC_ARM -DARM_MATH_CM4-o gimbal_task\sys_dwt.o --omf_browse gimbal_task\sys_dwt.crf --depend gimbal_task\sys_dwt.d)
