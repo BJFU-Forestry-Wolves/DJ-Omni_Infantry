@@ -61,7 +61,8 @@ uint8_t P_ext_referee_warning(Referee_RefereeDataTypeDef* referee, void *data_pt
 
 uint8_t P_ext_game_robot_status(Referee_RefereeDataTypeDef* referee, void *data_ptr) {
     ext_game_robot_status_t *struct_ptr = data_ptr;
-    
+	
+
 	referee->status.robot_id = struct_ptr->robot_id;
     referee->status.robot_level = struct_ptr->robot_level;
     referee->status.current_HP =  struct_ptr->current_HP;
@@ -70,10 +71,10 @@ uint8_t P_ext_game_robot_status(Referee_RefereeDataTypeDef* referee, void *data_
     referee->status.mains_power_chassis_output = struct_ptr->power_management_chassis_output;//底盘功率上限
     referee->status.mains_power_shooter_output = struct_ptr->power_management_shooter_output;
     referee->status.shooter_limit = struct_ptr->shooter_barrel_heat_limit;
-       
+    referee->client_id = Referee_GetClientIDByRobotID(referee->status.robot_id);   
     if (referee->status.robot_id != struct_ptr->robot_id) {
         referee->status.robot_id = struct_ptr->robot_id;
-        referee->client_id = Referee_GetClientIDByRobotID(referee->status.robot_id);
+        referee->client_id = Referee_GetClientIDByRobotID(referee->status.robot_id);		
     }
     
     return PARSE_SUCCEEDED;
@@ -122,22 +123,11 @@ uint8_t P_ext_shoot_data(Referee_RefereeDataTypeDef* referee, void *data_ptr) {
 
 
 const uint16_t Const_Referee_FRAME_HEADER_SOF       = 0xA5;     // 裁判系统指令帧头长度
-const Referee_RobotAndClientIDTypeDef   // 机器人ID及对应客户端ID，0表示无对应客户端
-    HERO_RED        = {1,   0x0101},    // 英雄(红)
-    ENGINEER_RED    = {2,   0x0102},    // 工程(红)
-    INFANTRY3_RED   = {3,   0x0103},    // 步兵3(红)
-    INFANTRY4_RED   = {4,   0x0104},    // 步兵4(红)
-    INFANTRY5_RED   = {5,   0x0105},    // 步兵5(红)
-    AERIAL_RED      = {6,   0x0106},    // 空中(红)
-    SENTRY_RED      = {7,   0},         // 哨兵(红)
-    HERO_BLUE       = {101, 0x0165},    // 英雄(蓝)
-    ENGINEER_BLUE   = {102, 0x0166},    // 工程(蓝)
-    INFANTRY3_BLUE  = {103, 0x0167},    // 步兵3(蓝)
-    INFANTRY4_BLUE  = {104, 0x0168},    // 步兵4(蓝)
-    INFANTRY5_BLUE  = {105, 0x0169},    // 步兵5(蓝)
-    AERIAL_BLUE     = {106, 0x016A},    // 空中(蓝)
-    SENTRY_BLUE     = {107, 0};         // 哨兵(蓝)
-        
+const Referee_RobotAndClientIDTypeDef RobotClientTable[] = {
+    {1,   0x0101}, {2,   0x0102}, {3,   0x0103}, {4,   0x0104}, {5,   0x0105}, {6,   0x0106}, {7,   0}, // 红方
+    {101, 0x0165}, {102, 0x0166}, {103, 0x0167}, {104, 0x0168}, {105, 0x0169}, {106, 0x016A}, {107, 0}  // 蓝方
+};
+#define ROBOT_CLIENT_TABLE_SIZE (sizeof(RobotClientTable) / sizeof(Referee_RobotAndClientIDTypeDef))   //计算表的大小     
 const uint16_t Const_Referee_CMD_NUM                = 20;       // 裁判系统指令个数（不含交互指令）
 const Referee_RefereeCmdTypeDef Const_Referee_CMD_LIST[Const_Referee_CMD_NUM] = {           // 裁判系统消息命令ID列表
     {0x0001,    11, &P_ext_game_status},                // 比赛状态数据，1Hz 周期发送
@@ -161,17 +151,8 @@ const Referee_RefereeCmdTypeDef Const_Referee_CMD_INTERACTIVE       = {0x0301, 8
 const uint16_t Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_LBOUND    = 0x0200;               // 机器人间交互数据内容ID下界
 const uint16_t Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_UBOUND    = 0x02FF;               // 机器人间交互数据内容ID上界
 const uint16_t Const_Referee_DATA_INTERACTIVE_DATA_MAX_LENGTH       = 113 - 1;              // 机器人间交互数据内容最大长度
-const uint16_t Const_Referee_GRAPHIC_BUFFER_MAX_LENGTH              = 21;                   // 图形缓冲区最大长度
-const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6]   = {                     // 裁判系统交互数据内容ID
-    {0x0100,    2,      NULL},              // 客户端删除图形
-    {0x0101,    15,     NULL},              // 客户端绘制一个图形
-    {0x0102,    30,     NULL},              // 客户端绘制二个图形
-    {0x0103,    75,     NULL},              // 客户端绘制五个图形
-    {0x0104,    105,    NULL},              // 客户端绘制七个图形
-    {0x0110,    45,     NULL}               // 客户端绘制字符图形
-};
 
-graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+
 
 
 /**
@@ -219,10 +200,12 @@ void Referee_InitReferee() {
   * @retval     客户端ID
   */
 uint16_t Referee_GetClientIDByRobotID(uint8_t robot_id) {
-    if (robot_id == 7 || robot_id == 107) return 0;
-    if ((robot_id >= 1 && robot_id <= 6) || (robot_id >= 101 && robot_id <= 106)) 
-        return robot_id + 0x100;
-    return 0;
+  for (int i = 0; i < ROBOT_CLIENT_TABLE_SIZE; i++) {
+        if (RobotClientTable[i].robot_id == robot_id) {
+            return RobotClientTable[i].client_id;
+        }
+    }
+   return 0; // 未找到匹配的 ID
 }
 
 
@@ -253,10 +236,10 @@ void Referee_SendInteractiveData(uint16_t data_cmd_id, uint16_t receiver_ID, con
     buf[5] = 0x01;
     buf[6] = 0x03;
     
-    ext_student_interactive_header_data_t *header = (void *) (buf + 7);
-    header->data_cmd_id  = data_cmd_id;
-    header->receiver_ID  = receiver_ID;
-    header->sender_ID    = (uint16_t)referee->status.robot_id;
+    robot_interaction_data_t *header = (void *) (buf + 7);
+    header->data_cmd_id  = data_cmd_id;                   //0x0301后放入子内容，绘制多少个图形
+    header->receiver_ID  = receiver_ID;                    //接收者ID
+    header->sender_ID    = (uint16_t)referee->status.robot_id;    //发送者ID
     
     memcpy(buf + 5 + Const_Referee_CMD_INTERACTIVE.data_length, interactive_data, interactive_data_length);
     
@@ -266,23 +249,6 @@ void Referee_SendInteractiveData(uint16_t data_cmd_id, uint16_t receiver_ID, con
     uint16_t tx_size = 5 + 2 + *data_length_ptr + 2;
     Uart_SendMessage(Const_Referee_UART_HANDLER, buf, tx_size, 100);
 }
-
-
-
-/**
-  * @brief      （已废弃）设置客户端自定义数据LED
-  * @param      led_no: 客户端自定义数据LED序号
-  * @param      led_state: 客户端自定义数据LED状态（1为绿，0为红）
-  */
-/* 
-void Referee_SetClientCustomDataLED(uint8_t led_no, uint8_t led_state) {
-    Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
-    if (led_no > 5) return;
-    if (led_state) referee->custom_data.masks |= 1 << led_no;
-    else referee->custom_data.masks &= ~(1 << led_no);
-}
-*/
-
 
 
 
@@ -332,7 +298,7 @@ uint8_t Referee_ParseRobotCustomData(uint8_t* data, uint16_t data_length) {
     
     //if (data_length != Const_Referee_CMD_INTERACTIVE.data_length) return PARSE_FAILED;      // wrong data length
     
-    ext_student_interactive_header_data_t *header_struct_ptr = (void *) data;
+    robot_interaction_data_t *header_struct_ptr = (void *) data;
     if (header_struct_ptr->data_cmd_id < Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_LBOUND || 
         header_struct_ptr->data_cmd_id > Const_Referee_DATA_CMD_ID_INTERACTIVE_DATA_UBOUND) 
         return PARSE_FAILED;    // wrong data cmd id

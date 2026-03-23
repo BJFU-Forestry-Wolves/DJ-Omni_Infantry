@@ -49,4 +49,8 @@ gimbal_task\app_referee.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim
 gimbal_task\app_referee.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_tim_ex.h
 gimbal_task\app_referee.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_uart.h
 gimbal_task\app_referee.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
-gimbal_task\app_referee.o: ../Inc/Modules/module_referee.h
+gimbal_task\app_referee.o: ../Inc/Periphal/periph_draw.h
+gimbal_task\app_referee.o: ../Inc/Utility/util_uart.h
+gimbal_task\app_referee.o: ../Inc/usart.h
+gimbal_task\app_referee.o: ../Inc/Algorithm/alg_crc.h
+gimbal_task\app_referee.o: C:\Keil5\ARM\ARMCC\Bin\..\include\string.h

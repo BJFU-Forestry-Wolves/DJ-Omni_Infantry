@@ -10,7 +10,6 @@ extern "C" {
 #include "main.h"
 
 void Referee_Task(void const * argument);
-void Referee_ResetSetup(void);
 #endif
 
 #ifdef __cplusplus

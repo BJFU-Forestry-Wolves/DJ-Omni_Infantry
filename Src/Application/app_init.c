@@ -28,6 +28,7 @@
 #include "app_remote.h"
 #include "protocol_common.h"
 #include "util_debug.h"      //µ÷ÊÔ×¨ÓÃ
+#include "periph_draw.h"
 
 void Init_InitAll() {
     DWT_Init(168);
@@ -44,7 +45,7 @@ void Init_InitAll() {
     Motor_InitAllMotors();
 
     Referee_InitReferee();
-//    Servo_InitAllServos();
+	Referee_Setup();
 //	Debug_Init() ; 
 
 	GimbalPitch_InitGimbalPitch();

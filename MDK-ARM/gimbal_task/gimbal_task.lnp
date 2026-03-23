@@ -64,6 +64,7 @@
 "gimbal_task\periph_servo.o"
 "gimbal_task\periph_remote.o"
 "gimbal_task\periph_dmmotor.o"
+"gimbal_task\periph_draw.o"
 "gimbal_task\util_can.o"
 "gimbal_task\util_flash.o"
 "gimbal_task\util_gpio.o"
