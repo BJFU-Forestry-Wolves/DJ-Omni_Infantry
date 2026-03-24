@@ -29,13 +29,16 @@ Project File Date:  03/24/2026
 Build target 'gimbal_task'
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
 Note: source file '../Middlewares/Third_Party/FreeRTOS/Source/list.c' - object file renamed from 'gimbal_task\list.o' to 'gimbal_task\list_1.o'.
-compiling list.c...
+compiling main.c...
+../Inc/Utility/util_debug.h(49): warning:  #1295-D: Deprecated declaration Debug_Init - give arg types
+  void Debug_Init();
+../Src/main.c: 1 warning, 0 errors
 linking...
 gimbal_task\gimbal_task.axf: Warning: L6304W: Duplicate input file gimbal_task\list_1.o ignored.
-Program Size: Code=67448 RO-data=5936 RW-data=1332 ZI-data=63212  
+Program Size: Code=67456 RO-data=5900 RW-data=1324 ZI-data=63212  
 Finished: 0 information, 1 warning and 0 error messages.
 FromELF: creating hex file...
-"gimbal_task\gimbal_task.axf" - 0 Error(s), 1 Warning(s).
+"gimbal_task\gimbal_task.axf" - 0 Error(s), 2 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -59,7 +62,7 @@ Package Vendor: Keil
 
    * Component: ARM::CMSIS:CORE@6.1.0
       Include file:  CMSIS/Core/Include/tz_context.h
-Build Time Elapsed:  00:00:05
+Build Time Elapsed:  00:00:07
 </pre>
 </body>
 </html>

@@ -128,6 +128,7 @@ void Remote_ControlCom() {
 * @retval     NULL
 */
 int test_count;
+int count_cqie = 0;
 void Remote_MouseShooterModeSet() {
     Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
@@ -148,7 +149,10 @@ void Remote_MouseShooterModeSet() {
         if (count_mouse_L >= 15) {
             Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
             count_mouse_L = 15;
+			count_cqie =1;
         }
+
+
     }
     else {
         if (0 < count_mouse_L && count_mouse_L < 15) {
@@ -157,6 +161,7 @@ void Remote_MouseShooterModeSet() {
         }
         else Shooter_ChangeFeederMode(Feeder_FINISH);
         count_mouse_L = 0;
+		count_cqie=0;
     }
 		
 		test_count = count_mouse_L;

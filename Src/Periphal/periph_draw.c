@@ -1,6 +1,6 @@
 #include "periph_referee.h"
 #include "periph_draw.h"
-
+#include "app_remote.h"
 
 Referee_DrawDataTypeDef Referee_DrawData;
 const uint16_t Const_Referee_GRAPHIC_BUFFER_MAX_LENGTH              = 21;                   // Í¼ÐÎ»º³åÇø×î´ó³¤¶È
@@ -20,7 +20,7 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6]   = {         
 
 // ¹ØÓÚ×ø±ê£º×óÏÂ½ÇÎª (0, 0)£¬Ë®Æ½·½ÏòÎª X£¬´¹Ö±·½ÏòÎª Y
 
-const uint8_t AIM_LINE_LAYER        = 2;
+const uint8_t AIM_LINE_LAYER        = 1;
 const Draw_Color AIM_LINE_COLOR     = Draw_COLOR_GREEN;
 const uint8_t AIM_LINE_LINE_MODE    = 3;                     //3ÖÖµ¯ËÙÄ£Ê½
 const uint8_t AIM_LINE_LINE_NUM     = 3 + 1;                 //4ÌõÖ±Ïß
@@ -37,10 +37,10 @@ const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {     //Ò»¸
         {0x103, 2, 850, 540, 950, 540},     // Horizontal Line 2
         {0x104, 2, 870, 500, 930, 500}      // Horizontal Line 3
     }, {    // Mode 2: 30 m/s
-        {0x101, 2, 960, 500, 960, 620},     // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},     // Horizontal Line 1
-        {0x103, 2, 850, 580, 950, 580},     // Horizontal Line 2
-        {0x104, 2, 870, 560, 930, 560}      // Horizontal Line 3
+        {0x101, 6, 940, 500, 940, 620},     // Vertical Line
+        {0x102, 8, 850, 600, 950, 600},     // Horizontal Line 1
+        {0x103, 6, 850, 580, 950, 580},     // Horizontal Line 2
+        {0x104, 6, 870, 560, 930, 560}      // Horizontal Line 3
     }
 };
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -162,6 +162,20 @@ void Draw_ClearAll() {
 }
 
 /**
+  * @brief      »æÍ¼º¯Êý£¬Çå¿ÕÖ¸¶¨Í¼²ã
+  * @param      layer: Í¼²ãºÅ£¨0~9£©
+  * @retval     ÎÞ
+  */
+void Draw_ClearLayer(uint8_t layer) {
+    Referee_RefereeDataTypeDef* referee = &Referee_RefereeData;
+    Referee_DrawingBufferFlush();
+    uint8_t buf[2];
+    buf[0] = 1;
+    buf[1] = layer;
+    Referee_SendInteractiveData(Const_Referee_DATA_CMD_ID_LIST[0].cmd_id, referee->client_id, 
+                                buf, Const_Referee_DATA_CMD_ID_LIST[0].data_length);
+}
+/**
   * @brief      ´ò°üÍ¼ÐÎÃüÁî
   * @param      Ïê¼ûÐ­Òé¼°Í·ÎÄ¼þ¶¨Òå
   * @retval     ÊÇ·ñºÏ·¨£¨1ÎªÊÇ£¬0Îª·ñ£©
@@ -239,11 +253,12 @@ void Referee_SetupAimLine() {
 void Referee_UpdateAimLine() {
     // draw_cnt: 4 when mode changed, 0 when mode not change
     Referee_DrawDataTypeDef *draw = &Referee_DrawData;
-    if (draw->aim_mode_last == draw->aim_mode) return;
+	if(draw->aim_mode_last== draw->aim_mode) return;
     draw->aim_mode_last = draw->aim_mode;
     const uint16_t (*aim_lines)[6] = AIM_LINES[draw->aim_mode];
     for (int i = 0; i < AIM_LINE_LINE_NUM; ++i) {
         Draw_AddLine(aim_lines[i][0], AIM_LINE_LAYER, AIM_LINE_COLOR, aim_lines[i][1], aim_lines[i][2], aim_lines[i][3], aim_lines[i][4], aim_lines[i][5]);
+		
     }
 }
 
@@ -262,14 +277,12 @@ void Referee_SetAimMode(uint8_t mode) {
 
 /*****************************************************ÎÄ×Ö»æÖÆ*********************************************/
  
-const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 20, 2, 1000, 840};  //Ãû³Æ£¬×Ö½Ú£¬¿í¶È£¬x£¬y
+const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 55, 12, 840, 400};  //Ãû³Æ£¬×Ö½Ú£¬¿í¶È£¬x£¬y
 const uint8_t AIM_MODE_LAYER        = 2;
-const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_GREEN;
-const char *AIM_MODE_TEXT_STR       = "AIM_MODE:";
-const char *NORMAL_AIM_TEXT_STR     = "NORMAL";
-const char *ARMOR_AIM_TEXT_STR      = "ARMOR";
-const char *BIG_BUFF_AIM_TEXT_STR   = "BIG_BUF";
-const char *SMALL_BUFF_AIM_TEXT_STR = "SMALL_BUF";
+const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_BLACK;
+
+const char *NORMAL_AIM_TEXT_STR     = "GUGUGAGA";
+
 
 /**
   * @brief      ´ò°üÏÔÊ¾×Ö·û´®Í¼ÐÎÃüÁî
@@ -321,6 +334,19 @@ void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t
     memcpy(buf, str, len);
     Referee_SendDrawingStringCmd(&graph, buf);
 }
+void Draw_DeleteString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
+                    uint8_t width, uint16_t start_x, uint16_t start_y, const char str[])  
+{
+    graphic_data_struct_t graph;
+    Referee_DrawingBufferFlush();
+    uint8_t len = strlen(str);
+    if (Referee_PackStringGraphicData(&graph, graph_id, Draw_OPERATE_DELETE, layer, color, 
+                                      font_size, len, width, start_x, start_y) != PARSE_SUCCEEDED)
+        return;
+    uint8_t buf[35];
+    memcpy(buf, str, len);
+    Referee_SendDrawingStringCmd(&graph, buf);
+}
 /**
   * @brief      ÉèÖÃµ×ÅÌºÍ×ÔÃéÄ£Ê½
   * @param      auto_aim_mode: ×ÔÃéÄ£Ê½£¨0 ~ 3¶ÔÓ¦ ÎÞ×ÔÃé¡¢×°¼×°å×ÔÃé¡¢Ð¡ÄÜÁ¿×ÔÃé¡¢´óÄÜÁ¿×ÔÃé£©
@@ -349,8 +375,7 @@ void Referee_SetupModeDisplay() {
   */
 void Referee_UpdateModeDisplay() {
     Referee_DrawDataTypeDef *draw = &Referee_DrawData;
-    if (draw->auto_aim_mode_last != draw->auto_aim_mode) {
-        draw->auto_aim_mode_last = draw->auto_aim_mode;
+	 if(count_cqie == 1){
         switch (draw->auto_aim_mode) {
             case 0:
                 Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);      
@@ -358,7 +383,8 @@ void Referee_UpdateModeDisplay() {
             default:
                 break;    
         }
-    }
+    }else{Draw_ClearLayer(2) ; }
+	
 }
 /*********************************************ÎÄ×Ö»æÖÆ½áÊø*****************************************************************/
 /**
@@ -372,7 +398,7 @@ void Referee_Setup() {
     if (now - last_time < 1000) return;
     last_time = now; 
 
-	Referee_SetAimMode(0);
+	Referee_SetAimMode(2);
 	Referee_SetMode(0);
     
 	Draw_ClearAll();                    // cmd_cnt: 1, total_cmd_cnt: 1
@@ -381,7 +407,7 @@ void Referee_Setup() {
 }
 
 void Referee_Update() {                
-   Draw_ClearAll()	;
+ //   Draw_ClearAll()	;
     Referee_UpdateAimLine();           // draw_cnt: if bullet speed changed 4, else 0
 	Referee_UpdateModeDisplay();
 

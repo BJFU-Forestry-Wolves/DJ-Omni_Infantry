@@ -36,6 +36,7 @@ void Remote_RemoteProcess(void);
 void Remote_KeyMouseProcess(void);
 
 extern float vef_pitch_ref;
+extern int count_cqie;
 #endif
 
 #ifdef __cplusplus
