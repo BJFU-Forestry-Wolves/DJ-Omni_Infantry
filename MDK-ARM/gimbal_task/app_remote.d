@@ -114,3 +114,6 @@ gimbal_task\app_remote.o: ../Inc/Utility/util_pwm.h
 gimbal_task\app_remote.o: ../Inc/Modules/module_dm4310.h
 gimbal_task\app_remote.o: ../Inc/Periphal/periph_DMmotor.h
 gimbal_task\app_remote.o: ../Inc/Utility/util_can.h
+gimbal_task\app_remote.o: ../Inc/Application/app_referee.h
+gimbal_task\app_remote.o: ../Inc/Periphal/periph_draw.h
+gimbal_task\app_remote.o: ../Inc/Utility/util_uart.h

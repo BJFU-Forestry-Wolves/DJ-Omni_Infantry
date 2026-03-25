@@ -72,10 +72,8 @@ typedef struct {
 	Shoot_ShootSpeedTypeDef shoot_speed;
     Shoot_ShootSpeedOffsetTypeDef shoot_speed_offset;
     
-    float shooter_speed_15mpers;
-    float shooter_speed_18mpers;
     float shooter_speed_22mpers;
-    float shooter_speed_30mpers;
+
 
     Shooter_HeatCtrlTypeDef heat_ctrl;
 

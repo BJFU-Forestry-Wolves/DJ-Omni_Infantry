@@ -13,16 +13,15 @@
 
 float Const_SERVO_INIT_OFFSET = 0.053f;
 
-const float Const_Shooter15mpers        = 198.0f;
-const float Const_Shooter18mpers        = 220.0f;
-const float Const_Shooter22mpers        = 260.0f;
-const float Const_Shooter30mpers        = 378.0f;
 
-const float Const_ShooterLockedCurrent              = 3000.0f;
-const float Const_ShooterLockedSpeed                = 20.0f;
-const float Const_ShooterLockedTime                 = 200.0f;
-const float Const_ShooterRelockedTime               = 500.0f;
-const float Const_ShooterLockedReverseSpeed         = 0.0f;
+const float Const_Shooter22mpers        = 300.0f;
+
+
+const float Const_ShooterLockedCurrent              = 9000.0f;//¶Â×ªµçÁ÷
+const float Const_ShooterLockedSpeed                = 10.0f;
+const float Const_ShooterLockedTime                 = 20.0f;
+const float Const_ShooterRelockedTime               = 80.0f;
+const float Const_ShooterLockedReverseSpeed         = 20.0f;
 
 const float Const_FeederSlowSpeed                   = -57.0f;
 const float Const_FeederFastSpeed                   = -70.0f;

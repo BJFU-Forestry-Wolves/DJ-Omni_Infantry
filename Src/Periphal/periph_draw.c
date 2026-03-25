@@ -21,9 +21,9 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6]   = {         
 // ¹ØÓÚ×ø±ê£º×óÏÂ½ÇÎª (0, 0)£¬Ë®Æ½·½ÏòÎª X£¬´¹Ö±·½ÏòÎª Y
 
 const uint8_t AIM_LINE_LAYER        = 1;
-const Draw_Color AIM_LINE_COLOR     = Draw_COLOR_GREEN;
+const Draw_Color AIM_LINE_COLOR     = Draw_COLOR_WHITE;
 const uint8_t AIM_LINE_LINE_MODE    = 3;                     //3ÖÖµ¯ËÙÄ£Ê½
-const uint8_t AIM_LINE_LINE_NUM     = 3 + 1;                 //4ÌõÖ±Ïß
+const uint8_t AIM_LINE_LINE_NUM     = 3 + 1+2;                 //4ÌõÖ±Ïß
 const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {     //Ò»¸öÈýÎ¬Êý×é
     // ID, Width, X1, Y1, X2, Y2
     {       // Mode 0: 15 m/s
@@ -37,10 +37,12 @@ const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {     //Ò»¸
         {0x103, 2, 850, 540, 950, 540},     // Horizontal Line 2
         {0x104, 2, 870, 500, 930, 500}      // Horizontal Line 3
     }, {    // Mode 2: 30 m/s
-        {0x101, 6, 940, 500, 940, 620},     // Vertical Line
-        {0x102, 8, 850, 600, 950, 600},     // Horizontal Line 1
-        {0x103, 6, 850, 580, 950, 580},     // Horizontal Line 2
-        {0x104, 6, 870, 560, 930, 560}      // Horizontal Line 3
+        {0x101, 6, 940, 360, 940, 480},     // ´¹Ö±Ïß (ËõÐ¡0.8±¶£¬¹Ì¶¨¶Ëµã940,480)
+		{0x102, 8, 892, 456, 988, 456},     // Ë®Æ½Ïß1 (ËõÐ¡0.8±¶)
+		{0x103, 6, 908, 432, 972, 432},     // Ë®Æ½Ïß2 (ËõÐ¡0.8±¶)
+		{0x104, 6, 924, 408, 964, 408},     // Ë®Æ½Ïß3 (ËõÐ¡0.8±¶)
+		{0x105, 6, 926, 466, 954, 494},     // ÇãÐ±Ïß1 (³¤¶È²»±ä£¬ÎÞÐÞ¸Ä)
+		{0x106, 6, 926, 494, 954, 466}      // ÇãÐ±Ïß2 (³¤¶È²»±ä£¬ÎÞÐÞ¸Ä)
     }
 };
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
@@ -277,11 +279,11 @@ void Referee_SetAimMode(uint8_t mode) {
 
 /*****************************************************ÎÄ×Ö»æÖÆ*********************************************/
  
-const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 55, 12, 840, 400};  //Ãû³Æ£¬×Ö½Ú£¬¿í¶È£¬x£¬y
+const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 60, 15, 763, 250};  //Ãû³Æ£¬×Ö½Ú£¬¿í¶È£¬x£¬y
 const uint8_t AIM_MODE_LAYER        = 2;
 const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_BLACK;
 
-const char *NORMAL_AIM_TEXT_STR     = "GUGUGAGA";
+const char *NORMAL_AIM_TEXT_STR     = " !?GUGUGAGA?! ";
 
 
 /**
@@ -334,19 +336,7 @@ void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t
     memcpy(buf, str, len);
     Referee_SendDrawingStringCmd(&graph, buf);
 }
-void Draw_DeleteString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
-                    uint8_t width, uint16_t start_x, uint16_t start_y, const char str[])  
-{
-    graphic_data_struct_t graph;
-    Referee_DrawingBufferFlush();
-    uint8_t len = strlen(str);
-    if (Referee_PackStringGraphicData(&graph, graph_id, Draw_OPERATE_DELETE, layer, color, 
-                                      font_size, len, width, start_x, start_y) != PARSE_SUCCEEDED)
-        return;
-    uint8_t buf[35];
-    memcpy(buf, str, len);
-    Referee_SendDrawingStringCmd(&graph, buf);
-}
+
 /**
   * @brief      ÉèÖÃµ×ÅÌºÍ×ÔÃéÄ£Ê½
   * @param      auto_aim_mode: ×ÔÃéÄ£Ê½£¨0 ~ 3¶ÔÓ¦ ÎÞ×ÔÃé¡¢×°¼×°å×ÔÃé¡¢Ð¡ÄÜÁ¿×ÔÃé¡¢´óÄÜÁ¿×ÔÃé£©
@@ -393,14 +383,14 @@ void Referee_UpdateModeDisplay() {
   * @retval     ÎÞ
   */
 void Referee_Setup() {     
-    static int last_time = -1000;
-    int now = HAL_GetTick();
-    if (now - last_time < 1000) return;
-    last_time = now; 
+//    static int last_time = -1000;
+//    int now = HAL_GetTick();
+//    if (now - last_time < 1000) return;
+//    last_time = now; 
 
 	Referee_SetAimMode(2);
 	Referee_SetMode(0);
-    
+  
 	Draw_ClearAll();                    // cmd_cnt: 1, total_cmd_cnt: 1
 	Referee_SetupAimLine();            // draw_cnt: 4
 	Referee_SetupModeDisplay();
@@ -408,7 +398,7 @@ void Referee_Setup() {
 
 void Referee_Update() {                
  //   Draw_ClearAll()	;
-    Referee_UpdateAimLine();           // draw_cnt: if bullet speed changed 4, else 0
+    Referee_UpdateAimLine();
 	Referee_UpdateModeDisplay();
 
     Referee_DrawingBufferFlush();         

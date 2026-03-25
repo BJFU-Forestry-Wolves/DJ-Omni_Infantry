@@ -21,10 +21,9 @@ extern "C" {
 extern float Const_SERVO_INIT_OFFSET;
 
 
-extern const float Const_Shooter15mpers;
-extern const float Const_Shooter18mpers;
+
 extern const float Const_Shooter22mpers;
-extern const float Const_Shooter30mpers;
+
 
 extern const float Const_ShooterLockedCurrent;     
 extern const float Const_ShooterLockedSpeed;       

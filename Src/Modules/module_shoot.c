@@ -36,10 +36,8 @@ void Shooter_InitShooter() {
     shooter->shoot_speed.left_shoot_speed = 0;
     shooter->shoot_speed.right_shoot_speed = 0;
     
-    shooter->shooter_speed_15mpers = Const_Shooter15mpers;
-    shooter->shooter_speed_18mpers = Const_Shooter18mpers;
     shooter->shooter_speed_22mpers = Const_Shooter22mpers;
-    shooter->shooter_speed_30mpers = Const_Shooter30mpers;
+
 
     PID_InitPIDParam(&shooter->shootLeftPIDParam, Const_ShootLeftParam[0][0], Const_ShootLeftParam[0][1], Const_ShootLeftParam[0][2], Const_ShootLeftParam[0][3], 
                     Const_ShootLeftParam[0][4], Const_ShootLeftParam[1][0], Const_ShootLeftParam[1][1], Const_ShootLeftParam[2][0], Const_ShootLeftParam[2][1], 
@@ -160,20 +158,12 @@ float Shooter_GetRefereeSpeed() {
 
     float speed;
     switch (referee->status.shooter_limit) {
-        case 15: 
-            speed = shooter->shooter_speed_15mpers;
-            break;
-        case 18:
-            speed = shooter->shooter_speed_18mpers;
-            break;
+
         case 22:
             speed = shooter->shooter_speed_22mpers;
             break;
-        case 30:
-            speed = shooter->shooter_speed_30mpers;
-            break;
         default:
-            speed = shooter->shooter_speed_15mpers;
+            speed = shooter->shooter_speed_22mpers;
             break;
     }
 
@@ -343,7 +333,7 @@ void Shooter_ShootControl() {
           Shooter_SetShooterSpeed(0);
           break;
       case Shoot_FAST:
-          Shooter_SetShooterSpeed(-220);
+          Shooter_SetShooterSpeed(-Const_Shooter22mpers);
           break;
       case Shoot_SLOW:
           Shooter_SetShooterSpeed(-50);
@@ -378,7 +368,7 @@ void Shooter_SingleShootCtrl() {
         //return;     // do nothing
     }
     if (!shooter->single_shoot_done) {   // not shoot yet
-        PID_AddPIDRef(&shooter->feedAngPID, 45.0f);
+        PID_AddPIDRef(&shooter->feedAngPID, 55.0f);
         PID_SetPIDFdb(&shooter->feedAngPID, Motor_FeedMotor.encoder.consequent_angle);
         shooter->single_shoot_done = 1;
     }

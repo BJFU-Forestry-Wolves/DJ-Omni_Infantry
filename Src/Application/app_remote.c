@@ -24,6 +24,9 @@
 #include "module_dm4310.h"
 #include "util_can.h"
 #include "alg_math.h"
+#include "app_referee.h"
+#include "periph_draw.h"
+
 
 #define REMOTE_TASK_PERIOD  1
 #define ENCODER_LIMIT 500
@@ -146,16 +149,16 @@ void Remote_MouseShooterModeSet() {
     static int count_mouse_L = 0;
     if (data->mouse.l == 1) {
         count_mouse_L++;
-        if (count_mouse_L >= 15) {
+        if (count_mouse_L >= 35) {
             Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
-            count_mouse_L = 15;
+            count_mouse_L = 35;
 			count_cqie =1;
         }
 
 
     }
     else {
-        if (0 < count_mouse_L && count_mouse_L < 15) {
+        if (0 < count_mouse_L && count_mouse_L < 35) {
             Shooter_SingleShootReset();
             Shooter_ChangeFeederMode(Feeder_SINGLE);    //15次鼠标点击以内为单发
         }
@@ -441,115 +444,29 @@ void Remote_KeyMouseProcess() {
         Shooter_ChangeShooterMode(Shoot_FAST);
     if (data->key.g == 1)      
         Shooter_ChangeShooterMode(Shoot_NULL);
+	
+	
+	
+	static uint32_t keyb_cool_tick = 0;    // 记录上次触发时间
+	#define KEYB_COOL_TIME  600           // 冷却时间(ms)，可自行修改
+			// 静态变量：记录上一次按键状态（边沿触发专用）
+		static uint8_t key_last_state = 0;
+		static uint8_t key_last_state1 = 0;
+
+		// 按键 B 上升沿触发（按下瞬间执行一次）
+		if (data->key.b == 1 && key_last_state == 0 && (HAL_GetTick() - keyb_cool_tick) > KEYB_COOL_TIME)
+		{
+			Referee_SetupAimLine();
+			keyb_cool_tick = HAL_GetTick();  // 刷新冷却时间
+		}
+		key_last_state = data->key.b;
+
+
+		// 按键 V 上升沿触发（按下瞬间执行一次）
+		if (data->key.v == 1 && key_last_state1 == 0)
+		{
+			Draw_ClearAll();
+		}
+		key_last_state1 = data->key.v;
 
 }
-
-//void Remote_KeyMouseProcess() { 
-//    Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
-//    Remote_RemoteControlTypeDef *control_data = Remote_GetControlDataPtr();
-//    Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
-//    GimbalPitch_GimbalPitchTypeDef *gimbal = GimbalPitch_GetGimbalPitchPtr();
-//    Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
-//    
-//	  switch (data->remote.s[1]) {
-//		case Remote_SWITCH_UP: {
-//            /* left switch up is fast shooting */
-//            Shooter_ChangeShooterMode(Shoot_NULL);
-//            //Shooter_ChangeFeederMode(Feeder_FINISH);
-//            break;
-//        }
-//        case Remote_SWITCH_MIDDLE: {
-//            /* left switch mid is stop shooting    */
-//            Shooter_ChangeShooterMode(Shoot_FAST);
-//            //Shooter_ChangeFeederMode(Feeder_FINISH);
-//					  
-//            break;
-//        }
-//				default:
-//				    break;
-//			}
-//		//chassis control
-//		float chassis_vx;
-//		float chassis_vy;
-//		
-//		if(data->key.w == 1)
-//		{
-//			chassis_vx = 320.0f;
-//		}	
-//		else if(data->key.s == 1)
-//		{
-//			chassis_vx = -320.0f;
-//		}
-//		else
-//		{
-//			chassis_vx = 0.0f;
-//		}
-//		
-//		if(data->key.a == 1)
-//		{
-//			chassis_vy = -320.0f;
-//		}
-//		else if(data->key.d == 1)
-//		{
-//			chassis_vy = 320.0f;
-//		}
-//		else
-//		{
-//			chassis_vy = 0.0f;
-//		}
-//		
-//		if(data->key.shift == 1)
-//		{
-//		  Chassis_SetChassisYawAngle(Motor_YawMotor.encoder.limited_angle,CHASSIS_YAW_ANGLE_OFFSET);
-//		  Chassis_SetChassisMode(Chassis_XTL);
-//		  Chassis_SetChassisRef(chassis_vx  , chassis_vy , -CHASSIS_XTL_WZ);
-//		}
-//		else if(data->key.shift == 0)
-//		{
-//			Chassis_SetChassisMode(Chassis_FOLLOW);
-//			Chassis_SetChassisRef(chassis_vx  , chassis_vy , (float)(Motor_YawMotor.encoder.limited_angle - CHASSIS_YAW_ANGLE_OFFSET));	
-//		}
-
-//		if(data->key.q == 1)
-//		{
-//			Servo_SetServoAngle(&Servo_ammoContainerCapServo, 90);
-//		}
-//		else if(data->key.q == 0)
-//		{
-//			Servo_SetServoAngle(&Servo_ammoContainerCapServo, 0);
-//		}
-//	
-//		
-//		//autoaim control
-//		float autoaim_yaw;
-//		float autoaim_pitch;
-//		if(data->mouse.r == 1)
-//		{
-//			autoaim_yaw = (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.002f;
-//			autoaim_pitch = (float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.002f;
-//		}
-//		else if(data->mouse.r == 0)
-//		{
-//			autoaim_yaw = 0.0f;
-//			autoaim_pitch = 0.0f;
-//		}
-//		
-//		
-//		//gimbal control
-//    GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
-//    GimbalYaw_GimbalYawTypeDef *gimbalyaw = GimbalYaw_GetGimbalYawPtr();
-//		gimbalpitch->output_state = 1;
-//		gimbalyaw->output_state = 1;
-//    buscomm->yaw_ref += Gimbal_LimitYaw((float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw);
-//		GimbalYaw_SetYawRef(buscomm->yaw_ref);
-//    float pitch_ref;
-//    pitch_ref = ((float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT - autoaim_pitch);
-//    GimbalPitch_SetPitchRef(Gimbal_LimitPitch(-pitch_ref));
-
-//		//shoot control(fric)
-//    if (data->key.f == 1)      
-//        Shooter_ChangeShooterMode(Shoot_FAST);
-//    if (data->key.g == 1)      
-//        Shooter_ChangeShooterMode(Shoot_NULL);
-
-//}

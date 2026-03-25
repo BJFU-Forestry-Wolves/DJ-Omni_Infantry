@@ -41,8 +41,8 @@ typedef __packed struct {
     uint16_t ally_3_robot_HP; //3ºÅ²½±ø 
     uint16_t ally_4_robot_HP;  
     uint16_t reserved;  
-    uint16_t ally_7_robot_HP; //7ºÅÉÚ±ø 
-    uint16_t ally_outpost_HP;  
+    uint16_t ally_7_robot_HP; //7ºÅÉÚ
+    uint16_t ally_outpost_HP;  //
     uint16_t ally_base_HP; 
 } ext_game_robot_HP_t;
 
