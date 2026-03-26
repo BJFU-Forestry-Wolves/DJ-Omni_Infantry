@@ -20,15 +20,6 @@ extern "C" {
 typedef enum
 {
     Motor1,
-    Motor2,
-    Motor3,
-    Motor4,
-    Motor5,
-    Motor6,
-	Motor7,
-	Motor8,
-	Motor9,
-	Motor10,
     num
 } motor_num;
 
@@ -150,6 +141,7 @@ void save_motor_data(uint16_t id, uint8_t rid);
 void dm_motor_fbdata(DMmotor_t *motor, uint8_t *rx_data);
 void dm_motor_ctrl_send(CAN_HandleTypeDef* hcan, DMmotor_t *motor);
 void dm_motor_detect(DMmotor_t *motor);
+void dm_motor_init_test(void);
 #endif
 
 #ifdef __cplusplus

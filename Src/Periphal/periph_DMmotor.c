@@ -23,15 +23,22 @@ void dm_motor_init(void)
 	motor[Motor1].mst_id = 0x00;		// Master ID设置为0x00       电机->主控
 	motor[Motor1].tmp.read_flag = 1;
 	motor[Motor1].ctrl.mode 	= mit_mode;		// 使用MIT模式
-	motor[Motor1].ctrl.pos_set 	= 0.2f;			// 初始目标位置  pos范围是-1到+1 ，角度=pos*716.2° 0.32
+	motor[Motor1].ctrl.pos_set 	= 0.4f;			// 初始目标位置  pos范围是-1到+1 ，角度=pos*716.2° 0.32
 	motor[Motor1].ctrl.vel_set 	= 0.0f;			// 速度前馈  6.5
-	motor[Motor1].ctrl.kp_set 	= 20.0f;		// 位置增益Kp=20
-	motor[Motor1].ctrl.kd_set 	= 0.32;			// 阻尼增益Kd=0.3
-	motor[Motor1].ctrl.tor_set 	= 0.0f;			// 扭矩前馈
+	motor[Motor1].ctrl.kp_set 	= DM_KP;		// 位置增益Kp=20
+	motor[Motor1].ctrl.kd_set 	= DM_KD;			// 阻尼增益Kd=0.3
+	motor[Motor1].ctrl.tor_set 	= 0.1f;			// 扭矩前馈
 	motor[Motor1].ctrl.cur_set 	= 0.0f;			// MIT模式不使用此参数
 	motor[Motor1].tmp.PMAX		= 12.5f;		// 位置映射范围    此参数不应该修改
 	motor[Motor1].tmp.VMAX		= 30.0f;		// 速度映射范围
 	motor[Motor1].tmp.TMAX		= 10.0f;		// 扭矩映射范围
+}
+
+
+void dm_motor_init_test(void)
+{
+	motor[Motor1].ctrl.kp_set 	= DM_KP;		// 位置增益Kp=20
+	motor[Motor1].ctrl.kd_set 	= DM_KD;			// 阻尼增益Kd=0.3
 }
 /**
 ************************************************************************

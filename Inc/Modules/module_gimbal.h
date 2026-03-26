@@ -32,11 +32,11 @@ typedef struct {
     PID_PIDParamTypeDef spdPIDParam;
     PID_PIDTypeDef angPID;
     PID_PIDParamTypeDef angPIDParam;
-    //PID_PIDParamTypeDef spdpid1;
-//	  PID_PIDTypeDef spdPID1;
-//	  PID_PIDParamTypeDef spdPidParam1;
-//	  PID_PIDTypeDef angPID1;
-//	  PID_PIDParamTypeDef angPIDParam1;
+
+	// 新增：角度平滑滤波专用变量
+    float pitch_ref_smooth;   // 滤波后的平滑目标角度
+    float filter_alpha;       // 滤波系数（0~1，越小越平滑）
+
 } GimbalPitch_GimbalPitchTypeDef;
 
 typedef struct {
@@ -68,7 +68,6 @@ GimbalPitch_GimbalPitchTypeDef* GimbalPitch_GetGimbalPitchPtr(void);
 void GimbalPitch_SetGimbalPitchControlState(uint8_t state);
 void GimbalPitch_SetGimbalPitchOutputState(uint8_t state);
 void GimbalPitch_SetPitchRef(float pitch_ref);
-float Gimbal_LimitPitch(float ref);
 float Gimbal_LimitYaw(float ref);
 void GimbalPitch_Control(void);
 void GimbalPitch_Output(void);

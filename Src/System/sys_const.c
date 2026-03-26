@@ -48,7 +48,7 @@ const float Const_WHEELLEG_REMOTE_X_GAIN                = 0.000022;
 const float Const_WHEELLEG_REMOTE_LEN_GAIN              = 0.00000028;
 
 const float REMOTE_PITCH_ANGLE_TO_REF                   = 0.0005f;
-const float REMOTE_DMPITCH_ANGLE                         = 0.0005f; //0.000018f
+const float REMOTE_DMPITCH_ANGLE                         = 0.0004f; //0.000018f
 
 const float REMOTE_CHASSIS_VX_GAIN                  = 0.7f;               //0.75
 const float REMOTE_CHASSIS_VY_GAIN									= -0.7f;
@@ -71,8 +71,10 @@ float KP_MAX                                                =500.0f;
 float KD_MIN                                                =0.0f  ;
 float KD_MAX                                                =5.0f   ;
 float Const_DMPITCH_UMAXANGLE                       = 0.8f;
-float Const_DMPITCH_DMAXANGLE                       = -0.03f;
-float Const_PITCH_MOTOR_INIT_OFFSETf              = -0.2f;     //越小PITCH开始时头会抬高
+float Const_DMPITCH_DMAXANGLE                       = 0.21f;
+float Const_PITCH_MOTOR_INIT_OFFSETf              = -0.4f;     //越小PITCH开始时头会抬高
+float DM_KP                                        = 70  ;
+float DM_KD	                                       = 0.9 ;
 /************************************************************************************************/
 // pitch gimbal param
 const float Const_GimbalPitchSpdParam[4][5] = {
@@ -89,10 +91,10 @@ const float Const_GimbalPitchAngParam[4][5] = {
 
 // yaw gimbal param
 const float Const_GimbalYawSpdParam[4][5] = {
-    {1.0f, 0, 0, 0, 20.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
+    {2.5f, 0, 0, 0, 20.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
 
 const float Const_GimbalYawAngParam[4][5] = {
-    {0.95f, 0, 0, 0, 10.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
+    {0.45f, 0.01, 0.35f, 0, 10.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
 
 
 // shooter param

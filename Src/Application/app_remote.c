@@ -176,8 +176,8 @@ void Remote_MouseShooterModeSet() {
 * @param      NULL
 * @retval     NULL
 */
-uint16_t test;
-float vef_pitch_ref;
+float test;
+
 void Remote_RemoteShooterModeSet() {
 
 
@@ -205,16 +205,6 @@ void Remote_RemoteShooterModeSet() {
             Shooter_ChangeShooterMode(Shoot_FAST);
             //Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
 					Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
-					 // test++;
-					 // if(test==20){Shooter_SingleShootReset();
-					//	test=0;
-					//	}
-          // Shooter_ChangeFeederMode(Feeder_SINGLE);
-//            if ((PID_GetPIDFdb(&shooter->shootLeftPID) >= 30) && (PID_GetPIDFdb(&shooter->shootRightPID) <= -30)) {
-//                Shooter_ChangeFeederMode(Feeder_REFEREE);
-//            }
-//            else Shooter_ChangeFeederMode(Feeder_FINISH);
-            break;
         }
         default:
             break;
@@ -226,13 +216,14 @@ void Remote_RemoteShooterModeSet() {
 		gimbalpitch->output_state = 1;
 		gimbalyaw->output_state = 1;
     Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
-    buscomm->yaw_ref += Gimbal_LimitYaw((float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN + (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.004f*0.2f);
+    buscomm->yaw_ref += (float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN + (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.004f*0.2f;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
-    float pitch_ref;
-	vef_pitch_ref =(float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE+(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;
+	
+    float pitch_ref;	
     pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;      //(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;      
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
-	GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
+	test = cospitch;
+	GimbalPitch_SetPitchRef(cospitch);
 	
 	
 	
@@ -338,7 +329,7 @@ void Remote_KeyMouseProcess() {
 	  switch (data->remote.s[1]) {
 		case Remote_SWITCH_UP: {
             /* left switch up is fast shooting */
-            Shooter_ChangeShooterMode(Shoot_NULL);
+            //Shooter_ChangeShooterMode(Shoot_NULL);
             //Shooter_ChangeFeederMode(Feeder_FINISH);
             break;
         }

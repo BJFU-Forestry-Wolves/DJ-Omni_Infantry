@@ -37,7 +37,7 @@ void GimbalPitch_InitGimbalPitch() {
     gimbalpitch->output_state = 1;
     gimbalpitch->pitch_ref = 0;
     gimbalpitch->pitch_count = 0;
-
+	gimbalpitch->pitch_ref_smooth =0;
     PID_InitPIDParam(&gimbalpitch->spdPIDParam, Const_GimbalPitchSpdParam[0][0], Const_GimbalPitchSpdParam[0][1], Const_GimbalPitchSpdParam[0][2], Const_GimbalPitchSpdParam[0][3], 
                     Const_GimbalPitchSpdParam[0][4], Const_GimbalPitchSpdParam[1][0], Const_GimbalPitchSpdParam[1][1], Const_GimbalPitchSpdParam[2][0], Const_GimbalPitchSpdParam[2][1], 
                     Const_GimbalPitchSpdParam[3][0], Const_GimbalPitchSpdParam[3][1], PID_POSITION);
@@ -145,7 +145,7 @@ void GimbalPitch_SetPitchRef(float pitch_ref) {
 //	float DMAX_PITCH_DEG = Const_DMPITCH_DMAXANGLE;
 	
     gimbalpitch->pitch_ref += pitch_ref;
-	LimitMaxMin(gimbalpitch->pitch_ref, 1.2,-0.3);
+	LimitMaxMin(gimbalpitch->pitch_ref, 0.75,0.2);
 }
 /**
   * @brief      Set the target value of gimbal yaw
@@ -158,35 +158,6 @@ void GimbalYaw_SetYawRef(float yaw_ref) {
     gimbalyaw->yaw_ref = yaw_ref;
 }                                                             //Pitch加和，而Yaw直接赋值
 
-/**
-* @brief      Pitch angle limit
-* @param      ref: Pitch set ref
-* @retval     Limited pitch ref
-*/
-float Gimbal_LimitPitch(float ref) {
-    Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
-    GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
-		INS_INSTypeDef *ins = INS_GetINSPtr();
-    float pitch_umaxangle;
-    if (buscomm->cha_mode  == Cha_Gyro) {
-        pitch_umaxangle = Const_PITCH_UMAXANGLE_GRYO;
-    }
-    else {
-        pitch_umaxangle = Const_PITCH_UMAXANGLE;
-    }
-    
-		
-	
-	if (((PID_GetPIDRef(&gimbalpitch->angPID) > pitch_umaxangle) && (ref > 0)) ||
-        ((PID_GetPIDRef(&gimbalpitch->angPID) < Const_PITCH_DMAXANGLE) && (ref < 0)))
-        return 0.0f;
-			else return ref;
-		
-
-
-        // Out of depression set maximum ref
-
-}
 
 
 /**
@@ -206,16 +177,7 @@ float Gimbal_LimitYaw(float ref) {
     else return ref;
 }
 
-/**
-* @brief      Set pitch ref
-* @param      ref: Yaw set ref
-* @retval     NULL
-*/
-void Gimbal_SetPitchRef(float ref) {
-    GimbalPitch_GimbalPitchTypeDef *gimbal = GimbalPitch_GetGimbalPitchPtr();
 
-    gimbal->pitch_ref = ref;
-}
 
 /**
   * @brief      Setting IMU yaw position feedback
@@ -254,18 +216,25 @@ void GimbalPitch_Control() {
     INS_INSTypeDef *ins = INS_GetINSPtr();
 
     if (gimbalpitch->control_state != 1) return;
+	
+	 // 滤波系数：0.05~0.2 之间，越小越平滑，响应越慢
+    // 推荐默认 0.1f，平滑效果好，不卡顿
+    gimbalpitch->filter_alpha = 0.08f;
+	// dm_motor_init_test();
+    //float imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
 
-    
-    float imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
-    float target_pos = gimbalpitch->pitch_ref - imu_error;
+
+    gimbalpitch->pitch_ref_smooth += gimbalpitch->filter_alpha *(gimbalpitch->pitch_ref - gimbalpitch->pitch_ref_smooth);
+      float target_pos = gimbalpitch->pitch_ref_smooth;
    
-	//float v_ref = vef_pitch_ref / 0.002f;
-	float v_imu = -ins->Gyro[Y_INS] * PI / 180.0f;
+
     
    // motor[Motor1].ctrl.vel_set = v_imu;
 	motor[Motor1].ctrl.pos_set =Gimbal_DMLimitPitch(target_pos) ;
 			
 }
+
+float gimbalyaw_fdb;
 /**
   * @brief      Control function of gimbal yaw
   * @param      NULL
@@ -278,10 +247,11 @@ void GimbalYaw_Control() {
     if (gimbalyaw->control_state != 1) return;
 
 
+	
     PID_SetPIDRef(&gimbalyaw->angPID, gimbalyaw->yaw_ref);
     PID_SetPIDFdb(&gimbalyaw->angPID, ins->YawTotalAngle);//用的totalangle
     PID_CalcPID(&gimbalyaw->angPID, &gimbalyaw->angPIDParam);
-
+	gimbalyaw_fdb = ins->YawTotalAngle;
     PID_SetPIDRef(&gimbalyaw->spdPID, PID_GetPIDOutput(&gimbalyaw->angPID));
     PID_SetPIDFdb(&gimbalyaw->spdPID, ins->Gyro[Z_INS]);
     PID_CalcPID(&gimbalyaw->spdPID, &gimbalyaw->spdPIDParam);   
@@ -314,11 +284,11 @@ float Gimbal_DMLimitPitch(float ref)
 	INS_INSTypeDef *ins = INS_GetINSPtr();
 	   
     
-	if ((ref > Const_DMPITCH_UMAXANGLE) && (ref > 0))
+	if (ref > Const_DMPITCH_UMAXANGLE)
 	{	
         return Const_DMPITCH_UMAXANGLE;
 	}
-	else if((ref < Const_DMPITCH_DMAXANGLE) && (ref < 0))
+	else if(ref < Const_DMPITCH_DMAXANGLE)
 	{
 			return Const_DMPITCH_DMAXANGLE;
 	}else

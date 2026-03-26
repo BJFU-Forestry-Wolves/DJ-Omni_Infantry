@@ -104,6 +104,8 @@ extern float KD_MIN;
 extern float KD_MAX;
 extern float Const_DMPITCH_UMAXANGLE;
 extern float Const_DMPITCH_DMAXANGLE;
+extern float DM_KP                  ;
+extern float DM_KD	                ;
 #endif
 
 #ifdef __cplusplus
