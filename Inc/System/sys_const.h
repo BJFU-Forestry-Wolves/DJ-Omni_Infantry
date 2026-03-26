@@ -106,6 +106,8 @@ extern float Const_DMPITCH_UMAXANGLE;
 extern float Const_DMPITCH_DMAXANGLE;
 extern float DM_KP                  ;
 extern float DM_KD	                ;
+extern float DMpitchrefMax                 ;
+extern float DMpitchrefMin	                ;
 #endif
 
 #ifdef __cplusplus

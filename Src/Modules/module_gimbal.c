@@ -35,7 +35,7 @@ void GimbalPitch_InitGimbalPitch() {
 	
     gimbalpitch->control_state = 1;
     gimbalpitch->output_state = 1;
-    gimbalpitch->pitch_ref = 0;
+    gimbalpitch->pitch_ref = 0.2;
     gimbalpitch->pitch_count = 0;
 	gimbalpitch->pitch_ref_smooth =0;
     PID_InitPIDParam(&gimbalpitch->spdPIDParam, Const_GimbalPitchSpdParam[0][0], Const_GimbalPitchSpdParam[0][1], Const_GimbalPitchSpdParam[0][2], Const_GimbalPitchSpdParam[0][3], 
@@ -145,7 +145,7 @@ void GimbalPitch_SetPitchRef(float pitch_ref) {
 //	float DMAX_PITCH_DEG = Const_DMPITCH_DMAXANGLE;
 	
     gimbalpitch->pitch_ref += pitch_ref;
-	LimitMaxMin(gimbalpitch->pitch_ref, 0.75,0.2);
+	LimitMaxMin(gimbalpitch->pitch_ref, DMpitchrefMax,DMpitchrefMin);
 }
 /**
   * @brief      Set the target value of gimbal yaw
@@ -209,8 +209,8 @@ void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
   * @retval     NULL
   */
 float out_put_data;
-
-
+float imu_error;
+float  IMUfdb =0.7;
 void GimbalPitch_Control() {
     GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
     INS_INSTypeDef *ins = INS_GetINSPtr();
@@ -219,13 +219,13 @@ void GimbalPitch_Control() {
 	
 	 // 滤波系数：0.05~0.2 之间，越小越平滑，响应越慢
     // 推荐默认 0.1f，平滑效果好，不卡顿
-    gimbalpitch->filter_alpha = 0.08f;
-	// dm_motor_init_test();
-    //float imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
+    gimbalpitch->filter_alpha = 0.07f;
+	 dm_motor_init_test();
+     imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
 
 
     gimbalpitch->pitch_ref_smooth += gimbalpitch->filter_alpha *(gimbalpitch->pitch_ref - gimbalpitch->pitch_ref_smooth);
-      float target_pos = gimbalpitch->pitch_ref_smooth;
+      float target_pos = gimbalpitch->pitch_ref_smooth-imu_error*IMUfdb;
    
 
     
