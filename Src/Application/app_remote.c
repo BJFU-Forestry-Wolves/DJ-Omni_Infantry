@@ -130,46 +130,6 @@ void Remote_ControlCom() {
 * @param      NULL
 * @retval     NULL
 */
-int test_count;
-int count_cqie = 0;
-void Remote_MouseShooterModeSet() {
-    Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
-    Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
-
-    // Prevent launching without opening the friction wheel
-//    if ((shooter->shooter_mode != Shoot_REFEREE) || (fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
-//        Shooter_ChangeFeederMode(Feeder_FINISH);
-//        return;
-//    }
-//    if ((fabs(Motor_ShootLeftMotor.encoder.speed) <= 30) || (fabs(Motor_ShootRightMotor.encoder.speed) <= 30)) {
-//        Shooter_ChangeFeederMode(Feeder_FINISH);
-//        return;
-//    }
-
-    static int count_mouse_L = 0;
-    if (data->mouse.l == 1) {
-        count_mouse_L++;
-        if (count_mouse_L >= 35) {
-            Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
-            count_mouse_L = 35;
-			count_cqie =1;
-        }
-
-
-    }
-    else {
-        if (0 < count_mouse_L && count_mouse_L < 35) {
-            Shooter_SingleShootReset();
-            Shooter_ChangeFeederMode(Feeder_SINGLE);    //15次鼠标点击以内为单发
-        }
-        else Shooter_ChangeFeederMode(Feeder_FINISH);
-        count_mouse_L = 0;
-		count_cqie=0;
-    }
-		
-		test_count = count_mouse_L;
-}
-
 
 /**
 * @brief      Remote shoot mode set
@@ -291,7 +251,7 @@ void Remote_RemoteProcess() {
 		        Chassis_SetChassisYawAngle(Motor_YawMotor.encoder.limited_angle,CHASSIS_YAW_ANGLE_OFFSET);
 		        Chassis_SetChassisMode(Chassis_XTL);
 		        Chassis_SetChassisRef((float)data->remote.ch[1]  , (float)data->remote.ch[0] , CHASSIS_XTL_WZ);
-          buscomm->yaw_ref += Gimbal_LimitYaw((float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN);
+          buscomm->yaw_ref += (float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
     pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;
@@ -310,13 +270,16 @@ void Remote_RemoteProcess() {
 /******************************************键鼠控制模式******************************************************/
 /*************************************此部分单独写，仅赛场使用************************************************/
 
-#define CHASSIS_ACCEL_STEP 3.0f  // 【关键参数】每控制周期速度变化量
+#define CHASSIS_ACCEL_STEP 1.0f  // 【关键参数】每控制周期速度变化量
                                  // 示例：若控制周期=10ms(100Hz)，加速至320需 320/8.0/100 = 0.4秒
                                  // 调大 → 加速更快；调小 → 加速更平滑
 
-																	
 
-
+static uint32_t tick_b = 0, tick_q = 0,tick_v = 0;
+static uint8_t last_b = 0, last_q = 0,last_v = 0;
+static uint8_t delay_step = 0;      // 步骤状态机
+static uint32_t delay_start_tick = 0;
+uint8_t q_mode = 0;
 
 
 void Remote_KeyMouseProcess() { 
@@ -325,25 +288,7 @@ void Remote_KeyMouseProcess() {
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
     GimbalPitch_GimbalPitchTypeDef *gimbal = GimbalPitch_GetGimbalPitchPtr();
     Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
-    
-	  switch (data->remote.s[1]) {
-		case Remote_SWITCH_UP: {
-            /* left switch up is fast shooting */
-            //Shooter_ChangeShooterMode(Shoot_NULL);
-            //Shooter_ChangeFeederMode(Feeder_FINISH);
-            break;
-        }
-        case Remote_SWITCH_MIDDLE: {
-            /* left switch mid is stop shooting    */
-            Shooter_ChangeShooterMode(Shoot_FAST);
-            //Shooter_ChangeFeederMode(Feeder_FINISH);
-					  
-            break;
-        }
-				default:
-				    break;
-			}
-		//chassis control
+    //chassis control
 		// 静态变量：保存跨周期的当前速度（上电/复位后自动初始化为0）
       static float current_chassis_vx = 0.0f;
       static float current_chassis_vy = 0.0f;
@@ -384,7 +329,7 @@ void Remote_KeyMouseProcess() {
 		{
 		  Chassis_SetChassisYawAngle(Motor_YawMotor.encoder.limited_angle,CHASSIS_YAW_ANGLE_OFFSET);
 		  Chassis_SetChassisMode(Chassis_XTL);
-		  Chassis_SetChassisRef(current_chassis_vx  , current_chassis_vy , -CHASSIS_XTL_WZ);
+		  Chassis_SetChassisRef(current_chassis_vx  , current_chassis_vy , CHASSIS_XTL_WZ);
 		}
 		else if(data->key.shift == 0)
 		{
@@ -392,16 +337,10 @@ void Remote_KeyMouseProcess() {
 			Chassis_SetChassisRef(current_chassis_vx  , current_chassis_vy , (float)(Motor_YawMotor.encoder.limited_angle - CHASSIS_YAW_ANGLE_OFFSET));	
 		}
 
-		if(data->key.q == 1)
+		if(Is_Key_Triggered(data->key.q, &last_q, &tick_q, 300))
 		{
-			Servo_SetServoAngle(&Servo_ammoContainerCapServo, 90);
-		}
-		else if(data->key.q == 0)
-		{
-			Servo_SetServoAngle(&Servo_ammoContainerCapServo, 0);
-		}
-	
-		
+			 q_mode = !q_mode;
+		}		
 		//autoaim control
 		float autoaim_yaw;
 		float autoaim_pitch;
@@ -422,12 +361,12 @@ void Remote_KeyMouseProcess() {
     GimbalYaw_GimbalYawTypeDef *gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 		gimbalpitch->output_state = 1;
 		gimbalyaw->output_state = 1;
-    buscomm->yaw_ref += Gimbal_LimitYaw((float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw);
+    buscomm->yaw_ref += (float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
     pitch_ref = ((float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT - autoaim_pitch);
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
-	GimbalPitch_SetPitchRef(Gimbal_DMLimitPitch(cospitch));
+	GimbalPitch_SetPitchRef(cospitch);
 
 
 		//shoot control(fric)
@@ -437,27 +376,77 @@ void Remote_KeyMouseProcess() {
         Shooter_ChangeShooterMode(Shoot_NULL);
 	
 	
-	
-	static uint32_t keyb_cool_tick = 0;    // 记录上次触发时间
-	#define KEYB_COOL_TIME  600           // 冷却时间(ms)，可自行修改
-			// 静态变量：记录上一次按键状态（边沿触发专用）
-		static uint8_t key_last_state = 0;
-		static uint8_t key_last_state1 = 0;
-
-		// 按键 B 上升沿触发（按下瞬间执行一次）
-		if (data->key.b == 1 && key_last_state == 0 && (HAL_GetTick() - keyb_cool_tick) > KEYB_COOL_TIME)
+/**************************************************for draw************************************************************/	
+		if (Is_Key_Triggered(data->key.b, &last_b, &tick_b, 1000))
 		{
-			Referee_SetupAimLine();
-			keyb_cool_tick = HAL_GetTick();  // 刷新冷却时间
+			Referee_SetupAimLine();       // 先画瞄准线
+			delay_step = 1;
+			delay_start_tick = HAL_GetTick();
 		}
-		key_last_state = data->key.b;
 
-
-		// 按键 V 上升沿触发（按下瞬间执行一次）
-		if (data->key.v == 1 && key_last_state1 == 0)
+		if (Is_Key_Triggered(data->key.v, &last_v, &tick_v, 600))
 		{
 			Draw_ClearAll();
-		}
-		key_last_state1 = data->key.v;
+		}	
+}
+int count_cqie = 0;
+void Remote_MouseShooterModeSet() {
+    Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
+    Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
 
+    static int count_mouse_L = 0;
+    if (data->mouse.l == 1) {
+        count_mouse_L++;
+        if (count_mouse_L >= 35) {
+            Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
+            count_mouse_L = 35;
+			count_cqie =1;
+			
+        }
+    }
+    else {
+        if (0 < count_mouse_L && count_mouse_L < 35) {
+            Shooter_SingleShootReset();
+            if (q_mode == 0) {
+                Shooter_ChangeFeederMode(Feeder_SINGLE);
+            } else {
+                Shooter_ChangeFeederMode(Feeder_Sanlian);
+
+            }
+        }
+        else 
+        {
+            // 没有按键或长按结束：进入完成/停止状态
+            Shooter_ChangeFeederMode(Feeder_FINISH);
+			count_cqie =0;
+        }
+        count_mouse_L = 0;
+    }
+		
+		//test_count = count_mouse_L;
+}
+
+
+/**
+ * @brief 按键边沿检测与冷却逻辑集成函数
+ * * @param current_state 当前按键的状态 (1为按下, 0为松开)
+ * @param last_state    指向记录上次状态的变量指针
+ * @param last_tick     指向记录上次触发时间的变量指针
+ * @param cool_time     设定的冷却时间 (ms)
+ * @return uint8_t      1: 触发成功, 0: 未触发
+ */
+uint8_t Is_Key_Triggered(uint8_t current_state, uint8_t *last_state, uint32_t *last_tick, uint32_t cool_time) 
+{
+    uint8_t triggered = 0;
+    uint32_t now = HAL_GetTick();
+
+    // 条件：当前是按下(1) && 上次是松开(0) && 时间差超过冷却时间
+    if (current_state == 1 && *last_state == 0 && (now - *last_tick) > cool_time) 
+    {
+        *last_tick = now;  // 更新时间戳
+        triggered = 1;     // 标记触发成功
+    }
+
+    *last_state = current_state; // 实时更新状态用于下次对比
+    return triggered;
 }

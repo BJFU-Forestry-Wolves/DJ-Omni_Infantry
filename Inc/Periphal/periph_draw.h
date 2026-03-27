@@ -112,7 +112,7 @@ void Draw_AddLine(uint32_t graph_id, uint8_t layer, Draw_Color color, uint8_t wi
 void Referee_Update();
 void Referee_Setup();
 void Referee_SetAimMode(uint8_t mode);
-
+void Referee_SetupModeDisplay();
 
 
 uint32_t Referee_PackGraphicData(graphic_data_struct_t *pgraph, uint32_t graph_id, 

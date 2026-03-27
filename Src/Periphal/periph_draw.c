@@ -280,12 +280,14 @@ void Referee_SetAimMode(uint8_t mode) {
 /*****************************************************文字绘制*********************************************/
  
 const uint16_t AIM_MODE_VALUE_TEXT[5]  = {0x501, 60, 15, 763, 250};  //名称，字节，宽度，x，y
+const uint16_t STR_MODE_VALUE_TEXT2[5]  = {0x502, 50, 12, 763, 850};  //名称，字节，宽度，x，y
 const uint8_t AIM_MODE_LAYER        = 2;
+const uint8_t STR_MODE_LAYER        = 3;
 const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_BLACK;
-
-const char *NORMAL_AIM_TEXT_STR     = " !?GUGUGAGA?! ";
-
-
+const Draw_Color STR_MODE_COLOR     = Draw_COLOR_BLACK;
+const char *AIM_TEXT     = " !?GUGUGAGA?! ";
+const char *STR_TEXT     = "ShootMode";
+const char *STR_TEXT_test     = "who am i ?";
 /**
   * @brief      打包显示字符串图形命令
   * @param      详见协议及头文件定义
@@ -323,13 +325,12 @@ void Referee_SendDrawingStringCmd(graphic_data_struct_t *pgraph, const uint8_t s
   * @param      详见协议及头文件定义
   * @retval     无
   */
-void Draw_AddString(uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
+void Draw_String(Draw_OperateType operate_type,uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
                     uint8_t width, uint16_t start_x, uint16_t start_y, const char str[])  
 {
     graphic_data_struct_t graph;
-    Referee_DrawingBufferFlush();
     uint8_t len = strlen(str);
-    if (Referee_PackStringGraphicData(&graph, graph_id, Draw_OPERATE_ADD, layer, color, 
+    if (Referee_PackStringGraphicData(&graph, graph_id, operate_type, layer, color, 
                                       font_size, len, width, start_x, start_y) != PARSE_SUCCEEDED)
         return;
     uint8_t buf[35];
@@ -356,7 +357,8 @@ void Referee_SetMode(uint8_t auto_aim_mode) {
 void Referee_SetupModeDisplay() {
     Referee_DrawDataTypeDef *draw = &Referee_DrawData;
     draw->auto_aim_mode_last = draw->auto_aim_mode;
-    Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);        
+    Draw_String(Draw_OPERATE_ADD,STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], 
+	STR_MODE_VALUE_TEXT2[2], STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT);        
 }
 /**
   * @brief      模式显示绘制：更新阶段
@@ -368,13 +370,19 @@ void Referee_UpdateModeDisplay() {
 	 if(count_cqie == 1){
         switch (draw->auto_aim_mode) {
             case 0:
-                Draw_AddString(AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], NORMAL_AIM_TEXT_STR);      
+                Draw_String(Draw_OPERATE_ADD,AIM_MODE_VALUE_TEXT[0], AIM_MODE_LAYER, AIM_MODE_COLOR, AIM_MODE_VALUE_TEXT[1], AIM_MODE_VALUE_TEXT[2], AIM_MODE_VALUE_TEXT[3], AIM_MODE_VALUE_TEXT[4], AIM_TEXT);      
                 break;
             default:
                 break;    
         }
     }else{Draw_ClearLayer(2) ; }
 	
+}
+void Referee_MaintainDisplay(){
+	if(count_cqie == 1){
+	Draw_String(Draw_OPERATE_MODIFY,STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], 
+	STR_MODE_VALUE_TEXT2[2], STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_test);
+	}
 }
 /*********************************************文字绘制结束*****************************************************************/
 /**
@@ -399,7 +407,8 @@ void Referee_Setup() {
 void Referee_Update() {                
  //   Draw_ClearAll()	;
     Referee_UpdateAimLine();
-	Referee_UpdateModeDisplay();
-
+	Referee_UpdateModeDisplay();   //闪出的文字
+	Referee_MaintainDisplay();     //始终在画面上面的文字
+	
     Referee_DrawingBufferFlush();         
 }

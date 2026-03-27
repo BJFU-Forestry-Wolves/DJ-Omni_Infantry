@@ -20,7 +20,7 @@ const float Const_Shooter22mpers        = 300.0f;
 const float Const_ShooterLockedCurrent              = 9000.0f;//堵转电流
 const float Const_ShooterLockedSpeed                = 10.0f;
 const float Const_ShooterLockedTime                 = 20.0f;
-const float Const_ShooterRelockedTime               = 80.0f;
+const float Const_ShooterRelockedTime               = 100.0f;
 const float Const_ShooterLockedReverseSpeed         = 20.0f;
 
 const float Const_FeederSlowSpeed                   = -57.0f;
@@ -57,7 +57,7 @@ const float REMOTE_CHASSIS_FOLLOW_WZ_GAIN						= 6.0f;    //跟随响应速度    原定
 const float REMOTE_CHASSIS_FOLLOW_WZ_MAX						= 120.0f;
 const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 1.0f;
 const float CHASSIS_YAW_ANGLE_OFFSET							= 170.62f;    //269.62
-const float CHASSIS_XTL_WZ										= 180.0f;
+const float CHASSIS_XTL_WZ										= 180.0f;     //180
 
 float Const_PITCH_UMAXANGLE                       = 10.0f;   //10.4
 float Const_PITCH_UMAXANGLE_GRYO                  = 10.0f;    //40.4

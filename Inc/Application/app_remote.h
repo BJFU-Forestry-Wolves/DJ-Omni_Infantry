@@ -34,6 +34,7 @@ void Remote_MouseShooterModeSet(void);
 void Remote_RemoteShooterModeSet(void);
 void Remote_RemoteProcess(void);
 void Remote_KeyMouseProcess(void);
+uint8_t Is_Key_Triggered(uint8_t current_state, uint8_t *last_state, uint32_t *last_tick, uint32_t cool_time);
 
 extern float vef_pitch_ref;
 extern int count_cqie;

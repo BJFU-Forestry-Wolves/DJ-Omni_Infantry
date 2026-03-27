@@ -361,14 +361,14 @@ void Shooter_ShootControl() {
   * @param      NULL
   * @retval     NULL
   */
-void Shooter_SingleShootCtrl() {
+void Shooter_SingleShootCtrl(float bullet) {
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
     
     if (fabs(PID_GetPIDFdb(&shooter->feedAngPID) - PID_GetPIDRef(&shooter->feedAngPID)) > 1.0f) {   // feeder motor not ready
         //return;     // do nothing
     }
     if (!shooter->single_shoot_done) {   // not shoot yet
-        PID_AddPIDRef(&shooter->feedAngPID, 55.0f);
+        PID_AddPIDRef(&shooter->feedAngPID, bullet);
         PID_SetPIDFdb(&shooter->feedAngPID, Motor_FeedMotor.encoder.consequent_angle);
         shooter->single_shoot_done = 1;
     }
@@ -403,7 +403,11 @@ void Shooter_FeederControl() {
           break;
       case Feeder_SINGLE:
           current_pid_num = 2;
-          Shooter_SingleShootCtrl();
+          Shooter_SingleShootCtrl(45.0);
+          break;
+	  case Feeder_Sanlian:
+          current_pid_num = 2;
+          Shooter_SingleShootCtrl(135.0);
           break;
       case Feeder_FAST_CONTINUE:
           current_pid_num = 1;

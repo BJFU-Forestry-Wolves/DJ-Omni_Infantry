@@ -214,24 +214,17 @@ uint8_t RXdata[15];                                 //接收视觉组的数组
 //             发送数据初始化
 void SendVisionData_Init(void)
 {
-	visionDataSend.head 					         = 0xAA;		   //帧头
-	visionDataSend.uphead 					         = 0xFF;		   //帧头
-	visionDataSend.payload_len 					     = 22;              //数据长度
-	visionDataSend.seq 					             = 0;
+	visionDataSend.head 					         = 0x53;		   //帧头
 	visionDataSend.color 					         = 0x02;		   //初始颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
 	visionDataSend.mode 					         = 0x01;		   //模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
 	visionDataSend.robotID 					       = 0x03;		   //当前机器人ID 0为英雄 1为工程 2为步兵 3为无人机 4为哨兵
-	visionDataSend.q[0].value                              =0    ;
-	visionDataSend.q[1].value                              =0    ;
-	visionDataSend.q[2].value                              =0    ;
-	visionDataSend.q[3].value                              =0    ;
-	visionDataSend.yaw_angle.yaw_gyro   	 =  5 ;			   //yaw轴陀螺仪角度   初始值
-	visionDataSend.pitch_angle.pitch_gyro	 =  6;			   //pitch轴陀螺仪角度 初始值
-//	visionDataSend.yaw_acc_data.yaw_acc 	 = 0;					 //yaw轴速度				  初始值
-//	visionDataSend.pitch_acc_data.pitch_acc= 0;					 //pitch轴速度		    初始值
-	visionDataSend.shoot_speed.value             = 0;		       //弹丸发射速度 			初始值
-//	visionDataSend.CRCcode                 = 0;          //CRC校验
-	visionDataSend.end 						         = 0x0D;		   //帧尾（某不愿意透露姓名的Q姓队长规定）
+	visionDataSend.yaw_angle.yaw_gyro   	 = 5 ;			   //yaw轴陀螺仪角度   初始值
+	visionDataSend.pitch_angle.pitch_gyro	 = 6.0;			   //pitch轴陀螺仪角度 初始值
+	visionDataSend.yaw_acc_data.yaw_acc 	 = 0;					 //yaw轴速度				  初始值
+	visionDataSend.pitch_acc_data.pitch_acc= 0;					 //pitch轴速度		    初始值
+	visionDataSend.shoot_speed             = 0;		       //弹丸发射速度 			初始值
+	visionDataSend.CRCcode                 = 0;          //CRC校验
+	visionDataSend.end 						         = 0x45;		   //帧尾（某不愿意透露姓名的Q姓队长规定）
 }
 //             收发数据的串口初始化
 void MyUART_Init(void)
@@ -241,141 +234,85 @@ void MyUART_Init(void)
 //                向视觉发送数据 
 void SendVisionData(VisionDataSend_Typedef* RAW_Data)		//调用该函数发送视觉信息给视觉组
 {
-	uint8_t data_buffer[28];
+		uint8_t data_buffer[14];
 	static uint8_t delay_num;
 	delay_num++;
 	while(delay_num ==10)
 	{
-	static uint8_t frame_seq = 0;
-	RAW_Data->seq = frame_seq++;
 	data_buffer[0]  = RAW_Data->head;												//帧头
-	data_buffer[1]  = RAW_Data->uphead;
-	data_buffer[2]  = RAW_Data->payload_len;		
-	data_buffer[3]  = RAW_Data->seq;	
-	data_buffer[4]  = RAW_Data->color;								   	  //颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
-	data_buffer[5]  = RAW_Data->mode;												//模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
-	data_buffer[6]  = RAW_Data->robotID;                               //当前机器人ID 0为英雄 1为工程 2为步兵 3为无人机 4为哨兵
-    data_buffer[7] = RAW_Data->shoot_speed.send[0];
-	data_buffer[8] = RAW_Data->shoot_speed.send[1];	
-    data_buffer[9] = RAW_Data->q[0].byte[0];                     //四元数W
-	data_buffer[10] = RAW_Data->q[0].byte[1];
-	data_buffer[11] = RAW_Data->q[1].byte[0];                     //四元数X
-	data_buffer[12] = RAW_Data->q[1].byte[1];
-	data_buffer[13] = RAW_Data->q[2].byte[0];                     //四元数Y
-	data_buffer[14] = RAW_Data->q[2].byte[1];
-	data_buffer[15] = RAW_Data->q[3].byte[0];                     //四元数Z
-	data_buffer[16] = RAW_Data->q[3].byte[1];
-	data_buffer[17]  = RAW_Data->yaw_angle.yaw_angle_send[0];
-	data_buffer[18]  = RAW_Data->yaw_angle.yaw_angle_send[1];
-	data_buffer[19]  = RAW_Data->pitch_angle.pitch_angle_send[0];
-	data_buffer[20]  = RAW_Data->pitch_angle.pitch_angle_send[1];
-	data_buffer[21]  = RAW_Data->yaw_vel.yaw_vel_send[0];
-    data_buffer[22]  = RAW_Data->yaw_vel.yaw_vel_send[1];
-    data_buffer[23]  = RAW_Data->pitch_vel.pitch_vel_send[0];
-    data_buffer[24]  = RAW_Data->pitch_vel.pitch_vel_send[1];
-//	data_buffer[8]  = RAW_Data->yaw_acc_data.yaw_acc_send[0];           新版视觉代码不需要加速度了
-//	data_buffer[9]  = RAW_Data->yaw_acc_data.yaw_acc_send[1];           哈吉桢不让发
-//	data_buffer[10] = RAW_Data->pitch_acc_data.pitch_acc_send[0];
-//	data_buffer[11] = RAW_Data->pitch_acc_data.pitch_acc_send[1];
-    uint16_t crc_val = Get_CRC16_CCITT(data_buffer, 25);
-
-	data_buffer[25] = (uint8_t)(crc_val & 0xFF);         // 低位
-    data_buffer[26] = (uint8_t)((crc_val >> 8) & 0xFF);  // 高位
-	data_buffer[27] = RAW_Data->end;								//帧尾
-	HAL_UART_Transmit(&huart1, data_buffer, 28, 0xff);//通过DMA一次性发送数据														//调用API发送
+	data_buffer[1]  = RAW_Data->color;								   	  //颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
+	data_buffer[2]  = RAW_Data->mode;												//模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
+	data_buffer[3]  = RAW_Data->robotID;										//当前机器人ID 0为英雄 1为工程 2为步兵 3为无人机 4为哨兵
+    data_buffer[4]  = RAW_Data->yaw_angle.yaw_angle_send[0];
+	data_buffer[5]  = RAW_Data->yaw_angle.yaw_angle_send[1];
+	data_buffer[6]  = RAW_Data->pitch_angle.pitch_angle_send[0];
+	data_buffer[7]  = RAW_Data->pitch_angle.pitch_angle_send[1];
+	data_buffer[8]  = RAW_Data->yaw_acc_data.yaw_acc_send[0];
+	data_buffer[9]  = RAW_Data->yaw_acc_data.yaw_acc_send[1];
+	data_buffer[10] = RAW_Data->pitch_acc_data.pitch_acc_send[0];
+	data_buffer[11] = RAW_Data->pitch_acc_data.pitch_acc_send[1];
+	data_buffer[12] = RAW_Data->shoot_speed;
+	data_buffer[13] = RAW_Data->end;								//帧尾
+	HAL_UART_Transmit(&huart1, data_buffer, 15, 0xff);//通过DMA一次性发送数据														//调用API发送
 	delay_num =0;
 	}
-
-//#ifdef UART_DEBUG_MODE
-//	printf("\n----------SendVisionData Start-------\n\n");
-//	printf("\n---------SendVisionData Finish-------\n");
-//#endif
 }
 //    处理从视觉接收的数据
 //    myVisionDataGet    和   RAW_Data
 void GetVisionData(VisionDataGet_Typedef* myVisionDataGet ,uint8_t RAW_Data[30])			//调用该函数获取视觉信息，视觉信息会传到 形参结构体 里
 {
 	
-	// 1. 拼接视觉发来的两个 CRC 字节 (假设低位在前 RAW_Data[12]，高位在后 RAW_Data[13])
-    uint16_t received_crc = (uint16_t)(RAW_Data[13] << 8) | RAW_Data[12];
-
-    // 2. 计算接收到的数据部分的 CRC16 (校验范围：Index 0 到 11，共 12 个字节)
-    // 注意：校验范围千万不能包含 CRC 字节本身
-    uint16_t calculated_crc = Get_CRC16_CCITT(RAW_Data, 12);
-
-    // 3. 校验对比
-    if (calculated_crc != received_crc) 
-    {
-        // 如果校验不通过，直接跳出函数，不更新结构体数据，防止干扰导致云台乱晃
-        return; 
-    }
-	
-	myVisionDataGet->head =        RAW_Data[0];
-	myVisionDataGet->uphead =      RAW_Data[1];
-	myVisionDataGet->payload_len = RAW_Data[2];
-	myVisionDataGet->seq =         RAW_Data[3];
-	myVisionDataGet->detect_signal=RAW_Data[4];
-	myVisionDataGet->shoot_msg =   RAW_Data[5];
-	myVisionDataGet->yaw_angle.yaw_angle_get[0] =     RAW_Data[6];
-	myVisionDataGet->yaw_angle.yaw_angle_get[1] =     RAW_Data[7];
-    myVisionDataGet->pitch_angle.pitch_angle_get[0] = RAW_Data[8];
-	myVisionDataGet->pitch_angle.pitch_angle_get[1] = RAW_Data[9];
-// myVisionDataGet->x_data.x_get[0] = RAW_Data[7];
-//	myVisionDataGet->x_data.x_get[1] = RAW_Data[8];
-//	myVisionDataGet->y_data.y_get[0] = RAW_Data[9];
-//	myVisionDataGet->y_data.y_get[1] = RAW_Data[10];
-	myVisionDataGet->depth_data.depth_get[0] = RAW_Data[10];
-	myVisionDataGet->depth_data.depth_get[1] = RAW_Data[11];
-	myVisionDataGet->CRCcode = received_crc;
+myVisionDataGet->head = RAW_Data[0];
+	myVisionDataGet->detect_signal = RAW_Data[1];
+	myVisionDataGet->shoot_msg = RAW_Data[2];
+	myVisionDataGet->yaw_angle.yaw_angle_get[0] = RAW_Data[3];
+	myVisionDataGet->yaw_angle.yaw_angle_get[1] = RAW_Data[4];
+  myVisionDataGet->pitch_angle.pitch_angle_get[0] = RAW_Data[5];
+	myVisionDataGet->pitch_angle.pitch_angle_get[1] = RAW_Data[6];
+  myVisionDataGet->x_data.x_get[0] = RAW_Data[7];
+	myVisionDataGet->x_data.x_get[1] = RAW_Data[8];
+	myVisionDataGet->y_data.y_get[0] = RAW_Data[9];
+	myVisionDataGet->y_data.y_get[1] = RAW_Data[10];
+	myVisionDataGet->depth_data.depth_get[0] = RAW_Data[11];
+	myVisionDataGet->depth_data.depth_get[1] = RAW_Data[12];
+	myVisionDataGet->CRCcode = RAW_Data[13];
 	myVisionDataGet->end = RAW_Data[14];
 	
- if(RAW_Data[0] != 0XAA)  myVisionDataGet->head = 0;
- if(RAW_Data[1] == 0X0F)  myVisionDataGet->detect_signal = 0;
- if(RAW_Data[2] == 0X0A)  myVisionDataGet->shoot_msg =0;
-// if(RAW_Data[3] == 0)  myVisionDataGet->yaw_angle.yaw_angle_get[0] = 0;
-// if(RAW_Data[4] == 0)  myVisionDataGet->yaw_angle.yaw_angle_get[1] = 0;
-// if(RAW_Data[5] == 0)  myVisionDataGet->pitch_angle.pitch_angle_get[0] = 0;
-// if(RAW_Data[6] == 0)  myVisionDataGet->pitch_angle.pitch_angle_get[1] = 0;
-// if(RAW_Data[7] == 0)  myVisionDataGet->x_data.x_get[0] = 0;
-// if(RAW_Data[8] == 0)  myVisionDataGet->x_data.x_get[1] = 0;
-// if(RAW_Data[9] == 0)  myVisionDataGet->y_data.y_get[0] = 0;
-// if(RAW_Data[10] == 0)  myVisionDataGet->y_data.y_get[1] = 0;
-// if(RAW_Data[11] == 0)  myVisionDataGet->depth_data.depth_get[0] = 0;
-// if(RAW_Data[12] == 0)  myVisionDataGet->depth_data.depth_get[1] = 0;
- if(RAW_Data[14] != 0X0D)  myVisionDataGet->end = 0;
-
+	 if(RAW_Data[0] == 0)  myVisionDataGet->head = 0;
+	 if(RAW_Data[1] == 0)  myVisionDataGet->detect_signal = 0;
+	 if(RAW_Data[2] == 0)  myVisionDataGet->shoot_msg =0;
+	 if(RAW_Data[3] == 0)  myVisionDataGet->yaw_angle.yaw_angle_get[0] = 0;
+	 if(RAW_Data[4] == 0)  myVisionDataGet->yaw_angle.yaw_angle_get[1] = 0;
+	 if(RAW_Data[5] == 0)  myVisionDataGet->pitch_angle.pitch_angle_get[0] = 0;
+	 if(RAW_Data[6] == 0)  myVisionDataGet->pitch_angle.pitch_angle_get[1] = 0;
+	 if(RAW_Data[7] == 0)  myVisionDataGet->x_data.x_get[0] = 0;
+	 if(RAW_Data[8] == 0)  myVisionDataGet->x_data.x_get[1] = 0;
+	 if(RAW_Data[9] == 0)  myVisionDataGet->y_data.y_get[0] = 0;
+	 if(RAW_Data[10] == 0)  myVisionDataGet->y_data.y_get[1] = 0;
+	 if(RAW_Data[11] == 0)  myVisionDataGet->depth_data.depth_get[0] = 0;
+	 if(RAW_Data[12] == 0)  myVisionDataGet->depth_data.depth_get[1] = 0;
+	 if(RAW_Data[13] == 0)  myVisionDataGet->CRCcode = 0;
+	 if(RAW_Data[14] == 0)  myVisionDataGet->end = 0;
 
 }
 
 void Tidy_send_vision(VisionDataSend_Typedef *visionDataSend)
 {
-	 Referee_RefereeDataTypeDef *referee = Referee_GetRefereeDataPtr();
+	  Referee_RefereeDataTypeDef *referee = Referee_GetRefereeDataPtr();
 	//visionDataSend.color 					         = 0x02;		//初始颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
 	//visionDataSend.mode 					         = 0x01;		//模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
-
-	visionDataSend->q[0].value = (int16_t)(INS.q[0] * 10000.0f);
-    visionDataSend->q[1].value = (int16_t)(INS.q[1] * 10000.0f);
-    visionDataSend->q[2].value = (int16_t)(INS.q[2] * 10000.0f);
-    visionDataSend->q[3].value = (int16_t)(INS.q[3] * 10000.0f);
+	visionDataSend->yaw_angle.yaw_gyro      = (int16_t)(INS.Yaw *100);
+	visionDataSend->pitch_angle.pitch_gyro  = (int16_t)(INS.Roll* 100);
+	visionDataSend->yaw_acc_data.yaw_acc 	  = (int16_t)(INS.Accel[0] * 100);
+	visionDataSend->pitch_acc_data.pitch_acc= (int16_t)(INS.Accel[2] * 100);
 	
+	if(referee->what_can_I_shoot.speed*10>255||referee->what_can_I_shoot.speed<0||referee->what_can_I_shoot.speed==0)
+	last_shoot_speed = 0;
+	else if(referee->what_can_I_shoot.speed*10!=0||referee->what_can_I_shoot.speed*10<255)
+	last_shoot_speed = referee->what_can_I_shoot.speed;
+	visionDataSend->shoot_speed              =(uint8_t)(last_shoot_speed*10.0);
 	
-
-	visionDataSend->yaw_angle.yaw_gyro      = (int16_t)(INS.Yaw* 100);
-	visionDataSend->pitch_angle.pitch_gyro  = (int16_t)(INS.Roll * 100);
-	visionDataSend->yaw_vel.yaw_gyro_vel      = (int16_t)(INS.Gyro[2]* 100);
-	visionDataSend->pitch_vel.pitch_gyro_vel  = (int16_t)(INS.Gyro[1] * 100);  //INS.Gyro[0]为raw，1为pitch，2为yaw
-//	visionDataSend->yaw_acc_data.yaw_acc 	= (int16_t)(INS.Accel[0] * 10000);
-//	visionDataSend->pitch_acc_data.pitch_acc= (int16_t)(INS.Accel[2] * 10000);
-	visionDataSend->shoot_speed.value              =  100*100;                           //(uint8_t)(last_shoot_speed*10.0);
-//	if(bref_data.init_speed>=25){visionDataSend->shoot_speed=(uint8_t)25*10;	}
-//	else{
-//	visionDataSend->shoot_speed              =(uint8_t)bref_data.init_speed*10;	
-//	}
-	
-	if(referee->status.shoot_heat != 0)
-	last_shoot_speed = referee->status.shoot_heat;
-	else if(referee->status.shoot_heat == 0)
-	last_shoot_speed = 15.0f;
+	visionDataSend->robotID                  =(uint8_t)referee->status.robot_id;
 
 //  visionDataSend.CRCcode                 = 0;       //CRC校验;
 }

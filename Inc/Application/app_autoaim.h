@@ -36,42 +36,29 @@ typedef union {
 
 typedef struct {
 	uint8_t head;       //帧头
-	uint8_t uphead;       //问学长这是什么
-	uint8_t payload_len;
-	uint8_t seq        ;
 	uint8_t color;      //颜色
 	uint8_t mode;       //模式
 	uint8_t robotID;    //机器人ID
-	Int_Byte_TypeDef q[4];     //陀螺仪四元数
-	union yaw_INS {     //YAW轴角度 （低位优先发送）
+	
+	union yaw_INS {     //YAW轴陀螺仪数据 （低位优先发送）
 		int16_t yaw_gyro;
 		uint8_t yaw_angle_send[2];
 	}yaw_angle;
-	union pitch_INS {   //PITCH轴角度 （低位优先发送）
+	union pitch_INS {   //PITCH轴陀螺仪数据 （低位优先发送）
 		int16_t pitch_gyro;
 		uint8_t pitch_angle_send[2];
 	}pitch_angle;
-	union yaw_INS_vel {     //YAW轴角速度 （低位优先发送）
-		int16_t yaw_gyro_vel;
-		uint8_t yaw_vel_send[2];
-	}yaw_vel;
-	union pitch_INS_vel {   //PITCH轴角速度 （低位优先发送）
-		int16_t pitch_gyro_vel;
-		uint8_t pitch_vel_send[2];
-	}pitch_vel;
-//	union yaw_Acc {     //YAW轴陀螺仪加速度（低位优先发送）
-//		int16_t yaw_acc;
-//		uint8_t yaw_acc_send[2];
-//	}yaw_acc_data;
-//	union pitch_Acc {   //PITCH轴陀螺仪加速度 （低位优先发送）
-//		int16_t pitch_acc;
-//		uint8_t pitch_acc_send[2];
-//	}pitch_acc_data;
-	union  shoot_speed_AAA{
-		int16_t   value;
-		uint8_t   send[2];
-	}shoot_speed ;
-	uint16_t CRCcode;
+	union yaw_Acc {     //YAW轴陀螺仪加速度（低位优先发送）
+		int16_t yaw_acc;
+		uint8_t yaw_acc_send[2];
+	}yaw_acc_data;
+	union pitch_Acc {   //PITCH轴陀螺仪加速度 （低位优先发送）
+		int16_t pitch_acc;
+		uint8_t pitch_acc_send[2];
+	}pitch_acc_data;
+	
+	uint8_t shoot_speed;//子弹速度
+	uint8_t CRCcode;    //CRC校验 8校验
 	uint8_t end;        //尾帧
 }VisionDataSend_Typedef;
 //陀螺仪相关数据均为float，需原始数据*100，转化成int16_t

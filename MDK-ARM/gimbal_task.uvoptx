@@ -168,7 +168,7 @@
           <Type>0</Type>
           <LineNumber>224</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134232918</Address>
+          <Address>134232966</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -198,57 +198,9 @@
         <Bp>
           <Number>2</Number>
           <Type>0</Type>
-          <LineNumber>260</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134233484</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Src\Modules\module_gimbal.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\260</Expression>
-        </Bp>
-        <Bp>
-          <Number>3</Number>
-          <Type>0</Type>
-          <LineNumber>256</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134233564</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Src\Modules\module_gimbal.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\256</Expression>
-        </Bp>
-        <Bp>
-          <Number>4</Number>
-          <Type>0</Type>
-          <LineNumber>245</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>134233472</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>1</BreakIfRCount>
-          <Filename>..\Src\Modules\module_gimbal.c</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\245</Expression>
-        </Bp>
-        <Bp>
-          <Number>5</Number>
-          <Type>0</Type>
           <LineNumber>175</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134234060</Address>
+          <Address>134233884</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -260,11 +212,11 @@
           <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\175</Expression>
         </Bp>
         <Bp>
-          <Number>6</Number>
+          <Number>3</Number>
           <Type>0</Type>
           <LineNumber>169</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233990</Address>
+          <Address>134233814</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -276,11 +228,11 @@
           <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\169</Expression>
         </Bp>
         <Bp>
-          <Number>7</Number>
+          <Number>4</Number>
           <Type>0</Type>
           <LineNumber>67</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233758</Address>
+          <Address>134233582</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -292,11 +244,11 @@
           <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\67</Expression>
         </Bp>
         <Bp>
-          <Number>8</Number>
+          <Number>5</Number>
           <Type>0</Type>
           <LineNumber>39</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233046</Address>
+          <Address>134233130</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -308,7 +260,7 @@
           <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\39</Expression>
         </Bp>
         <Bp>
-          <Number>9</Number>
+          <Number>6</Number>
           <Type>0</Type>
           <LineNumber>210</LineNumber>
           <EnabledFlag>0</EnabledFlag>
@@ -320,22 +272,6 @@
           <BreakByAccess>0</BreakByAccess>
           <BreakIfRCount>0</BreakIfRCount>
           <Filename>startup_stm32f407xx.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
-        </Bp>
-        <Bp>
-          <Number>10</Number>
-          <Type>0</Type>
-          <LineNumber>210</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>..\Src\Modules\module_gimbal.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression></Expression>
         </Bp>
@@ -380,6 +316,16 @@
           <count>7</count>
           <WinNumber>1</WinNumber>
           <ItemText>INS</ItemText>
+        </Ww>
+        <Ww>
+          <count>8</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>count_cqie</ItemText>
+        </Ww>
+        <Ww>
+          <count>9</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>q_mode</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -1416,7 +1362,7 @@
       <GroupNumber>10</GroupNumber>
       <FileNumber>75</FileNumber>
       <FileType>1</FileType>
-      <tvExp>1</tvExp>
+      <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
       <PathWithFileName>..\Src\System\sys_const.c</PathWithFileName>

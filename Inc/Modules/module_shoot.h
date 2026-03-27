@@ -22,12 +22,13 @@ extern "C" {
 
 typedef enum {
 	Feeder_NULL             = 0u,
-	Feeder_SINGLE           = 1u,
+	Feeder_SINGLE           = 1u,	
 	Feeder_FAST_CONTINUE    = 2u,
     Feeder_LOW_CONTINUE     = 3u,
 	Feeder_LOCKED_ROTOR     = 4u,
     Feeder_REFEREE          = 5u,
-  	Feeder_FINISH           = 6u      
+  	Feeder_FINISH           = 6u,
+	Feeder_Sanlian           =7u	
 }Shoot_FeederModeEnum;
 
 typedef enum {
@@ -105,7 +106,7 @@ void Shooter_AngleCorrect(void);
 void Shooter_RealAngleCorrect(void);
 uint8_t Shooter_HeatCtrl(void);
 void Shooter_ShootControl(void);
-void Shooter_SingleShootCtrl(void);
+void Shooter_SingleShootCtrl(float bullet);
 void Shooter_SingleShootReset(void);
 void Shooter_FeederControl(void);
 void Shooter_ShooterMotorOutput(void);
