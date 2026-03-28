@@ -328,12 +328,14 @@ void Referee_SendDrawingStringCmd(graphic_data_struct_t *pgraph, const uint8_t s
 void Draw_String(Draw_OperateType operate_type,uint32_t graph_id, uint8_t layer, Draw_Color color, uint16_t font_size, 
                     uint8_t width, uint16_t start_x, uint16_t start_y, const char str[])  
 {
+	 Referee_DrawingBufferFlush(); 
     graphic_data_struct_t graph;
     uint8_t len = strlen(str);
     if (Referee_PackStringGraphicData(&graph, graph_id, operate_type, layer, color, 
                                       font_size, len, width, start_x, start_y) != PARSE_SUCCEEDED)
         return;
     uint8_t buf[35];
+	memset(buf, 0, sizeof(buf)); 
     memcpy(buf, str, len);
     Referee_SendDrawingStringCmd(&graph, buf);
 }

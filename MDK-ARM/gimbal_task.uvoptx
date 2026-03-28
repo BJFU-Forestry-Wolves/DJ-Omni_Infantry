@@ -120,6 +120,7 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
+          <Name>?</Name>
         </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
@@ -168,7 +169,7 @@
           <Type>0</Type>
           <LineNumber>224</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134232966</Address>
+          <Address>134232978</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -200,7 +201,7 @@
           <Type>0</Type>
           <LineNumber>175</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233884</Address>
+          <Address>134234104</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -216,7 +217,7 @@
           <Type>0</Type>
           <LineNumber>169</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233814</Address>
+          <Address>134234034</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -232,7 +233,7 @@
           <Type>0</Type>
           <LineNumber>67</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233582</Address>
+          <Address>134233802</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -248,7 +249,7 @@
           <Type>0</Type>
           <LineNumber>39</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233130</Address>
+          <Address>134233142</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -258,22 +259,6 @@
           <Filename>..\Src\Modules\module_gimbal.c</Filename>
           <ExecCommand></ExecCommand>
           <Expression>\\gimbal_task\../Src/Modules/module_gimbal.c\39</Expression>
-        </Bp>
-        <Bp>
-          <Number>6</Number>
-          <Type>0</Type>
-          <LineNumber>210</LineNumber>
-          <EnabledFlag>0</EnabledFlag>
-          <Address>0</Address>
-          <ByteObject>0</ByteObject>
-          <HtxType>0</HtxType>
-          <ManyObjects>0</ManyObjects>
-          <SizeOfObject>0</SizeOfObject>
-          <BreakByAccess>0</BreakByAccess>
-          <BreakIfRCount>0</BreakIfRCount>
-          <Filename>startup_stm32f407xx.s</Filename>
-          <ExecCommand></ExecCommand>
-          <Expression></Expression>
         </Bp>
       </Breakpoint>
       <WatchWindow1>
@@ -285,47 +270,17 @@
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>GimbalPitch_gimbalPitchControlData</ItemText>
+          <ItemText>Remote_RemoteData,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Remote_RemoteData,0x0A</ItemText>
+          <ItemText>visionDataGet,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Referee_RefereeData,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Shooter_ShooterControl</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Motor_FeedMotor</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>test,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>INS</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>count_cqie</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>q_mode</ItemText>
+          <ItemText>Gimbal_YawVisionPID</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>
@@ -1125,8 +1080,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\Modules\module_chassis.c</PathWithFileName>
-      <FilenameWithoutPath>module_chassis.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\Modules\module_dm4310.c</PathWithFileName>
+      <FilenameWithoutPath>module_dm4310.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1137,8 +1092,8 @@
       <tvExp>0</tvExp>
       <tvExpOptDlg>0</tvExpOptDlg>
       <bDave2>0</bDave2>
-      <PathWithFileName>..\Src\Modules\module_dm4310.c</PathWithFileName>
-      <FilenameWithoutPath>module_dm4310.c</FilenameWithoutPath>
+      <PathWithFileName>..\Src\Modules\module_chassis.c</PathWithFileName>
+      <FilenameWithoutPath>module_chassis.c</FilenameWithoutPath>
       <RteFlg>0</RteFlg>
       <bShared>0</bShared>
     </File>
@@ -1386,7 +1341,7 @@
 
   <Group>
     <GroupName>Algorithm</GroupName>
-    <tvExp>0</tvExp>
+    <tvExp>1</tvExp>
     <tvExpOptDlg>0</tvExpOptDlg>
     <cbSel>0</cbSel>
     <RteFlg>0</RteFlg>

@@ -230,3 +230,76 @@ void PID_CalcPID(PID_PIDTypeDef* pid, PID_PIDParamTypeDef* pparam) {
 }
 
 
+void PID_GimbalYawVisionPID_Init(PID_GimbalYawVisionTypeDef *yaw_pid, float kp, float ki, float kd, float inc_max, float bias_deadband)
+{
+    if (yaw_pid == NULL) return;
+    
+    // 初始化PID核心参数
+    yaw_pid->kp = kp;
+    yaw_pid->ki = ki;
+    yaw_pid->kd = kd;
+    
+    // 初始化限幅/死区参数
+    yaw_pid->inc_max = inc_max;         //单次最大累加度数
+    yaw_pid->bias_deadband = bias_deadband;    //小于死区直接输出0°
+    
+    // 初始化偏差缓存
+    yaw_pid->raw_bias = 0.0f;
+    yaw_pid->real_bias = 0.0f;
+    yaw_pid->err[0] = 0.0f;
+    yaw_pid->err[1] = 0.0f;
+    yaw_pid->err[2] = 0.0f;
+    yaw_pid->single_inc = 0.0f;
+}
+
+
+
+/**
+ * @brief 云台YAW轴视觉偏差PID计算核心函数
+ * @核心逻辑：增量式PID → 输入总偏差 → 输出单次最优累加量
+ * @适配点：1.自动×0.01还原真实角度 2.死区滤波 3.单次累加量限幅 4.历史偏差缓存
+ */
+float PID_GimbalYawVisionPID_Calc(PID_GimbalYawVisionTypeDef *yaw_pid, int16_t raw_yaw_predict)
+{
+    if (yaw_pid == NULL) return 0.0f;
+    
+    // -------------------------- 步骤1：数据预处理 还原真实角度偏差 --------------------------
+    // raw_yaw_predict ×0.01 → 还原为云台可识别的真实角度偏差(°)
+    yaw_pid->raw_bias = (float)raw_yaw_predict;
+    yaw_pid->real_bias = yaw_pid->raw_bias * 0.01f;
+    
+    // -------------------------- 步骤2：偏差死区滤波（消除微小抖动） --------------------------
+    if (fabs(yaw_pid->real_bias) < yaw_pid->bias_deadband)
+    {
+        yaw_pid->single_inc = 0.0f;
+        yaw_pid->err[0] = 0.0f;
+        yaw_pid->err[1] = 0.0f;
+        yaw_pid->err[2] = 0.0f;
+        return yaw_pid->single_inc;
+    }
+    
+    // -------------------------- 步骤3：更新偏差缓存（k、k-1、k-2） --------------------------
+    yaw_pid->err[2] = yaw_pid->err[1];  // 上上周期偏差 e(k-2)
+    yaw_pid->err[1] = yaw_pid->err[0];  // 上一周期偏差 e(k-1)
+    yaw_pid->err[0] = yaw_pid->real_bias;// 当前周期偏差 e(k)
+    
+    // -------------------------- 步骤4：增量式PID核心计算（专属你的累加场景） --------------------------
+    // 增量式PID公式：ΔU(k) = Kp*(e(k)-e(k-1)) + Ki*e(k) + Kd*(e(k)-2e(k-1)+e(k-2))
+    float delta_err1 = yaw_pid->err[0] - yaw_pid->err[1];          // e(k)-e(k-1)
+    float delta_err2 = yaw_pid->err[0] - 2*yaw_pid->err[1] + yaw_pid->err[2]; // e(k)-2e(k-1)+e(k-2)
+    
+    yaw_pid->single_inc = yaw_pid->kp * delta_err1          // P环节：动态调响应速度
+                        + yaw_pid->ki * yaw_pid->err[0]     // I环节：补微小偏差
+                        + yaw_pid->kd * delta_err2;         // D环节：抑制超调/抖动
+    
+    // -------------------------- 步骤5：单次累加量限幅（硬件保护，杜绝冲击） --------------------------
+    LimitMax(yaw_pid->single_inc, yaw_pid->inc_max);
+    
+    // -------------------------- 返回：本次2ms最优累加量 --------------------------
+    static float filted_inc = 0.0f;
+    #define FILTER_ALPHA 0.2f  // 滤波系数（0.1~0.3，越小越平滑）
+    filted_inc = filted_inc * (1 - FILTER_ALPHA) + yaw_pid->single_inc * FILTER_ALPHA;
+    yaw_pid->single_inc = filted_inc;
+
+    return yaw_pid->single_inc;
+}

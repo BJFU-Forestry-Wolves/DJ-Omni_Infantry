@@ -32,6 +32,7 @@
 #define ENCODER_LIMIT 500
 Remote_RemoteControlTypeDef Remote_remoteControlData;
 Math_SlopeParamTypeDef Remote_ChassisFBSlope;
+PID_GimbalYawVisionTypeDef Gimbal_YawVisionPID;
 float last_encoder_angle=0;
 float encoder_angle=0;
 float get_abs(float a){
@@ -73,6 +74,8 @@ void Remote_RemotrControlInit() {
     Remote_RemoteControlTypeDef *control_data = Remote_GetControlDataPtr();
     
     Math_InitSlopeParam(&Remote_ChassisFBSlope, MOUSE_CHASSIS_ACCELERATE, MOUSE_CHASSIS_ACCELERATE);
+	
+	
 }
 
 
@@ -136,14 +139,19 @@ void Remote_ControlCom() {
 * @param      NULL
 * @retval     NULL
 */
-float test;
-
+float testvision;
+float testvision2;
 void Remote_RemoteShooterModeSet() {
 
 
 		Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
 		Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
-		
+	PID_GimbalYawVisionPID_Init(&Gimbal_YawVisionPID, 
+                                Const_GimbalYawVision[0],   // Kp   (? Debug ? YAKp ?????)
+                                Const_GimbalYawVision[1],   // Ki
+                                Const_GimbalYawVision[2],   // Kd
+                                Const_GimbalYawVision[3],   // inc_max ????????(?)??=????
+                                Const_GimbalYawVision[4]);  // bias_deadband ??(?)????????	
 
     switch (data->remote.s[1]) {
     /*      left switch control mode   */
@@ -176,13 +184,17 @@ void Remote_RemoteShooterModeSet() {
 		gimbalpitch->output_state = 1;
 		gimbalyaw->output_state = 1;
     Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
-    buscomm->yaw_ref += (float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN + (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.004f*0.2f;
-		GimbalYaw_SetYawRef(buscomm->yaw_ref);
+	float yaw_single_inc = PID_GimbalYawVisionPID_Calc(&Gimbal_YawVisionPID, visionDataGet.yaw_angle.yaw_predict);
+	float yaw_total_add = (float)data->remote.ch[2] * -Const_WHEELLEG_REMOTE_YAW_GAIN+yaw_single_inc;
+	buscomm->yaw_ref += yaw_total_add;
+	testvision =yaw_total_add;
+	testvision2 = yaw_single_inc;
+	GimbalYaw_SetYawRef(buscomm->yaw_ref);
 	
     float pitch_ref;	
     pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;      //(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;      
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
-	test = cospitch;
+
 	GimbalPitch_SetPitchRef(cospitch);
 	
 	

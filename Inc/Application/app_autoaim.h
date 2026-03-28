@@ -68,9 +68,6 @@ typedef struct {
 /* 从视觉组获取的信息 信息一共14个字符 */
 typedef struct {
 	uint8_t head;              //头帧[0]
-	uint8_t uphead;            //小头帧
-	uint8_t payload_len;
-	uint8_t seq;
 	uint8_t detect_signal;     //装甲板数量or是否识别到能量机关装甲板[1]
 	uint8_t shoot_msg;         //开火命令 0 or 1[2]
 	union yaw_coordinate {     //YAW轴增加量（低位优先发送）[3...4]
@@ -98,7 +95,7 @@ typedef struct {
 		uint8_t depth_get[2];
 	}depth_data;
 	
-	uint16_t CRCcode;           //CRC校验 8[13]
+	uint8_t CRCcode;           //CRC校验 8[13]
 	uint8_t end;               //尾帧 [14]
 	
 }VisionDataGet_Typedef;

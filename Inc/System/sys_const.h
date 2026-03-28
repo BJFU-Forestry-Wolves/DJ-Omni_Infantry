@@ -93,7 +93,7 @@ extern const float Const_ChassisBackRightSpdParam[4][5];
 extern const float Const_ChassisBackRightAngParam[4][5];
 extern const float Const_GimbalPitchSpdParam1[4][5] ;
 extern const float Const_GimbalPitchAngParam1[4][5] ;
-extern const float Power_Limit[4];
+extern const float Const_GimbalYawVision[5]    ;
 
 extern const float QuaternionEKF_F[36];                                   
 extern float QuaternionEKF_P[36];

@@ -97,7 +97,7 @@ const float Const_GimbalYawSpdParam[4][5] = {
 
 const float Const_GimbalYawAngParam[4][5] = {
     {0.45f, 0.01, 0.35f, 0, 10.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
-
+const float Const_GimbalYawVision[5] ={0.0015f, 0.001f, 0.0f, 5.0, 0.02f} ;
 
 // shooter param
 const float Const_ShootLeftParam[4][5] = {

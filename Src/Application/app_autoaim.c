@@ -299,8 +299,8 @@ myVisionDataGet->head = RAW_Data[0];
 void Tidy_send_vision(VisionDataSend_Typedef *visionDataSend)
 {
 	  Referee_RefereeDataTypeDef *referee = Referee_GetRefereeDataPtr();
-	//visionDataSend.color 					         = 0x02;		//初始颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
-	//visionDataSend.mode 					         = 0x01;		//模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
+	visionDataSend->color 					         = 0x01;		//初始颜色 0为己方红色 1为己方蓝色 2为己方红蓝双色（调试模式）
+	visionDataSend->mode 					         = 0x00;		//模式 0为自瞄 1为小能量机关 2为大能量机关 3为打击哨兵模式 4为小陀螺模式 5为录像模式 6为无人机模式 7为哨兵模式 8为雷达模式 其余情况默认为自瞄模式
 	visionDataSend->yaw_angle.yaw_gyro      = (int16_t)(INS.Yaw *100);
 	visionDataSend->pitch_angle.pitch_gyro  = (int16_t)(INS.Roll* 100);
 	visionDataSend->yaw_acc_data.yaw_acc 	  = (int16_t)(INS.Accel[0] * 100);
