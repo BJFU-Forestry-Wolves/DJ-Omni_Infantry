@@ -38,6 +38,7 @@ uint8_t Is_Key_Triggered(uint8_t current_state, uint8_t *last_state, uint32_t *l
 
 extern float vef_pitch_ref;
 extern int count_cqie;
+extern uint8_t q_mode;
 #endif
 
 #ifdef __cplusplus

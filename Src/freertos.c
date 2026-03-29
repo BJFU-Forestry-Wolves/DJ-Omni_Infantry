@@ -55,7 +55,6 @@ osThreadId Shoot_TaskHandlHandle;
 osThreadId Remote_TaskHandHandle;
 osThreadId Gimbal_TaskHandHandle;
 osThreadId Referee_TaskHaHandle;
-osThreadId Debug_TASKSHandle;
 osThreadId Chassis_TaskHanHandle;
 osTimerId SoftTimerHandle;
 
@@ -72,7 +71,6 @@ void Shoot_Task(void const * argument);
 void Remote_Task(void const * argument);
 void Gimbal_Task(void const * argument);
 void Referee_Task(void const * argument);
-void Debug_Task(void const * argument);
 void Chassis_Task(void const * argument);
 void SoftTimerCallback(void const * argument);
 
@@ -163,7 +161,7 @@ void MX_FREERTOS_Init(void) {
   Shoot_TaskHandlHandle = osThreadCreate(osThread(Shoot_TaskHandl), NULL);
 
   /* definition and creation of Remote_TaskHand */
-  osThreadDef(Remote_TaskHand, Remote_Task, osPriorityRealtime, 0, 128);
+  osThreadDef(Remote_TaskHand, Remote_Task, osPriorityRealtime, 0, 256);
   Remote_TaskHandHandle = osThreadCreate(osThread(Remote_TaskHand), NULL);
 
   /* definition and creation of Gimbal_TaskHand */
@@ -173,10 +171,6 @@ void MX_FREERTOS_Init(void) {
   /* definition and creation of Referee_TaskHa */
   osThreadDef(Referee_TaskHa, Referee_Task, osPriorityRealtime, 0, 128);
   Referee_TaskHaHandle = osThreadCreate(osThread(Referee_TaskHa), NULL);
-
-  /* definition and creation of Debug_TASKS */
-//  osThreadDef(Debug_TASKS, Debug_Task, osPriorityIdle, 0, 128);
-//  Debug_TASKSHandle = osThreadCreate(osThread(Debug_TASKS), NULL);
 
   /* definition and creation of Chassis_TaskHan */
   osThreadDef(Chassis_TaskHan, Chassis_Task, osPriorityRealtime, 0, 128);
@@ -330,24 +324,6 @@ __weak void Referee_Task(void const * argument)
     osDelay(1);
   }
   /* USER CODE END Referee_Task */
-}
-
-/* USER CODE BEGIN Header_Debug_Task */
-/**
-* @brief Function implementing the Debug_TASKS thread.
-* @param argument: Not used
-* @retval None
-*/
-/* USER CODE END Header_Debug_Task */
-__weak void Debug_Task(void const * argument)
-{
-  /* USER CODE BEGIN Debug_Task */
-  /* Infinite loop */
-  for(;;)
-  {
-    osDelay(1);
-  }
-  /* USER CODE END Debug_Task */
 }
 
 /* USER CODE BEGIN Header_Chassis_Task */

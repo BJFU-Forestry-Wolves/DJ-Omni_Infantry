@@ -45,7 +45,7 @@ void Init_InitAll() {
     Motor_InitAllMotors();
 
     Referee_InitReferee();
-//	Referee_Setup();
+	Referee_Setup();
 //	Debug_Init() ; 
 
 	GimbalPitch_InitGimbalPitch();

@@ -358,7 +358,7 @@ void Remote_KeyMouseProcess() {
 		float autoaim_pitch;
 		if(data->mouse.r == 1)
 		{
-			autoaim_yaw = (float)visionDataGet.yaw_angle.yaw_predict *0.01f*0.002f;
+			autoaim_yaw = PID_GimbalYawVisionPID_Calc(&Gimbal_YawVisionPID, visionDataGet.yaw_angle.yaw_predict);
 			autoaim_pitch = (float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.002f;
 		}
 		else if(data->mouse.r == 0)
@@ -376,7 +376,7 @@ void Remote_KeyMouseProcess() {
     buscomm->yaw_ref += (float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
-    pitch_ref = ((float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT - autoaim_pitch);
+    pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT ;
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
 	GimbalPitch_SetPitchRef(cospitch);
 
@@ -389,11 +389,9 @@ void Remote_KeyMouseProcess() {
 	
 	
 /**************************************************for draw************************************************************/	
-		if (Is_Key_Triggered(data->key.b, &last_b, &tick_b, 1000))
+		if (Is_Key_Triggered(data->key.b, &last_b, &tick_b, 300))
 		{
-			Referee_SetupAimLine();       // 先画瞄准线
-			delay_step = 1;
-			delay_start_tick = HAL_GetTick();
+			Referee_Setup();
 		}
 
 		if (Is_Key_Triggered(data->key.v, &last_v, &tick_v, 600))
