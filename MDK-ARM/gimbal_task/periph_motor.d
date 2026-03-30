@@ -86,3 +86,6 @@ gimbal_task\periph_motor.o: ../Inc/Modules/module_dm4310.h
 gimbal_task\periph_motor.o: ../Inc/Periphal/periph_DMmotor.h
 gimbal_task\periph_motor.o: ../Inc/Utility/util_pwm.h
 gimbal_task\periph_motor.o: ../Inc/tim.h
+gimbal_task\periph_motor.o: ../Inc/Modules/module_power.h
+gimbal_task\periph_motor.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+gimbal_task\periph_motor.o: ../Inc/Periphal/periph_motor.h

@@ -15,6 +15,7 @@
 #include "stdlib.h"
 #include "alg_power_limting.h"
 #include "module_dm4310.h"
+#include "module_power.h"
 /********** VOLATILE USER CODE **********/
 
 const uint32_t Const_Motor_MOTOR_OFFLINE_TIME = 200;
@@ -49,9 +50,10 @@ Motor_MotorTypeDef Motor_FeedMotor;
   * @param      rxdata: CAN rx data buff
   * @retval     NULL
   */
+SuperCap_Data_t SuperCap ;
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len) {
-	if (stdid == 0x00) {
-        return;
+	if (stdid == 0x211) {
+        Parse_SuperCap_Feedback(rxdata,&SuperCap);
     }
 	
     for (int i = 0; i < MOTOR_GROUP_NUM; i++) {

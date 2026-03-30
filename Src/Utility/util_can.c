@@ -44,7 +44,7 @@ void Can_InitTxHeader(CAN_TxHeaderTypeDef *pheader, uint32_t stdid, uint32_t ext
     pheader->StdId = stdid;
     pheader->ExtId = extid;
     pheader->RTR = CAN_RTR_DATA;
-    pheader->IDE = CAN_ID_STD;          //你TM用标准帧，给扩展帧设置个0x01是何以味 (---某源)
+    pheader->IDE = CAN_ID_STD;          
     pheader->DLC = dlc;
     pheader->TransmitGlobalTime = DISABLE;
 }

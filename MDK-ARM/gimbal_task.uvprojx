@@ -755,6 +755,11 @@
               <FileType>1</FileType>
               <FilePath>..\Src\Modules\module_chassis.c</FilePath>
             </File>
+            <File>
+              <FileName>module_power.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Src\Modules\module_power.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

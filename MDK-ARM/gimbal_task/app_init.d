@@ -119,6 +119,8 @@ gimbal_task\app_init.o: ../Inc/Application/app_remote.h
 gimbal_task\app_init.o: ../Inc/Periphal/periph_remote.h
 gimbal_task\app_init.o: ../Inc/Periphal/periph_servo.h
 gimbal_task\app_init.o: ../Inc/Protocol/protocol_common.h
-gimbal_task\app_init.o: ../Inc/Utility/util_debug.h
 gimbal_task\app_init.o: ../Inc/Periphal/periph_draw.h
 gimbal_task\app_init.o: ../Inc/Utility/util_uart.h
+gimbal_task\app_init.o: ../Inc/Modules/module_power.h
+gimbal_task\app_init.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+gimbal_task\app_init.o: ../Inc/Periphal/periph_motor.h

@@ -27,9 +27,10 @@
 #include "app_ins.h"
 #include "app_remote.h"
 #include "protocol_common.h"
-#include "util_debug.h"      //µ÷ÊÔ×¨ÓÃ
 #include "periph_draw.h"
+#include "module_power.h"
 
+CAN_TxHeaderTypeDef CapHeader;
 void Init_InitAll() {
     DWT_Init(168);
 
@@ -45,8 +46,7 @@ void Init_InitAll() {
     Motor_InitAllMotors();
 
     Referee_InitReferee();
-	Referee_Setup();
-//	Debug_Init() ; 
+	Referee_Setup(); 
 
 	GimbalPitch_InitGimbalPitch();
 	GimbalYaw_InitGimbalYaw();
@@ -58,6 +58,9 @@ void Init_InitAll() {
 	/*****Just for DM ******/
 	dm_motor_init();
 	dm_motor_enable(&hcan1, &motor[Motor1]);
+	/*******for Cap *********/
+	SuperCap_InitHeader(&CapHeader) ;
+	SuperCap_SetPower(&hcan1,&CapHeader,70);
 	
 }
 
