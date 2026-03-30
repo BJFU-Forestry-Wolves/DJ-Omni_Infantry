@@ -28,7 +28,7 @@ typedef enum {
 	Feeder_LOCKED_ROTOR     = 4u,
     Feeder_REFEREE          = 5u,
   	Feeder_FINISH           = 6u,
-	Feeder_Sanlian           =7u	
+	Feeder_VERY_FAST_CONTINUE        =7u	
 }Shoot_FeederModeEnum;
 
 typedef enum {

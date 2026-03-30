@@ -405,9 +405,9 @@ void Shooter_FeederControl() {
           current_pid_num = 2;
           Shooter_SingleShootCtrl(45.0);
           break;
-	  case Feeder_Sanlian:
-          current_pid_num = 2;
-          Shooter_SingleShootCtrl(175.0);
+	  case Feeder_VERY_FAST_CONTINUE:
+          current_pid_num = 1;
+          Shooter_SetFeederSpeed(Const_FeederVeryFastSpeed);
           break;
       case Feeder_FAST_CONTINUE:
           current_pid_num = 1;

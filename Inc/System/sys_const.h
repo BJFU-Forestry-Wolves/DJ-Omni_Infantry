@@ -33,6 +33,7 @@ extern const float Const_ShooterLockedReverseSpeed;
 
 extern const float Const_FeederSlowSpeed;
 extern const float Const_FeederFastSpeed;
+extern const float Const_FeederVeryFastSpeed;
 extern const float Const_FeederWaitSpeed;
 
 extern const float Const_HeatCtrlFastLimit;  
@@ -72,6 +73,7 @@ extern float Const_PITCH_UMAXANGLE_GRYO;
 extern float Const_PITCH_DMAXANGLE;         
 extern float Const_YAW_MAXANGLE;            
 extern float Const_PITCH_MOTOR_INIT_OFFSETf;
+extern float VisionPitch                   ;
 
 extern const float Const_GimbalPitchSpdParam[4][5];
 extern const float Const_GimbalPitchAngParam[4][5];

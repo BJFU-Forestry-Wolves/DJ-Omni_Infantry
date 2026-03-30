@@ -297,7 +297,7 @@ float PID_GimbalYawVisionPID_Calc(PID_GimbalYawVisionTypeDef *yaw_pid, int16_t r
     
     // -------------------------- 返回：本次2ms最优累加量 --------------------------
     static float filted_inc = 0.0f;
-    #define FILTER_ALPHA 0.2f  // 滤波系数（0.1~0.3，越小越平滑）
+    #define FILTER_ALPHA 0.6f  // 滤波系数（0.1~0.3，越小越平滑）
     filted_inc = filted_inc * (1 - FILTER_ALPHA) + yaw_pid->single_inc * FILTER_ALPHA;
     yaw_pid->single_inc = filted_inc;
 

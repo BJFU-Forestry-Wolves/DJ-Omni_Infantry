@@ -120,7 +120,8 @@
         <SetRegEntry>
           <Number>0</Number>
           <Key>DLGUARM</Key>
-          <Name></Name>        </SetRegEntry>
+          <Name>?</Name>
+        </SetRegEntry>
         <SetRegEntry>
           <Number>0</Number>
           <Key>JL2CM3</Key>
@@ -200,7 +201,7 @@
           <Type>0</Type>
           <LineNumber>175</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233940</Address>
+          <Address>134234104</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -216,7 +217,7 @@
           <Type>0</Type>
           <LineNumber>169</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233870</Address>
+          <Address>134234034</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -232,7 +233,7 @@
           <Type>0</Type>
           <LineNumber>67</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233638</Address>
+          <Address>134233802</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -280,6 +281,21 @@
           <count>3</count>
           <WinNumber>1</WinNumber>
           <ItemText>Gimbal_YawVisionPID</ItemText>
+        </Ww>
+        <Ww>
+          <count>4</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>GimbalPitch_gimbalPitchControlData</ItemText>
+        </Ww>
+        <Ww>
+          <count>5</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Referee_RefereeData,0x0A</ItemText>
+        </Ww>
+        <Ww>
+          <count>6</count>
+          <WinNumber>1</WinNumber>
+          <ItemText>Shooter_ShooterControl</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

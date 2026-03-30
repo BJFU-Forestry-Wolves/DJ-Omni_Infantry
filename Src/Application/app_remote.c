@@ -192,7 +192,7 @@ void Remote_RemoteShooterModeSet() {
 	GimbalYaw_SetYawRef(buscomm->yaw_ref);
 	
     float pitch_ref;	
-    pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE;      //(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;      
+    pitch_ref = (float)data->remote.ch[3] * REMOTE_DMPITCH_ANGLE + (float)visionDataGet.pitch_angle.pitch_predict*0.01f*VisionPitch;      //(float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.02*-0.06f;      
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
 
 	GimbalPitch_SetPitchRef(cospitch);
@@ -287,8 +287,8 @@ void Remote_RemoteProcess() {
                                  // 调大 → 加速更快；调小 → 加速更平滑
 
 
-static uint32_t tick_b = 0, tick_q = 0,tick_v = 0;
-static uint8_t last_b = 0, last_q = 0,last_v = 0;
+static uint32_t tick_b = 0, tick_q = 0,tick_v = 0,tick_e = 0;
+static uint8_t last_b = 0, last_q = 0,last_v = 0,last_e = 0;
 static uint8_t delay_step = 0;      // 步骤状态机
 static uint32_t delay_start_tick = 0;
 uint8_t q_mode = 0;
@@ -351,7 +351,11 @@ void Remote_KeyMouseProcess() {
 
 		if(Is_Key_Triggered(data->key.q, &last_q, &tick_q, 300))
 		{
-			 q_mode = !q_mode;
+			 q_mode = (q_mode + 1) % 3;
+		}
+		if(Is_Key_Triggered(data->key.e, &last_e, &tick_e, 300))
+		{
+			 q_mode = (q_mode + 2) % 3;
 		}		
 		//autoaim control
 		float autoaim_yaw;
@@ -376,7 +380,7 @@ void Remote_KeyMouseProcess() {
     buscomm->yaw_ref += (float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
-    pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT ;
+    pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT+autoaim_pitch ;
 	float cospitch = pitch_ref*PI/180;   //角度转为弧度
 	GimbalPitch_SetPitchRef(cospitch);
 
@@ -400,29 +404,40 @@ void Remote_KeyMouseProcess() {
 		}	
 }
 int count_cqie = 0;
+int test_count ;
 void Remote_MouseShooterModeSet() {
     Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
 
     static int count_mouse_L = 0;
-    if (data->mouse.l == 1) {
-        count_mouse_L++;
-        if (count_mouse_L >= 35) {
-            Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
-            count_mouse_L = 35;
-			count_cqie =1;
-			
+    if (data->mouse.l == 1){
+		count_mouse_L++;
+    if (count_mouse_L >= 35) {
+        count_mouse_L = 35;
+        count_cqie = 1;      
+        switch (q_mode) {
+            case 0:
+                Shooter_ChangeFeederMode(Feeder_LOW_CONTINUE);
+                break;
+                
+            case 1:
+                Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
+                break;
+                
+            case 2:
+                Shooter_ChangeFeederMode(Feeder_VERY_FAST_CONTINUE);
+                break;
+                
+            default:
+                // 防御性编程：万一 q_mode 出现意外值，默认使用中速
+                Shooter_ChangeFeederMode(Feeder_FAST_CONTINUE);
+                break;
         }
-    }
-    else {
+    }}else {
         if (0 < count_mouse_L && count_mouse_L < 35) {
             Shooter_SingleShootReset();
-            if (q_mode == 0) {
-                Shooter_ChangeFeederMode(Feeder_SINGLE);
-            } else {
-                Shooter_ChangeFeederMode(Feeder_Sanlian);
-
-            }
+            Shooter_ChangeFeederMode(Feeder_SINGLE);
+             
         }
         else 
         {
@@ -433,7 +448,7 @@ void Remote_MouseShooterModeSet() {
         count_mouse_L = 0;
     }
 		
-		//test_count = count_mouse_L;
+		test_count = count_mouse_L;
 }
 
 

@@ -210,7 +210,7 @@ void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
   */
 float out_put_data;
 float imu_error;
-float  IMUfdb =0.7;
+float  IMUfdb =0.1;
 void GimbalPitch_Control() {
     GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
     INS_INSTypeDef *ins = INS_GetINSPtr();
@@ -219,7 +219,7 @@ void GimbalPitch_Control() {
 	
 	 // 滤波系数：0.05~0.2 之间，越小越平滑，响应越慢
     // 推荐默认 0.1f，平滑效果好，不卡顿
-    gimbalpitch->filter_alpha = 0.07f;
+    gimbalpitch->filter_alpha = 0.1f;
 	 dm_motor_init_test();
      imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;
 

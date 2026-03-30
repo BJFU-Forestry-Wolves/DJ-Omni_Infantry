@@ -14,7 +14,7 @@
 float Const_SERVO_INIT_OFFSET = 0.053f;
 
 
-const float Const_Shooter22mpers        = 300.0f;
+const float Const_Shooter22mpers        = 360.0f;
 
 
 const float Const_ShooterLockedCurrent              = 9000.0f;//¶Â×ªµçÁ÷
@@ -23,8 +23,9 @@ const float Const_ShooterLockedTime                 = 20.0f;
 const float Const_ShooterRelockedTime               = 100.0f;
 const float Const_ShooterLockedReverseSpeed         = 20.0f;
 
-const float Const_FeederSlowSpeed                   = -57.0f;
+const float Const_FeederSlowSpeed                   = -50.0f;
 const float Const_FeederFastSpeed                   = -70.0f;
+const float Const_FeederVeryFastSpeed               = -90.0f;
 const float Const_FeederWaitSpeed                   = 10.0f;
 
 const float Const_HeatCtrlFastLimit                 = 75;
@@ -71,12 +72,13 @@ float KP_MAX                                                =500.0f;
 float KD_MIN                                                =0.0f  ;
 float KD_MAX                                                =5.0f   ;
 float Const_DMPITCH_UMAXANGLE                       = 0.8f;
-float Const_DMPITCH_DMAXANGLE                       = 0.0f;
+float Const_DMPITCH_DMAXANGLE                       = -0.2f;
 float Const_PITCH_MOTOR_INIT_OFFSETf              = 0.16f;     
-float DM_KP                                        = 100  ;
+float DM_KP                                        = 130  ;
 float DM_KD	                                       = 1.5 ;
 float DMpitchrefMax                                = 1.08 ;
-float DMpitchrefMin	                               = -0.04 ;
+float DMpitchrefMin	                               = -0.4 ;
+float VisionPitch                                  =0.005f;
 /************************************************************************************************/
 // pitch gimbal param
 const float Const_GimbalPitchSpdParam[4][5] = {
@@ -97,6 +99,7 @@ const float Const_GimbalYawSpdParam[4][5] = {
 
 const float Const_GimbalYawAngParam[4][5] = {
     {0.45f, 0.01, 0.35f, 0, 10.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
+
 const float Const_GimbalYawVision[5] ={0.0015f, 0.001f, 0.0f, 5.0, 0.02f} ;
 
 // shooter param

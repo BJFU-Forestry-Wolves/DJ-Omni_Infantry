@@ -286,8 +286,9 @@ const uint8_t STR_MODE_LAYER        = 3;
 const Draw_Color AIM_MODE_COLOR     = Draw_COLOR_BLACK;
 const Draw_Color STR_MODE_COLOR     = Draw_COLOR_ORANGE;
 const char *AIM_TEXT     = " !?GUGUGAGA?! ";
-const char *STR_TEXT     = "ShootMode:Single";
-const char *STR_TEXT_test  ="ShootMode:Sanlian";
+const char *STR_TEXT_Shoot1  ="ShootMode:Slow";
+const char *STR_TEXT_Shoot2  ="ShootMode:Fast";
+const char *STR_TEXT_Shoot3  ="ShootMode:VeryFast";
 /**
   * @brief      打包显示字符串图形命令
   * @param      详见协议及头文件定义
@@ -360,7 +361,7 @@ void Referee_SetupModeDisplay() {
     Referee_DrawDataTypeDef *draw = &Referee_DrawData;
     draw->auto_aim_mode_last = draw->auto_aim_mode;
     Draw_String(Draw_OPERATE_ADD,STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], 
-	STR_MODE_VALUE_TEXT2[2], STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT);        
+	STR_MODE_VALUE_TEXT2[2], STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_Shoot1);        
 }
 /**
   * @brief      模式显示绘制：更新阶段
@@ -383,28 +384,38 @@ void Referee_UpdateModeDisplay() {
 }
 void Referee_MaintainDisplay() {
     static uint8_t q_mode_last = 0xFF; 
-    // 2. 检测 q_mode 是否改变，如果没有改变则直接返回
     if (q_mode == q_mode_last) {
         return;
     }
     q_mode_last = q_mode;
 
-    
-   if (q_mode == 1) {
-        // 强制刷新缓冲区，确保指令顺序
-        Referee_DrawingBufferFlush(); 
-        
-        Draw_String(Draw_OPERATE_MODIFY, STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, 
-                    STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], STR_MODE_VALUE_TEXT2[2], 
-                    STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_test);
-    } 
-    else if (q_mode == 0) {
-        Referee_DrawingBufferFlush();
-        
-        Draw_String(Draw_OPERATE_MODIFY, STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, 
-                    STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], STR_MODE_VALUE_TEXT2[2], 
-                    STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT);
-	}
+    // 2. 既然都要刷新，直接提出来执行一次即可
+    Referee_DrawingBufferFlush(); 
+
+    // 3. 使用 switch 规整分支
+    switch (q_mode) {
+        case 0:
+            Draw_String(Draw_OPERATE_MODIFY, STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, 
+                        STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], STR_MODE_VALUE_TEXT2[2], 
+                        STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_Shoot1);
+            break;
+
+        case 1:
+            Draw_String(Draw_OPERATE_MODIFY, STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, 
+                        STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], STR_MODE_VALUE_TEXT2[2], 
+                        STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_Shoot2);
+            break;
+
+        case 2:
+            Draw_String(Draw_OPERATE_MODIFY, STR_MODE_VALUE_TEXT2[0], STR_MODE_LAYER, 
+                        STR_MODE_COLOR, STR_MODE_VALUE_TEXT2[1], STR_MODE_VALUE_TEXT2[2], 
+                        STR_MODE_VALUE_TEXT2[3], STR_MODE_VALUE_TEXT2[4], STR_TEXT_Shoot3);
+            break;
+
+        default:
+            // 防止出现未定义的 q_mode 导致状态错乱
+            break;
+    }
 }
 /*********************************************文字绘制结束*****************************************************************/
 /**
