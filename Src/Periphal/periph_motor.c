@@ -50,7 +50,7 @@ Motor_MotorTypeDef Motor_FeedMotor;
   * @param      rxdata: CAN rx data buff
   * @retval     NULL
   */
-SuperCap_Data_t SuperCap ;
+
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len) {
 	if (stdid == 0x211) {
         Parse_SuperCap_Feedback(rxdata,&SuperCap);

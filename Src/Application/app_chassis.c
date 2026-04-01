@@ -1,6 +1,6 @@
 #include "app_chassis.h"
 #include "module_chassis.h"
-
+#include "module_power.h"
 
 /**
   * @brief          Chassis task
@@ -10,6 +10,7 @@
 void Chassis_Task(void const * argument) {
 
     for(;;) {
+		SuperCap_CheckPower(&SuperCap);
 			Chassis_Control();
       Chassis_Output();
       osDelay(2);

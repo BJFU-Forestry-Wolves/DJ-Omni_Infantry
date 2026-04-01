@@ -146,13 +146,14 @@ void Remote_RemoteShooterModeSet() {
 
 		Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
 		Shoot_StatusTypeDef* shooter = Shooter_GetShooterControlPtr();
+		
+	  
 	PID_GimbalYawVisionPID_Init(&Gimbal_YawVisionPID, 
                                 Const_GimbalYawVision[0],   // Kp   (? Debug ? YAKp ?????)
                                 Const_GimbalYawVision[1],   // Ki
                                 Const_GimbalYawVision[2],   // Kd
                                 Const_GimbalYawVision[3],   // inc_max ????????(?)??=????
-                                Const_GimbalYawVision[4]);  // bias_deadband ??(?)????????	
-
+                                Const_GimbalYawVision[4]);  // bias_deadband ??(?)????????
     switch (data->remote.s[1]) {
     /*      left switch control mode   */
         case Remote_SWITCH_UP: {
@@ -292,6 +293,9 @@ static uint8_t last_b = 0, last_q = 0,last_v = 0,last_e = 0;
 static uint8_t delay_step = 0;      // 步骤状态机
 static uint32_t delay_start_tick = 0;
 uint8_t q_mode = 0;
+float autoaimtest;
+LowPassFilter pitch_filter = {0.0f, 0.05f};
+LowPassFilter  yaw_filter = {0.0f, 0.08f};
 
 
 void Remote_KeyMouseProcess() { 
@@ -300,6 +304,13 @@ void Remote_KeyMouseProcess() {
     Shoot_StatusTypeDef *shooter = Shooter_GetShooterControlPtr();
     GimbalPitch_GimbalPitchTypeDef *gimbal = GimbalPitch_GetGimbalPitchPtr();
     Protocol_DataTypeDef *buscomm = Protocol_GetBusDataPtr();
+	
+	PID_GimbalYawVisionPID_Init(&Gimbal_YawVisionPID, 
+                                Const_GimbalYawVision[0],   // Kp   (? Debug ? YAKp ?????)
+                                Const_GimbalYawVision[1],   // Ki
+                                Const_GimbalYawVision[2],   // Kd
+                                Const_GimbalYawVision[3],   // inc_max ????????(?)??=????
+                                Const_GimbalYawVision[4]);  // bias_deadband ??(?)????????
     //chassis control
 		// 静态变量：保存跨周期的当前速度（上电/复位后自动初始化为0）
       static float current_chassis_vx = 0.0f;
@@ -377,11 +388,17 @@ void Remote_KeyMouseProcess() {
     GimbalYaw_GimbalYawTypeDef *gimbalyaw = GimbalYaw_GetGimbalYawPtr();
 		gimbalpitch->output_state = 1;
 		gimbalyaw->output_state = 1;
-    buscomm->yaw_ref += (float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT + autoaim_yaw;
+		float target_yaw = buscomm->yaw_ref + (float)data->mouse.x * -MOUSE_YAW_ANGLE_TO_FACT;
+		float alpha = 0.1f; // 调整这个值，通常在0.01到0.3之间
+		float raw_ref = alpha * target_yaw + (1.0f - alpha) * buscomm->yaw_ref;
+		buscomm->yaw_ref = raw_ref+autoaim_yaw;
+		autoaimtest = autoaim_yaw;
 		GimbalYaw_SetYawRef(buscomm->yaw_ref);
     float pitch_ref;
-    pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT+autoaim_pitch ;
-	float cospitch = pitch_ref*PI/180;   //角度转为弧度
+     pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT;
+		float alphb = 0.10f;
+	float raw_pitch	 = alphb*pitch_ref+ (1.0f - alphb)*pitch_ref+autoaim_pitch ;
+	float cospitch = raw_pitch*PI/180;   //角度转为弧度
 	GimbalPitch_SetPitchRef(cospitch);
 
 
@@ -474,4 +491,16 @@ uint8_t Is_Key_Triggered(uint8_t current_state, uint8_t *last_state, uint32_t *l
 
     *last_state = current_state; // 实时更新状态用于下次对比
     return triggered;
+}
+
+/**
+ * @brief 一阶低通滤波函数
+ * @param filter 滤波器结构体指针
+ * @param input  当前时刻的原始输入值
+ * @return float 滤波后的平滑输出
+ */
+float apply_low_pass_filter(LowPassFilter *filter, float input) {
+    // 公式：out = alpha * input + (1 - alpha) * last_out
+    filter->last_out = filter->alpha * input + (1.0f - filter->alpha) * filter->last_out;
+    return filter->last_out;
 }

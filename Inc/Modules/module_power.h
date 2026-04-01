@@ -18,8 +18,10 @@ typedef struct {
 void Parse_SuperCap_Feedback(uint8_t *rx_data, SuperCap_Data_t *cap_data);
 void SuperCap_SetPower(CAN_HandleTypeDef* phcan, CAN_TxHeaderTypeDef* pheader, float target_power_w);
 void SuperCap_InitHeader(CAN_TxHeaderTypeDef *pheader);
+void SuperCap_CheckPower(SuperCap_Data_t *pcap_data);
 
-
+extern CAN_TxHeaderTypeDef CapHeader;
+extern SuperCap_Data_t SuperCap ;
 
 #endif
 	

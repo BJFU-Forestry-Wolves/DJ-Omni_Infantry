@@ -30,7 +30,7 @@
 #include "periph_draw.h"
 #include "module_power.h"
 
-CAN_TxHeaderTypeDef CapHeader;
+
 void Init_InitAll() {
     DWT_Init(168);
 

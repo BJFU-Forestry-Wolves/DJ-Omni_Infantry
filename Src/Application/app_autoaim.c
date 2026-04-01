@@ -222,7 +222,7 @@ void SendVisionData_Init(void)
 	visionDataSend.pitch_angle.pitch_gyro	 = 6.0;			   //pitch轴陀螺仪角度 初始值
 	visionDataSend.yaw_acc_data.yaw_acc 	 = 0;					 //yaw轴速度				  初始值
 	visionDataSend.pitch_acc_data.pitch_acc= 0;					 //pitch轴速度		    初始值
-	visionDataSend.shoot_speed             = 0;		       //弹丸发射速度 			初始值
+	visionDataSend.shoot_speed             = 100;		       //弹丸发射速度 			初始值
 	visionDataSend.CRCcode                 = 0;          //CRC校验
 	visionDataSend.end 						         = 0x45;		   //帧尾（某不愿意透露姓名的Q姓队长规定）
 }

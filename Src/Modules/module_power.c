@@ -4,7 +4,8 @@
 #include "stdio.h"
 #include "stdlib.h"
 
-
+CAN_TxHeaderTypeDef CapHeader;
+SuperCap_Data_t SuperCap ;
 /**
  * @brief 解析超级电容控制板的反馈数据 (ID: 0x211)
  * @param rx_data CAN接收到的8字节数据缓冲区
@@ -65,4 +66,33 @@ void SuperCap_SetPower(CAN_HandleTypeDef* phcan, CAN_TxHeaderTypeDef* pheader, f
 
     // 6. 调用你的自定义发送函数
     Can_SendMessage(phcan, pheader, txdata);
+}
+
+/**
+ * @brief  检测超级电容功率并在非70W时强制校正（带100ms发送限速）
+ * @param  pcap_data 指向超级电容数据结构体的指针
+ * @note   推荐在主循环或定时任务中高频调用（比如 2ms 周期调用一次也没问题）
+ */
+void SuperCap_CheckPower(SuperCap_Data_t *pcap_data)
+{
+    if (pcap_data == NULL) return;
+	if (pcap_data->target_power ==70) return;
+    // 1. 静态变量，用于记录上一次成功发送的时间戳
+    static uint32_t last_send_tick = 0;
+    uint32_t current_tick = HAL_GetTick();
+
+    // 2. 时间限制：如果距离上次发送不足 100ms，直接返回，绝不发送
+    if (current_tick - last_send_tick < 100)
+    {
+        return; 
+    }
+    if (fabs(pcap_data->target_power - 70.0f) > 0.1f)
+    {
+        // 4. 调用你之前写好的发送函数，强制拉回 70.0W
+        SuperCap_SetPower(&hcan1, &CapHeader, 70.0f);
+        
+        // 5. 更新发送时间戳，重新开始 100ms 的倒计时
+        last_send_tick = current_tick;
+
+    }
 }

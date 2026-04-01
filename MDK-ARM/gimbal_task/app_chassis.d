@@ -82,3 +82,6 @@ gimbal_task\app_chassis.o: ../Drivers/CMSIS/DSP/Include/dsp/filtering_functions.
 gimbal_task\app_chassis.o: ../Drivers/CMSIS/DSP/Include/dsp/quaternion_math_functions.h
 gimbal_task\app_chassis.o: ../Inc/Algorithm/alg_filter.h
 gimbal_task\app_chassis.o: ../Inc/Algorithm/alg_pid.h
+gimbal_task\app_chassis.o: ../Inc/Modules/module_power.h
+gimbal_task\app_chassis.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+gimbal_task\app_chassis.o: ../Inc/Periphal/periph_motor.h

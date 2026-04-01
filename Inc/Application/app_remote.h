@@ -26,6 +26,11 @@ typedef struct {
     float yaw_angle_offset;
 } Remote_RemoteControlTypeDef;
 
+typedef struct {
+    float last_out; // 上一次的输出值
+    float alpha;    // 滤波系数 (0.0 ~ 1.0)，越小越平滑，延迟也越大
+} LowPassFilter;
+
 void Remote_Task(void const * argument);
 void Remote_RemotrControlInit(void);
 Remote_RemoteControlTypeDef* Remote_GetControlDataPtr(void);
@@ -35,6 +40,7 @@ void Remote_RemoteShooterModeSet(void);
 void Remote_RemoteProcess(void);
 void Remote_KeyMouseProcess(void);
 uint8_t Is_Key_Triggered(uint8_t current_state, uint8_t *last_state, uint32_t *last_tick, uint32_t cool_time);
+float apply_low_pass_filter(LowPassFilter *filter, float input);
 
 extern float vef_pitch_ref;
 extern int count_cqie;

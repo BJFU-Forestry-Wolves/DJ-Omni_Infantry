@@ -20,12 +20,12 @@ const float Const_Shooter22mpers        = 360.0f;
 const float Const_ShooterLockedCurrent              = 9000.0f;//堵转电流
 const float Const_ShooterLockedSpeed                = 10.0f;
 const float Const_ShooterLockedTime                 = 20.0f;
-const float Const_ShooterRelockedTime               = 100.0f;
-const float Const_ShooterLockedReverseSpeed         = 20.0f;
+const float Const_ShooterRelockedTime               = 80.0f;
+const float Const_ShooterLockedReverseSpeed         = 0.0f;
 
-const float Const_FeederSlowSpeed                   = -50.0f;
+const float Const_FeederSlowSpeed                   = -70.0f;
 const float Const_FeederFastSpeed                   = -70.0f;
-const float Const_FeederVeryFastSpeed               = -90.0f;
+const float Const_FeederVeryFastSpeed               = -70.0f;
 const float Const_FeederWaitSpeed                   = 10.0f;
 
 const float Const_HeatCtrlFastLimit                 = 75;
@@ -38,7 +38,7 @@ const float Const_ShooterSlowSpeed                  = 0.0f;
 const float Const_ShooterFastSpeed                  = 0.0f;
 
 const float MOUSE_PITCH_ANGLE_TO_FACT             = 0.0025f;
-float MOUSE_YAW_ANGLE_TO_FACT               	  = 0.0025f;
+float MOUSE_YAW_ANGLE_TO_FACT               	  = 0.04f;      //0.0025
 const float MOUSE_CHASSIS_TO_FACT                 = 0.00022;       
 const float MOUSE_CHASSIS_ACCELERATE              = 0.02f;
 float MOUSE_CHASSIS_MAX_SPEED               	  = 12;
@@ -56,7 +56,7 @@ const float REMOTE_CHASSIS_VY_GAIN									= -0.7f;
 const float REMOTE_CHASSIS_SEP_WZ_GAIN							= -0.25f;
 const float REMOTE_CHASSIS_FOLLOW_WZ_GAIN						= 6.0f;    //跟随响应速度    原定4.3
 const float REMOTE_CHASSIS_FOLLOW_WZ_MAX						= 120.0f;
-const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 1.0f;
+const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 2.0f;
 const float CHASSIS_YAW_ANGLE_OFFSET							= 170.62f;    //269.62
 const float CHASSIS_XTL_WZ										= 180.0f;     //180
 
@@ -100,7 +100,7 @@ const float Const_GimbalYawSpdParam[4][5] = {
 const float Const_GimbalYawAngParam[4][5] = {
     {0.45f, 0.01, 0.35f, 0, 10.0f}, {0.1f, -1}, {0, 0}, {-1, -1}};
 
-const float Const_GimbalYawVision[5] ={0.0015f, 0.001f, 0.0f, 5.0, 0.02f} ;
+const float Const_GimbalYawVision[5] ={0.0033f, 0.0f, 0.0f, 0.5, 0.12f} ;
 
 // shooter param
 const float Const_ShootLeftParam[4][5] = {
