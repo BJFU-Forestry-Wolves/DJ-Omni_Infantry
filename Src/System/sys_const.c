@@ -14,7 +14,7 @@
 float Const_SERVO_INIT_OFFSET = 0.053f;
 
 
-const float Const_Shooter22mpers        = 360.0f;
+const float Const_Shooter22mpers        = 320.0f;
 
 
 const float Const_ShooterLockedCurrent              = 9000.0f;//堵转电流
@@ -38,7 +38,7 @@ const float Const_ShooterSlowSpeed                  = 0.0f;
 const float Const_ShooterFastSpeed                  = 0.0f;
 
 const float MOUSE_PITCH_ANGLE_TO_FACT             = 0.0025f;
-float MOUSE_YAW_ANGLE_TO_FACT               	  = 0.04f;      //0.0025
+float MOUSE_YAW_ANGLE_TO_FACT               	  = 0.02f;      //0.0025
 const float MOUSE_CHASSIS_TO_FACT                 = 0.00022;       
 const float MOUSE_CHASSIS_ACCELERATE              = 0.02f;
 float MOUSE_CHASSIS_MAX_SPEED               	  = 12;
@@ -54,9 +54,9 @@ const float REMOTE_DMPITCH_ANGLE                         = 0.0004f; //0.000018f
 const float REMOTE_CHASSIS_VX_GAIN                  = 0.7f;               //0.75
 const float REMOTE_CHASSIS_VY_GAIN									= -0.7f;
 const float REMOTE_CHASSIS_SEP_WZ_GAIN							= -0.25f;
-const float REMOTE_CHASSIS_FOLLOW_WZ_GAIN						= 6.0f;    //跟随响应速度    原定4.3
+const float REMOTE_CHASSIS_FOLLOW_WZ_GAIN						= 4.5f;    //跟随响应速度    原定4.3
 const float REMOTE_CHASSIS_FOLLOW_WZ_MAX						= 120.0f;
-const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 2.0f;
+const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 1.2f;
 const float CHASSIS_YAW_ANGLE_OFFSET							= 170.62f;    //269.62
 const float CHASSIS_XTL_WZ										= 180.0f;     //180
 

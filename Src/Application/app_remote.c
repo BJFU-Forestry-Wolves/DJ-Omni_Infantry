@@ -283,7 +283,7 @@ void Remote_RemoteProcess() {
 /******************************************键鼠控制模式******************************************************/
 /*************************************此部分单独写，仅赛场使用************************************************/
 
-#define CHASSIS_ACCEL_STEP 1.0f  // 【关键参数】每控制周期速度变化量
+#define CHASSIS_ACCEL_STEP 0.9f  // 【关键参数】每控制周期速度变化量
                                  // 示例：若控制周期=10ms(100Hz)，加速至320需 320/8.0/100 = 0.4秒
                                  // 调大 → 加速更快；调小 → 加速更平滑
 
@@ -297,7 +297,7 @@ float autoaimtest;
 LowPassFilter pitch_filter = {0.0f, 0.05f};
 LowPassFilter  yaw_filter = {0.0f, 0.08f};
 
-
+float autoaim_pitchz;
 void Remote_KeyMouseProcess() { 
     Remote_RemoteDataTypeDef *data = Remote_GetRemoteDataPtr();
     Remote_RemoteControlTypeDef *control_data = Remote_GetControlDataPtr();
@@ -319,11 +319,11 @@ void Remote_KeyMouseProcess() {
 	  float target_vx = 0.0f;
       float target_vy = 0.0f;
 		
-		if (data->key.w == 1)      target_vx =  170.0f;  // W: 前进
-        else if (data->key.s == 1) target_vx = -170.0f; // S: 后退
+		if (data->key.w == 1)      target_vx =  220.0f;  // W: 前进
+        else if (data->key.s == 1) target_vx = -220.0f; // S: 后退
 
-        if (data->key.d == 1)      target_vy =  170.0f;  // D: 右移
-        else if (data->key.a == 1) target_vy = -170.0f; // A: 左移
+        if (data->key.d == 1)      target_vy =  220.0f;  // D: 右移
+        else if (data->key.a == 1) target_vy = -220.0f; // A: 左移
 			
 			// 2. 当前速度向目标速度线性渐变（含防超调保护）
            // VX 轴
@@ -375,6 +375,7 @@ void Remote_KeyMouseProcess() {
 		{
 			autoaim_yaw = PID_GimbalYawVisionPID_Calc(&Gimbal_YawVisionPID, visionDataGet.yaw_angle.yaw_predict);
 			autoaim_pitch = (float)visionDataGet.pitch_angle.pitch_predict*0.01f*0.002f;
+			
 		}
 		else if(data->mouse.r == 0)
 		{
@@ -398,6 +399,7 @@ void Remote_KeyMouseProcess() {
      pitch_ref = (float)data->mouse.y * MOUSE_PITCH_ANGLE_TO_FACT;
 		float alphb = 0.10f;
 	float raw_pitch	 = alphb*pitch_ref+ (1.0f - alphb)*pitch_ref+autoaim_pitch ;
+		autoaim_pitchz = autoaim_pitch;
 	float cospitch = raw_pitch*PI/180;   //角度转为弧度
 	GimbalPitch_SetPitchRef(cospitch);
 
@@ -429,8 +431,8 @@ void Remote_MouseShooterModeSet() {
     static int count_mouse_L = 0;
     if (data->mouse.l == 1){
 		count_mouse_L++;
-    if (count_mouse_L >= 35) {
-        count_mouse_L = 35;
+    if (count_mouse_L >= 3) {
+        count_mouse_L = 3;
         count_cqie = 1;      
         switch (q_mode) {
             case 0:
@@ -451,7 +453,7 @@ void Remote_MouseShooterModeSet() {
                 break;
         }
     }}else {
-        if (0 < count_mouse_L && count_mouse_L < 35) {
+        if (0 < count_mouse_L && count_mouse_L < 3) {
             Shooter_SingleShootReset();
             Shooter_ChangeFeederMode(Feeder_SINGLE);
              

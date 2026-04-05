@@ -119,6 +119,11 @@
       <TargetDriverDllRegistry>
         <SetRegEntry>
           <Number>0</Number>
+          <Key>DLGUARM</Key>
+          <Name>T馩</Name>
+        </SetRegEntry>
+        <SetRegEntry>
+          <Number>0</Number>
           <Key>JL2CM3</Key>
           <Name>-U-O78 -O78 -S2 -ZTIFSpeedSel5000 -A0 -C0 -JU1 -JI127.0.0.1 -JP0 -RST0 -N00("ARM CoreSight SW-DP") -D00(2BA01477) -L00(0) -TO18 -TC10000000 -TP21 -TDS8007 -TDT0 -TDC1F -TIEFFFFFFFF -TIP8 -TB1 -TFE0 -FO7 -FD20000000 -FC1000 -FN1 -FF0STM32F4xx_1024.FLM -FS08000000 -FL0100000 -FP0($$Device:STM32F407IGHx$CMSIS\Flash\STM32F4xx_1024.FLM)</Name>
         </SetRegEntry>
@@ -180,7 +185,7 @@
           <Type>0</Type>
           <LineNumber>175</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233776</Address>
+          <Address>134234172</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -196,7 +201,7 @@
           <Type>0</Type>
           <LineNumber>169</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233706</Address>
+          <Address>134234102</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -212,7 +217,7 @@
           <Type>0</Type>
           <LineNumber>67</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134233474</Address>
+          <Address>134233870</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -228,7 +233,7 @@
           <Type>0</Type>
           <LineNumber>39</LineNumber>
           <EnabledFlag>0</EnabledFlag>
-          <Address>134232978</Address>
+          <Address>134233210</Address>
           <ByteObject>0</ByteObject>
           <HtxType>0</HtxType>
           <ManyObjects>0</ManyObjects>
@@ -254,42 +259,12 @@
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>visionDataGet,0x0A</ItemText>
+          <ItemText>Shooter_ShooterControl</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>Gimbal_YawVisionPID</ItemText>
-        </Ww>
-        <Ww>
-          <count>4</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>GimbalPitch_gimbalPitchControlData</ItemText>
-        </Ww>
-        <Ww>
-          <count>5</count>
-          <WinNumber>1</WinNumber>
           <ItemText>Referee_RefereeData,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>6</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Shooter_ShooterControl</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SuperCap</ItemText>
-        </Ww>
-        <Ww>
-          <count>8</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>visionDataSend,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>9</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>Motor_ShootLeftMotor</ItemText>
         </Ww>
       </WatchWindow1>
       <WatchWindow2>

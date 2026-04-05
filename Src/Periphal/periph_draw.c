@@ -23,26 +23,23 @@ const Referee_RefereeCmdTypeDef Const_Referee_DATA_CMD_ID_LIST[6]   = {         
 const uint8_t AIM_LINE_LAYER        = 1;
 const Draw_Color AIM_LINE_COLOR     = Draw_COLOR_WHITE;
 const uint8_t AIM_LINE_LINE_MODE    = 3;                     //3种弹速模式
-const uint8_t AIM_LINE_LINE_NUM     = 3 + 1+2;                 //4条直线
+const uint8_t AIM_LINE_LINE_NUM     = 2;                 //4条直线
 const uint16_t AIM_LINES[AIM_LINE_LINE_MODE][AIM_LINE_LINE_NUM][6] = {     //一个三维数组
     // ID, Width, X1, Y1, X2, Y2
     {       // Mode 0: 15 m/s
         {0x101, 2, 960, 500, 960, 620},     // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},     // Horizontal Line 1
-        {0x103, 2, 850, 560, 950, 560},     // Horizontal Line 2
-        {0x104, 2, 870, 520, 930, 520}      // Horizontal Line 3
+        {0x102, 4, 850, 600, 950, 600}     // Horizontal Line 1
+
     }, {    // Mode 1: 18 m/s
         {0x101, 2, 960, 500, 960, 620},     // Vertical Line
-        {0x102, 4, 850, 600, 950, 600},     // Horizontal Line 1
-        {0x103, 2, 850, 540, 950, 540},     // Horizontal Line 2
-        {0x104, 2, 870, 500, 930, 500}      // Horizontal Line 3
+        {0x102, 4, 850, 600, 950, 600}     // Horizontal Line 1
+
     }, {    // Mode 2: 30 m/s
-        {0x101, 6, 940, 360, 940, 480},     // 垂直线 (缩小0.8倍，固定端点940,480)
-		{0x102, 8, 892, 456, 988, 456},     // 水平线1 (缩小0.8倍)
-		{0x103, 6, 908, 432, 972, 432},     // 水平线2 (缩小0.8倍)
-		{0x104, 6, 924, 408, 964, 408},     // 水平线3 (缩小0.8倍)
-		{0x105, 6, 926, 466, 954, 494},     // 倾斜线1 (长度不变，无修改)
-		{0x106, 6, 926, 494, 954, 466}      // 倾斜线2 (长度不变，无修改)
+//		{0x102, 8, 892, 456, 988, 456},     // 水平线1 (缩小0.8倍)
+//		{0x103, 6, 908, 432, 972, 432},     // 水平线2 (缩小0.8倍)
+//		{0x104, 6, 924, 408, 964, 408},     // 水平线3 (缩小0.8倍)
+		{0x105, 4, 916, 466, 944, 494},     // 倾斜线1 (X左移10)
+		{0x106, 4, 916, 494, 944, 466}      // 倾斜线2 (X左移10)
     }
 };
 graphic_data_struct_t Referee_dummyGraphicCmd = {{0x00, 0x00, 0x00}, Draw_OPERATE_NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
