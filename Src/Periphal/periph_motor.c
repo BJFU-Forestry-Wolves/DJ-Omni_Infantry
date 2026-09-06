@@ -37,7 +37,10 @@ Motor_MotorTypeDef Motor_ChassisFontLeftMotor;
 Motor_MotorTypeDef Motor_ChassisBackLeftMotor;
 Motor_MotorTypeDef Motor_ChassisBackRightMotor;
 Motor_MotorTypeDef Motor_PitchMotor;
-Motor_MotorTypeDef Motor_YawMotor;          //yaw
+Motor_MotorTypeDef Motor_YawMotor;   //yaw
+Motor_MotorTypeDef Motor_YawMotor1; 
+Motor_MotorTypeDef Motor_YawMotor2; 
+Motor_MotorTypeDef Motor_YawMotor3; 
 Motor_MotorTypeDef Motor_ShootLeftMotor;
 Motor_MotorTypeDef Motor_ShootRightMotor;
 Motor_MotorTypeDef Motor_FeedMotor;
@@ -79,11 +82,17 @@ void Motor_InitAllMotors() {
     Motor_groupHandle[0] = &Motor_PitchMotors;
     Motor_InitMotorGroup(&Motor_PitchMotors, Motor_TYPE_RM6020, 4, &hcan1, 0x1FF); 
 		Motor_InitMotor(&Motor_YawMotor,Motor_TYPE_RM6020,0x208,0.1,gm6020_encoder_callback);
-    
+		Motor_InitMotor(&Motor_YawMotor1,Motor_TYPE_RM6020,0x207,0.1,gm6020_encoder_callback);
+		Motor_InitMotor(&Motor_YawMotor2,Motor_TYPE_RM6020,0x206,0.1,gm6020_encoder_callback);
+		Motor_InitMotor(&Motor_YawMotor3,Motor_TYPE_RM6020,0x205,0.1,gm6020_encoder_callback);
+	
 	  Motor_InitMotor(&Motor_FeedMotor, Motor_TYPE_RM2006, 0X207, 0.1, rm2006_encoder_callback);
-		Motor_PitchMotors.motor_handle[2]=&Motor_FeedMotor;
-	  Motor_PitchMotors.motor_handle[3] = &Motor_YawMotor;
+		Motor_PitchMotors.motor_handle[0]=&Motor_YawMotor3;
+		Motor_PitchMotors.motor_handle[1]=&Motor_YawMotor2;
+		Motor_PitchMotors.motor_handle[2]=&Motor_YawMotor1;
+		Motor_PitchMotors.motor_handle[3] =&Motor_YawMotor;
     //Motor_PitchMotors.motor_handle[1] = &Motor_PitchMotor;
+	
 //曾经云台pitch为6020，先代码中使用DM4340    
     Motor_groupHandle[1] = &Motor_ShootMotors;
     Motor_InitMotorGroup(&Motor_ShootMotors, Motor_TYPE_RM3508, 4, &hcan2, 0x200);

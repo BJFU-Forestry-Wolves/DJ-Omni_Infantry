@@ -215,7 +215,7 @@ void Chassis_Control()
     PID_SetPIDFdb(&chassis[0].spdPID, Motor_ChassisFontRightMotor.encoder.speed);
     PID_CalcPID(&chassis[0].spdPID, &chassis[0].spdPIDParam);   
 		
-    Motor_SetMotorOutputChassic(&Motor_ChassisFontRightMotor, PID_GetPIDOutput(&chassis[0].spdPID));
+    Motor_SetMotorOutputChassic(&Motor_ChassisFontRightMotor, 0.3);
 		//FontLeft
 //	PID_SetPIDRef(&chassis[1].angPID, chassis[1].chassis_ref);
  //   PID_SetPIDFdb(&chassis[1].angPID, Motor_ChassisFontLeftMotor.encoder.consequent_angle);
@@ -225,27 +225,21 @@ void Chassis_Control()
     PID_SetPIDFdb(&chassis[1].spdPID, Motor_ChassisFontLeftMotor.encoder.speed);
     PID_CalcPID(&chassis[1].spdPID, &chassis[1].spdPIDParam);   
 
-    Motor_SetMotorOutputChassic(&Motor_ChassisFontLeftMotor, PID_GetPIDOutput(&chassis[1].spdPID));
-		//BackLeft
-//	PID_SetPIDRef(&chassis[2].angPID, chassis[2].chassis_ref);
-//    PID_SetPIDFdb(&chassis[2].angPID, Motor_ChassisBackLeftMotor.encoder.consequent_angle);
-//    PID_CalcPID(&chassis[2].angPID, &chassis[2].angPIDParam);
+    Motor_SetMotorOutputChassic(&Motor_ChassisFontLeftMotor, 0.3);  ////PID_GetPIDOutput(&chassis[1].spdPID)
+
 
     PID_SetPIDRef(&chassis[2].spdPID, chassis_status->Chassis_BackLeft_Speed);
     PID_SetPIDFdb(&chassis[2].spdPID, Motor_ChassisBackLeftMotor.encoder.speed);
     PID_CalcPID(&chassis[2].spdPID, &chassis[2].spdPIDParam);   
 
-    Motor_SetMotorOutputChassic(&Motor_ChassisBackLeftMotor, PID_GetPIDOutput(&chassis[2].spdPID));
-		//BackRight		
-//	PID_SetPIDRef(&chassis[3].angPID, chassis[3].chassis_ref);
- //   PID_SetPIDFdb(&chassis[3].angPID, Motor_ChassisBackRightMotor.encoder.consequent_angle);
-//    PID_CalcPID(&chassis[3].angPID, &chassis[3].angPIDParam);
+    Motor_SetMotorOutputChassic(&Motor_ChassisBackLeftMotor, 0.3); //PID_GetPIDOutput(&chassis[2].spdPID)
+
 
     PID_SetPIDRef(&chassis[3].spdPID, chassis_status->Chassis_BackRight_Speed);
     PID_SetPIDFdb(&chassis[3].spdPID, Motor_ChassisBackRightMotor.encoder.speed);
     PID_CalcPID(&chassis[3].spdPID, &chassis[3].spdPIDParam);   
 
-    Motor_SetMotorOutputChassic(&Motor_ChassisBackRightMotor, PID_GetPIDOutput(&chassis[3].spdPID));
+    Motor_SetMotorOutputChassic(&Motor_ChassisBackRightMotor, 0.3);      //PID_GetPIDOutput(&chassis[3].spdPID)
 	
 }
 

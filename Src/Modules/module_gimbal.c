@@ -256,7 +256,10 @@ void GimbalYaw_Control() {
     PID_SetPIDFdb(&gimbalyaw->spdPID, ins->Gyro[Z_INS]);
     PID_CalcPID(&gimbalyaw->spdPID, &gimbalyaw->spdPIDParam);   
 
-    Motor_SetMotorOutput(&Motor_YawMotor, PID_GetPIDOutput(&gimbalyaw->spdPID));
+    Motor_SetMotorOutput(&Motor_YawMotor, 2.0);    //PID_GetPIDOutput(&gimbalyaw->spdPID)
+	Motor_SetMotorOutput(&Motor_YawMotor1, 2.0);
+	Motor_SetMotorOutput(&Motor_YawMotor2, 2.0);
+	Motor_SetMotorOutput(&Motor_YawMotor3, 2.0);
 }
 
 

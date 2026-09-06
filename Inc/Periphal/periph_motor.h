@@ -81,6 +81,9 @@ extern Motor_MotorTypeDef Motor_ChassisBackLeftMotor;
 extern Motor_MotorTypeDef Motor_ChassisBackRightMotor;
 extern Motor_MotorTypeDef Motor_PitchMotor;
 extern Motor_MotorTypeDef Motor_YawMotor;            //yaw轴
+extern Motor_MotorTypeDef Motor_YawMotor1; 
+extern Motor_MotorTypeDef Motor_YawMotor2; 
+extern Motor_MotorTypeDef Motor_YawMotor3; 
 extern Motor_MotorTypeDef Motor_ShootLeftMotor;
 extern Motor_MotorTypeDef Motor_ShootRightMotor;
 extern Motor_MotorTypeDef Motor_FeedMotor;
