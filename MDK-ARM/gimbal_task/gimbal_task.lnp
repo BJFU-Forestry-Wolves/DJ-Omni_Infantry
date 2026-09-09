@@ -29,7 +29,6 @@
 "gimbal_task\stm32f4xx_hal_exti.o"
 "gimbal_task\stm32f4xx_hal_spi.o"
 "gimbal_task\stm32f4xx_hal_uart.o"
-"gimbal_task\list_1.o"
 "gimbal_task\system_stm32f4xx.o"
 "gimbal_task\croutine.o"
 "gimbal_task\event_groups.o"

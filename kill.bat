@@ -1,9 +1,5 @@
-del *.bak /s
-del *.lst /s
-del *.map /s
-del *.obj /s
-del *.axf /s
-del *.o /s
-del *.d /s
-del *.tmp /s
-exit
+@echo off
+cd /d "%~dp0"
+del /s /q *.bak *.lst *.map *.obj *.axf *.o *.d *.tmp *.crf *.dep *.lnp *.plg *.htm *.uvguix.* *.__i *.tra *.iex
+echo 清理完成！
+pause
