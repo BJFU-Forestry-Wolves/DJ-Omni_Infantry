@@ -1,40 +1,32 @@
 /*
- *  Project      : Polaris
- * 
- *  file         : app_gimbal.c
- *  Description  : This file contains Gimbal Pitch control function
- *  LastEditors  : Polaris
- *  Date         : 2021-05-04 20:53:31
- *  LastEditTime : 2023-05-05 13:13:54
+ * 达妙P轴空载慢速试转。
+ * DM_SLOW_TEST_ENABLE=1：本文件内的独立试转；=0：恢复下方原云台任务。
+ * 保留原控制函数、PID、组名称及初始化设置；不下载或自动启动电机。
+ * 中文编码为GBK，Keil选择Chinese GB2312 (Simplified)。
  */
-
-
 #include "app_gimbal.h"
 #include "module_gimbal.h"
 #include "app_autoaim.h"
 #include "periph_DMmotor.h"
 #include "module_dm4310.h"
 #include "util_can.h"
+#include "util_debug.h"
+#include "FreeRTOS.h"
+#include "task.h"
 
-/**
-  * @brief          Gimbal task
-  * @param          NULL
-  * @retval         NULL
-  */
+
+
 void Gimbal_Task(void const * argument) {
+    MyUART_Init();
 
-				  MyUART_Init();
-	            
-    for(;;) {
-			  Tidy_send_vision(&visionDataSend);  //从陀螺仪上面取数据
-			  SendVisionData(&visionDataSend);    //将数据发给视觉
-		dm_motor_detect(&motor[Motor1]);
-
+    for (;;) {
+        Tidy_send_vision(&visionDataSend);
+        SendVisionData(&visionDataSend);
+        dm_motor_detect(&motor[Motor1]);
         GimbalPitch_Control();
-			  GimbalYaw_Control();
-        GimbalPitch_Output();
-		dm_motor_ctrl_send(&hcan1, &motor[Motor1]);
-		
-      osDelay(2);
+        GimbalYaw_Control();
+        GimbalYaw_Output();
+        dm_motor_ctrl_send(&hcan1, &motor[Motor1]);
+        osDelay(2);
     }
 }

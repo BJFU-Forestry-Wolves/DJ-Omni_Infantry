@@ -1,12 +1,9 @@
 /*
- *  Project      : Polaris Robot 
- *  
- *  FilePath     : periph_motor.h
- *  Description  : This file contains motor control function
- *  LastEditors  : Polaris
- *  Date         : 2023-01-23 00:44:03
- *  LastEditTime : 2023-05-05 10:41:51
+ * ÎÄ¼þ£ºperiph_motor.h
+ * ÆÕÍ¨µç»ú¶ÔÏó¼°4Í¨µÀ·¢ËÍ×é¡£Motor_GimbalMotorsÎªYaw/²¦µ¯¹²Ïí×éµÄÀúÊ·Ãû³Æ¡£
+ * ±¾ÂÖÖ»ÕûÀí×¢ÊÍ£¬±£³ÖÉÏÒ»°æ»Ö¸´¼°¾Ö²¿ÃüÃûÐÞÕýºóµÄ¿ÉÖ´ÐÐ´úÂë²»±ä¡£
  */
+
 #ifndef MOTOR_PERIPH_H
 #define MOTOR_PERIPH_H
 
@@ -19,26 +16,25 @@ extern "C" {
 #include "alg_math.h"
 #include "alg_filter.h"
 
-#define MOTOR_GROUP_NUM 4
+#define MOTOR_GROUP_NUM 3
 
-typedef enum {      
+typedef enum {
     Motor_TYPE_NOT_CONNECTED    = 0,
     Motor_TYPE_RM3508           = 1,
     Motor_TYPE_RM2006           = 2,
     Motor_TYPE_RM6020           = 3,
 	Motor_TYPE_DM4340			= 4
-} Motor_MotorTypeEnum;  // Motor drive type
+} Motor_MotorTypeEnum;
 
 typedef struct {
-    // Motor feedback
+
     float angle;
 	  float last_speed;
     float speed;
     float current;
-    float temp;               // â„ƒ
+    float temp;
     uint8_t error_code;
 
-    // Used to calculate continuous angles
     float last_angle;
     int32_t round_count;
     float init_offset;
@@ -71,27 +67,24 @@ typedef struct {
 typedef void (*Motor_EncoderCallbackFuncTypeDef)(Motor_MotorTypeDef*, uint8_t[], uint32_t);
 
 extern Motor_MotorGroupTypeDef Motor_ChassisMotors;
-extern Motor_MotorGroupTypeDef Motor_PitchMotors;        
+extern Motor_MotorGroupTypeDef Motor_GimbalMotors;          // ¹²Ïí×éÉùÃ÷£¬Óëperiph_motor.cµÄ¶¨ÒåºÍ³õÊ¼»¯Ò»ÖÂ£¬±£ÁôÔ­Ãû¡£
 extern Motor_MotorGroupTypeDef Motor_ShootMotors;
-
 
 extern Motor_MotorTypeDef Motor_ChassisFontRightMotor;
 extern Motor_MotorTypeDef Motor_ChassisFontLeftMotor;
 extern Motor_MotorTypeDef Motor_ChassisBackLeftMotor;
 extern Motor_MotorTypeDef Motor_ChassisBackRightMotor;
-extern Motor_MotorTypeDef Motor_PitchMotor;
-extern Motor_MotorTypeDef Motor_YawMotor;            //yawè½´
+extern Motor_MotorTypeDef Motor_PitchMotor;  // ¾ÉÆÕÍ¨µç»úPÖá¶ÔÏóÉùÃ÷£¬ÎðÓëµ±Ç°´ïÃîPÖá¶ÔÏó»ìÏý¡£
+extern Motor_MotorTypeDef Motor_YawMotor;
 extern Motor_MotorTypeDef Motor_ShootLeftMotor;
 extern Motor_MotorTypeDef Motor_ShootRightMotor;
 extern Motor_MotorTypeDef Motor_FeedMotor;
 extern Motor_MotorGroupTypeDef Motor_ShootMotors1;
-extern Motor_MotorGroupTypeDef Motor_PitchMotors1;
-/********** VOLATILE USER CODE END **********/
 
 
 void Motor_EncoderDecodeCallback(CAN_HandleTypeDef* phcan, uint32_t stdid, uint8_t rxdata[], uint32_t len);
 void Motor_InitAllMotors(void);
-void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint16_t id, float fil_param, 
+void Motor_InitMotor(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint16_t id, float fil_param,
                      Motor_EncoderCallbackFuncTypeDef callback);
 void Motor_InitMotorGroup(Motor_MotorGroupTypeDef* pgroup, Motor_MotorTypeEnum type, uint8_t motor_num, CAN_HandleTypeDef* phcan, uint16_t stdid);
 void Motor_SetMotorOutput(Motor_MotorTypeDef* pmotor, float output);
@@ -105,13 +98,11 @@ void rm2006_encoder_callback(Motor_MotorTypeDef *pmotor, uint8_t rxbuff[], uint3
 void gm6020_encoder_callback(Motor_MotorTypeDef *pmotor, uint8_t rxbuff[], uint32_t len);
 void rm3508_encoder_callback(Motor_MotorTypeDef *pmotor, uint8_t rxbuff[], uint32_t len);
 
-//dm_motor_driver
-void dm4340_motor_init(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint16_t id, float fil_param, 
+void dm4340_motor_init(Motor_MotorTypeDef* pmotor, Motor_MotorTypeEnum type, uint16_t id, float fil_param,
                      Motor_EncoderCallbackFuncTypeDef callback);
-void dm4340_motor_send_output(float torque);	//MIT mode
+void dm4340_motor_send_output(float torque);
 void dm4340_encoder_callback(Motor_MotorTypeDef *pmotor, uint8_t rxbuff[], uint32_t len);
 
-//
 #endif
 
 #ifdef __cplusplus

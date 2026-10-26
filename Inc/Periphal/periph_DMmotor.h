@@ -1,19 +1,20 @@
-
+/*
+ * 文件：periph_DMmotor.h
+ * 达妙协议对象。ctrl是待发送给定，para是反馈，tmp是驱动参数缓存。
+ * 本轮只整理注释，保持上一版恢复及局部命名修正后的可执行代码不变。
+ */
 
 #ifndef PERIPH_DMMOTOR_H
 #define PERIPH_DMMOTOR_H
 
-
-#define MIT_MODE 			0x000
+#define MIT_MODE 			0x000  // MIT控制的CAN ID偏移，和软件枚举mit_mode=1不是一回事。
 #define POS_MODE			0x100
 #define SPD_MODE			0x200
 #define PSI_MODE		  	0x300
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
-
 
 #include "util_pwm.h"
 
@@ -31,98 +32,95 @@ typedef enum
 	psi_mode = 4
 } mode_e;
 
-// 电机参数
 typedef struct
 {
 	uint8_t read_flag;
 	uint8_t write_flag;
 	uint8_t save_flag;
-	
-    float UV_Value;		// 低压保护值
-    float KT_Value;		// 扭矩系数
-    float OT_Value;		// 过温保护值
-    float OC_Value;		// 过流保护值
-    float ACC;			// 加速度
-    float DEC;			// 减速度
-    float MAX_SPD;		// 最大速度
-    uint32_t MST_ID;	// 反馈ID
-    uint32_t ESC_ID;	// 接收ID
-    uint32_t TIMEOUT;	// 超时警报时间
-    uint32_t cmode;		// 控制模式
-    float  	 Damp;		// 电机粘滞系数
-    float    Inertia;	// 电机转动惯量
-    uint32_t hw_ver;	// 保留
-    uint32_t sw_ver;	// 软件版本号
-    uint32_t SN;		// 保留
-    uint32_t NPP;		// 电机极对数
-    float    Rs;		// 电阻
-    float    Ls;		// 电感
-    float    Flux;		// 磁链
-    float    Gr;		// 齿轮减速比
-    float    PMAX;		// 位置映射范围
-    float    VMAX;		// 速度映射范围
-    float    TMAX;		// 扭矩映射范围
-    float    I_BW;		// 电流环控制带宽
-    float    KP_ASR;	// 速度环Kp
-    float    KI_ASR;	// 速度环Ki
-    float    KP_APR;	// 位置环Kp
-    float    KI_APR;	// 位置环Ki
-    float    OV_Value;	// 过压保护值
-    float    GREF;		// 齿轮力矩效率
-    float    Deta;		// 速度环阻尼系数
-    float 	 V_BW;		// 速度环滤波带宽
-    float 	 IQ_cl;		// 电流环增强系数
-    float    VL_cl;		// 速度环增强系数
-    uint32_t can_br;	// CAN波特率代码
-    uint32_t sub_ver;	// 子版本号
-	float 	 u_off;		// u相偏置
-	float	 v_off;		// v相偏置
-	float	 k1;		// 补偿因子1
-	float 	 k2;		// 补偿因子2
-	float 	 m_off;		// 角度偏移
-	float  	 dir;		// 方向
-	float	 p_m;		// 电机位置
-	float	 x_out;		// 输出轴位置
+
+    float UV_Value;
+    float KT_Value;
+    float OT_Value;
+    float OC_Value;
+    float ACC;
+    float DEC;
+    float MAX_SPD;
+    uint32_t MST_ID;
+    uint32_t ESC_ID;
+    uint32_t TIMEOUT;	   // 通信超时计数，单位50us；2000对应100ms。仅改本地字段不会写驱动。
+    uint32_t cmode;
+    float  	 Damp;
+    float    Inertia;
+    uint32_t hw_ver;
+    uint32_t sw_ver;
+    uint32_t SN;
+    uint32_t NPP;
+    float    Rs;
+    float    Ls;
+    float    Flux;
+    float    Gr;
+    float    PMAX;		   // MIT位置映射端点，单位rad；不是机械限位。
+    float    VMAX;		   // MIT速度映射端点，单位rad/s。
+    float    TMAX;		   // MIT转矩映射端点，单位N*m。
+    float    I_BW;
+    float    KP_ASR;
+    float    KI_ASR;
+    float    KP_APR;
+    float    KI_APR;
+    float    OV_Value;
+    float    GREF;
+    float    Deta;
+    float 	 V_BW;
+    float 	 IQ_cl;
+    float    VL_cl;
+    uint32_t can_br;
+    uint32_t sub_ver;
+	float 	 u_off;
+	float	 v_off;
+	float	 k1;
+	float 	 k2;
+	float 	 m_off;
+	float  	 dir;
+	float	 p_m;
+	float	 x_out;
 } esc_inf_t;
 
-// 电机回传信息结构体
 typedef struct
 {
-    int id;
-    int state;
+    int id;  // 普通反馈D0低4位携带的驱动ID。
+    int state;  // 驱动反馈状态：0失能、1使能、0xD通信超时。
     int p_int;
     int v_int;
     int t_int;
     int kp_int;
     int kd_int;
-    float pos;
-    float vel;
-    float tor;
+    float pos;  // 解析位置，单位rad。
+    float vel;  // 解析速度，单位rad/s。
+    float tor;  // 解析转矩，单位N*m。
     float Kp;
     float Kd;
-    float Tmos;
-    float Tcoil;
+    float Tmos;  // 驱动MOS温度，单位摄氏度。
+    float Tcoil;  // 电机绕组温度反馈，单位摄氏度。
 } motor_fbpara_t;
 
-// 电机参数设置结构体
 typedef struct
 {
     uint8_t mode;
-    float pos_set;
-    float vel_set;
-    float tor_set;
+    float pos_set;  // MIT目标位置，单位rad。
+    float vel_set;  // MIT目标速度，单位rad/s。
+    float tor_set;  // MIT前馈转矩，单位N*m。
 	float cur_set;
-    float kp_set;
-    float kd_set;
+    float kp_set;  // MIT位置比例增益。
+    float kd_set;  // MIT速度阻尼增益。
 } motor_ctrl_t;
 
 typedef struct
 {
-    uint16_t id;
-	uint16_t mst_id;
-    motor_fbpara_t para;
-    motor_ctrl_t ctrl;
-	esc_inf_t tmp;
+    uint16_t id;  // 主控控制地址；与反馈地址mst_id不是同一语义。
+	uint16_t mst_id;  // 反馈CAN地址的本地记录，不会自动更新驱动配置或接收判断。
+    motor_fbpara_t para;  // 最近一次普通MIT反馈的解析结果，暂停时可能是旧值。
+    motor_ctrl_t ctrl;  // 主控待发送控制值；修改它不会立即发帧。
+	esc_inf_t tmp;  // 驱动参数缓存/映射配置，不代表每项已成功从驱动读回。
 } DMmotor_t;
 
 void dm_motor_init(void);
