@@ -1,0 +1,45 @@
+# ============ Keil MDK 编译产物（与 keilkilll.bat 对齐）============
+*.bak
+*.ddk
+*.edk
+*.lst
+*.lnp
+*.mpf
+*.mpj
+*.obj
+*.omf
+*.plg
+*.rpt
+*.tmp
+*.__i
+*.crf
+*.o
+*.d
+*.axf
+*.tra
+*.dep
+*.iex
+*.htm
+*.sct
+*.map
+JLinkLog.txt
+
+# ============ Keil 用户/机器私有（keilkilll.bat 管不到）============
+*.uvguix.*
+*.uvoptx
+JLinkSettings.ini
+*.scvd
+
+# ============ 日志 ============
+*.log
+*.log.lock
+
+# ============ 固件产物：想留档就保持注释，不想留档就取消注释 ============
+# *.hex
+# *.bin
+
+# ============ 系统 / 编辑器（.vscode 下的配置保留追踪）============
+Thumbs.db
+desktop.ini
+.DS_Store
+.idea/
