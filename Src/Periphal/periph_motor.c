@@ -77,8 +77,8 @@ void Motor_InitAllMotors() {
 	  //Motor_InitMotor(&Motor_PitchMotor, Motor_TYPE_RM6020, 0x206, 0.1, gm6020_encoder_callback);
     //Motor_InitMotor(&Motor_FeedMotor, Motor_TYPE_RM2006, 0X201, 0.1, rm2006_encoder_callback);
 	  //Motor_ShootMotors.motor_handle[0] = &Motor_FeedMotor;
-    Motor_ShootMotors.motor_handle[0] = &Motor_ShootLeftMotor;
-    Motor_ShootMotors.motor_handle[1] = &Motor_ShootRightMotor;
+    Motor_ShootMotors.motor_handle[1] = &Motor_ShootLeftMotor;
+    Motor_ShootMotors.motor_handle[0] = &Motor_ShootRightMotor;
 
 		Motor_groupHandle[2] = &Motor_ChassisMotors;
     Motor_InitMotorGroup(&Motor_ChassisMotors, Motor_TYPE_RM3508, 4, &hcan1, 0x200);

@@ -14,7 +14,7 @@
 float Const_SERVO_INIT_OFFSET = 0.053f;
 
 
-const float Const_Shooter22mpers        = 320.0f;
+const float Const_Shooter22mpers        = 200.0f;
 
 
 const float Const_ShooterLockedCurrent              = 9000.0f;//¶Â×ªµçÁ÷
