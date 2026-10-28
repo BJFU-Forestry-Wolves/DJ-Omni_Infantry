@@ -170,7 +170,7 @@ void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
 
 float out_put_data;
 float imu_error;
-float  IMUfdb =0.1;
+float  IMUfdb =0.0;
 /**
  * 计算达妙P轴MIT位置目标：参考平滑值减去IMU补偿，再进行软件钳位。
  * 此函数只更新motor[Motor1].ctrl，不发送CAN帧；周期发送由任务中的dm_motor_ctrl_send负责。

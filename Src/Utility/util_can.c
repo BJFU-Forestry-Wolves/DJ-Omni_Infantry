@@ -148,7 +148,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
 void Can_RxMessageCallback(CAN_HandleTypeDef* phcan, CAN_RxHeaderTypeDef* rxheader, uint8_t rxdata[]) {
     if (phcan == &hcan1) {
 
-	  if( rxheader -> StdId==0x06)  // 以驱动Master ID分流反馈；当前未额外验证帧类型和数据长度。
+	  if( rxheader -> StdId==0x00)  // 以驱动Master ID分流反馈；当前未额外验证帧类型和数据长度。
 	  {
 		dm_motor_fbdata(&motor[Motor1], rxdata);
         receive_motor_data(&motor[Motor1], rxdata);

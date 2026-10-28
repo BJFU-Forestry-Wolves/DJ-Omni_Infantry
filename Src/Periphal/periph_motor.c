@@ -22,7 +22,6 @@ Motor_MotorGroupTypeDef *Motor_groupHandle[MOTOR_GROUP_NUM];
 Motor_MotorGroupTypeDef Motor_ChassisMotors;
 Motor_MotorGroupTypeDef Motor_GimbalMotors;          // 历史名称：实际为CAN1/0x1FF的Yaw+拨弹共享组，不是达妙P轴。
 Motor_MotorGroupTypeDef Motor_ShootMotors;
-Motor_MotorGroupTypeDef Motor_ShootMotors1;
 //Motor_MotorGroupTypeDef Motor_DM4310s;
 //Motor_MotorGroupTypeDef Motor_PitchMotors1;
 
@@ -72,14 +71,14 @@ void Motor_InitAllMotors() {
 	  Motor_GimbalMotors.motor_handle[2] = &Motor_FeedMotor;  // 第3通道：拨弹反馈ID0x207，输出占本组D4/D5。
 
     Motor_groupHandle[1] = &Motor_ShootMotors;
-    Motor_InitMotorGroup(&Motor_ShootMotors, Motor_TYPE_RM3508, 4, &hcan2, 0x200);
-    Motor_InitMotor(&Motor_ShootRightMotor, Motor_TYPE_RM3508, 0x204, 0.1, rm3508_encoder_callback);
-    Motor_InitMotor(&Motor_ShootLeftMotor, Motor_TYPE_RM3508, 0x203, 0.1, rm3508_encoder_callback);
+    Motor_InitMotorGroup(&Motor_ShootMotors, Motor_TYPE_RM3508, 2, &hcan2, 0x200);
+    Motor_InitMotor(&Motor_ShootRightMotor, Motor_TYPE_RM3508, 0x201, 0.1, rm3508_encoder_callback);
+    Motor_InitMotor(&Motor_ShootLeftMotor, Motor_TYPE_RM3508, 0x202, 0.1, rm3508_encoder_callback);
 	  //Motor_InitMotor(&Motor_PitchMotor, Motor_TYPE_RM6020, 0x206, 0.1, gm6020_encoder_callback);
     //Motor_InitMotor(&Motor_FeedMotor, Motor_TYPE_RM2006, 0X201, 0.1, rm2006_encoder_callback);
 	  //Motor_ShootMotors.motor_handle[0] = &Motor_FeedMotor;
-    Motor_ShootMotors.motor_handle[2] = &Motor_ShootLeftMotor;
-    Motor_ShootMotors.motor_handle[3] = &Motor_ShootRightMotor;
+    Motor_ShootMotors.motor_handle[0] = &Motor_ShootLeftMotor;
+    Motor_ShootMotors.motor_handle[1] = &Motor_ShootRightMotor;
 
 		Motor_groupHandle[2] = &Motor_ChassisMotors;
     Motor_InitMotorGroup(&Motor_ChassisMotors, Motor_TYPE_RM3508, 4, &hcan1, 0x200);
