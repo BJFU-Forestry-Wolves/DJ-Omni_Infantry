@@ -34,6 +34,13 @@ JLinkSettings.ini
 *.log
 *.log.lock
 
+# ============ 本地工具临时产物（不上传）============
+.dsh-pdf-reader/
+.dsh-*/
+.kilo/
+.claude/
+.codex/
+
 # ============ 固件产物：想留档就保持注释，不想留档就取消注释 ============
 # *.hex
 # *.bin
