@@ -29,9 +29,10 @@ void GimbalPitch_InitGimbalPitch() {
 
     gimbalpitch->control_state = 1;
     gimbalpitch->output_state = 1;
-    gimbalpitch->pitch_ref = 0.2;
+    /* P轴初始位置与 dm_motor_init 的 ctrl.pos_set 同源：只需改 Const_DMPitchInitPos */
+    gimbalpitch->pitch_ref = Const_DMPitchInitPos;
+    LimitMaxMin(gimbalpitch->pitch_ref, Const_DMPITCH_UMAXANGLE, Const_DMPITCH_DMAXANGLE);  // 初值超界会被夹住，避免造成反向空程
     gimbalpitch->pitch_count = 0;
-	gimbalpitch->pitch_ref_smooth =0;
     PID_InitPIDParam(&gimbalpitch->spdPIDParam, Const_GimbalPitchSpdParam[0][0], Const_GimbalPitchSpdParam[0][1], Const_GimbalPitchSpdParam[0][2], Const_GimbalPitchSpdParam[0][3],
                     Const_GimbalPitchSpdParam[0][4], Const_GimbalPitchSpdParam[1][0], Const_GimbalPitchSpdParam[1][1], Const_GimbalPitchSpdParam[2][0], Const_GimbalPitchSpdParam[2][1],
                     Const_GimbalPitchSpdParam[3][0], Const_GimbalPitchSpdParam[3][1], PID_POSITION);
@@ -112,16 +113,14 @@ void GimbalYaw_SetGimbalYawOutputState(uint8_t state) {
 }
 
 /**
- * 把输入增量累加到P轴位置参考，并用DMpitchrefMin/Max钳位。
+ * 把输入增量累加到P轴位置参考，并用 Const_DMPITCH_UMAXANGLE/DMAXANGLE 直接钳位。
  * 这是增量接口，不是直接设定绝对位置；当前参考以rad参与后续计算。
  */
 void GimbalPitch_SetPitchRef(float pitch_ref) {
     GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
-//    float UMAX_PITCH_DEG = Const_DMPITCH_UMAXANGLE;
-//	float DMAX_PITCH_DEG = Const_DMPITCH_DMAXANGLE;
 
     gimbalpitch->pitch_ref += pitch_ref;
-	LimitMaxMin(gimbalpitch->pitch_ref, DMpitchrefMax,DMpitchrefMin);
+	LimitMaxMin(gimbalpitch->pitch_ref, Const_DMPITCH_UMAXANGLE, Const_DMPITCH_DMAXANGLE);
 }
 
 /**
@@ -169,29 +168,19 @@ void GimbalYaw_SetIMUYawSpeedFdb(float imu_yaw_speed_fdb) {
 }
 
 float out_put_data;
-float imu_error;
-float  IMUfdb =0.0;
 /**
- * 计算达妙P轴MIT位置目标：参考平滑值减去IMU补偿，再进行软件钳位。
+ * 计算达妙P轴MIT位置目标：参考值直接下发（当前不做IMU/陀螺仪补偿），再做软件钳位。
  * 此函数只更新motor[Motor1].ctrl，不发送CAN帧；周期发送由任务中的dm_motor_ctrl_send负责。
  * dm_motor_init_test会每轮重新写入全局DM_KP/DM_KD，直接在Watch修改ctrl增益会被覆盖。
  */
 void GimbalPitch_Control() {
     GimbalPitch_GimbalPitchTypeDef *gimbalpitch = GimbalPitch_GetGimbalPitchPtr();
-    INS_INSTypeDef *ins = INS_GetINSPtr();
 
     if (gimbalpitch->control_state != 1) return;
 
-    gimbalpitch->filter_alpha = 0.1f;  // alpha越小平滑越强，响应越慢；每轮设为0.1。
 	 dm_motor_init_test();
-     imu_error = ins->Roll * PI / 180.0f + Const_PITCH_MOTOR_INIT_OFFSETf;  // 把IMU的Roll从度转换为rad，再加装配零偏。
 
-    gimbalpitch->pitch_ref_smooth += gimbalpitch->filter_alpha *(gimbalpitch->pitch_ref - gimbalpitch->pitch_ref_smooth);  // 一阶平滑：新值=旧值+alpha*(参考-旧值)。
-      float target_pos = gimbalpitch->pitch_ref_smooth-imu_error*IMUfdb;  // 平滑参考减去IMUfdb比例的IMU补偿，得到P轴位置目标。
-
-   // motor[Motor1].ctrl.vel_set = v_imu;
-	motor[Motor1].ctrl.pos_set =Gimbal_DMLimitPitch(target_pos) ;  // 只写入经过软件钳位的位置给定，真正发送由任务负责。
-
+	motor[Motor1].ctrl.pos_set = Gimbal_DMLimitPitch(gimbalpitch->pitch_ref);  // 参考经软件钳位后直接下发
 }
 
 float gimbalyaw_fdb;

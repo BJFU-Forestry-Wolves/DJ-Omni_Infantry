@@ -23,7 +23,7 @@ void dm_motor_init(void)
 	motor[Motor1].mst_id = 0x00;		// Master ID设置为0x00       电机->主控
 	motor[Motor1].tmp.read_flag = 1;
 	motor[Motor1].ctrl.mode 	= mit_mode;		// 使用MIT模式
-	motor[Motor1].ctrl.pos_set 	= 0.4f;			// 初始目标位置  pos范围是-1到+1 ，角度=pos*716.2° 0.32
+	motor[Motor1].ctrl.pos_set 	= Const_DMPitchInitPos;			// 初始目标位置：由 Const_DMPitchInitPos 统一指定（与 pitch_ref 初值同源）
 	motor[Motor1].ctrl.vel_set 	= 0.0f;			// 速度前馈  6.5
 	motor[Motor1].ctrl.kp_set 	= DM_KP;		// 位置增益Kp=20
 	motor[Motor1].ctrl.kd_set 	= DM_KD;			// 阻尼增益Kd=0.3

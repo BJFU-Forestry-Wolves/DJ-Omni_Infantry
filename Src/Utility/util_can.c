@@ -8,6 +8,7 @@
 #include "periph_motor.h"
 #include "protocol_common.h"
 #include "module_dm4310.h"
+#include "periph_Ina226.h"
 
 CAN_RxHeaderTypeDef Can_RxHeader;
 #define Const_Can_RX_BUFF_LEN  200
@@ -148,6 +149,7 @@ void HAL_CAN_RxFifo0MsgPendingCallback(CAN_HandleTypeDef *phcan) {
 void Can_RxMessageCallback(CAN_HandleTypeDef* phcan, CAN_RxHeaderTypeDef* rxheader, uint8_t rxdata[]) {
     if (phcan == &hcan1) {
 
+	  (void)Ina226_OnCanFrame(phcan, rxheader, rxdata);   /* 森林功率计 0x2A0/0x2A1/0x2A2：内部按 ID 自过滤，不匹配原样放行 */
 	  if( rxheader -> StdId==0x00)  // 以驱动Master ID分流反馈；当前未额外验证帧类型和数据长度。
 	  {
 		dm_motor_fbdata(&motor[Motor1], rxdata);

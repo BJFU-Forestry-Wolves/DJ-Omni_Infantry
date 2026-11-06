@@ -71,13 +71,12 @@ float KP_MIN                                                =0.0f  ;
 float KP_MAX                                                =500.0f;
 float KD_MIN                                                =0.0f  ;
 float KD_MAX                                                =5.0f   ;
-float Const_DMPITCH_UMAXANGLE                       = 0.8f;
-float Const_DMPITCH_DMAXANGLE                       = -0.2f;
+float Const_DMPITCH_UMAXANGLE                       = 0.04f;
+float Const_DMPITCH_DMAXANGLE                       = -0.68f;
+float Const_DMPitchInitPos                          = -0.4f;  // 达妙P轴上电初始位置(rad)：dm_motor_init 与 pitch_ref 初值共用，须落在[DMAX,UMAX]内
 float Const_PITCH_MOTOR_INIT_OFFSETf              = 0.16f;     
 float DM_KP                                        = 130  ;
 float DM_KD	                                       = 1.5 ;
-float DMpitchrefMax                                = 1.08 ;
-float DMpitchrefMin	                               = -0.4 ;
 float VisionPitch                                  =0.005f;
 /************************************************************************************************/
 // pitch gimbal param

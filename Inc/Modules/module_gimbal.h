@@ -29,9 +29,6 @@ typedef struct {
     PID_PIDTypeDef angPID;  // 角度环PID对象；Yaw外环使用，P轴当前保留但未用于MIT目标生成。
     PID_PIDParamTypeDef angPIDParam;
 
-    float pitch_ref_smooth;      // P轴参考的一阶平滑状态，单位rad。
-    float filter_alpha;          // 一阶平滑系数；当前控制函数每轮写0.1。
-
 } GimbalPitch_GimbalPitchTypeDef;
 
 typedef struct {

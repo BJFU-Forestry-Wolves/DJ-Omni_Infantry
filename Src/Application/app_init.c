@@ -25,6 +25,7 @@
 #include "protocol_common.h"
 #include "periph_draw.h"
 #include "module_power.h"
+#include "periph_Ina226.h"
 
 /**
  * 按依赖顺序完成硬件与控制模块初始化。
@@ -42,6 +43,9 @@ void Init_InitAll() {
 	Motor_InitAllMotors();
     Can_InitFilterAndStart(&hcan1);
     Can_InitFilterAndStart(&hcan2);
+
+    /* 森林功率计 V1.4：CAN 已启动，接收端可以开始解析 0x2A0/0x2A1/0x2A2 */
+    Ina226_Init();
 
     Referee_InitReferee();
 	Referee_Setup();

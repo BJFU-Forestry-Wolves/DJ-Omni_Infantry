@@ -184,7 +184,7 @@ void Shooter_UpdataControlData() {
     shooter->heat_ctrl.shooter_17mm_cooling_heat = (float)referee->status.shoot_heat;
     shooter->heat_ctrl.shooter_17mm_cooling_rate = (float)referee->status.shooter_limit;
     
-    Shooter_FeederMotorLockedJudge();
+  //  Shooter_FeederMotorLockedJudge();
 }
 
 
@@ -226,7 +226,7 @@ void Shooter_ForceChangeFeederMode(Shoot_FeederModeEnum mode) {
 
 
 /**
-  * @brief      Motor locked rotor judge
+  * @brief     ÅÐ¶Ï²¦ÅÌÊÇ·ñ¿¨µ¯£¬¿¨µ¯·´×ªÂß¼­
   * @param      NULL
   * @retval     NULL
   */

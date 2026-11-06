@@ -106,10 +106,9 @@ extern float KD_MIN;
 extern float KD_MAX;
 extern float Const_DMPITCH_UMAXANGLE;
 extern float Const_DMPITCH_DMAXANGLE;
+extern float Const_DMPitchInitPos;                          // 达妙P轴上电初始位置(rad)，与 pitch_ref 初值同源
 extern float DM_KP                  ;
 extern float DM_KD	                ;
-extern float DMpitchrefMax                 ;
-extern float DMpitchrefMin	                ;
 #endif
 
 #ifdef __cplusplus
