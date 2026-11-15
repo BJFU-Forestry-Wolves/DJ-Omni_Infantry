@@ -55,6 +55,11 @@ typedef struct {
 
 extern Chassis_ChassisTypeDef Chassis_ControlData[4];
 extern Chassis_StatusTypeDef Chassis_StatusData;
+extern volatile float Chassis_XtlCompMag;
+extern volatile float Chassis_XtlCompPhase;
+extern volatile float Chassis_XtlCompVx;
+extern volatile float Chassis_XtlCompVy;
+extern volatile float Chassis_WheelBias[4];
 
 void Chassis_InitChassis(void);
 

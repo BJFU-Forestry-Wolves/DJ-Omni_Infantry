@@ -4,6 +4,37 @@
 #include "alg_power_limting.h"
 Chassis_ChassisTypeDef Chassis_ControlData[4];
 Chassis_StatusTypeDef Chassis_StatusData;
+/*
+ * 小陀螺旋转中心补偿（参数纠正偏移）
+ *
+ * 物理模型：小陀螺时真实旋转中心相对几何中心偏移 c，底盘中心会残留一个
+ *           恒定本体速度 v = -w x c，表现为中心画圆，半径 = |c|。
+ *           补偿即在车体坐标系叠加反向平移 v_comp = w x e。
+ *
+ * 这里用「幅值 + 相位」两个参数，便于按方向系统扫描，而不是硬猜 Vx/Vy：
+ *     comp_x = -Mag * cos(Phase)
+ *     comp_y = -Mag * sin(Phase)
+ * Mag 单位与轮速目标一致(rpm)。换算关系：
+ *     绕圈半径[m] = Mag * (a+b) / Chassis_Wz
+ *     已知半径 R 时      Mag = R * Chassis_Wz / (a+b)
+ *     例：a+b=0.58m, Wz=120, R=8mm -> Mag=1.66
+ *
+ * 注意：只在小陀螺模式(Chassis_XTL)生效。
+ */
+volatile float Chassis_XtlCompMag   = 0.00f;  /* 幅值，单位同轮速目标 */
+volatile float Chassis_XtlCompPhase = 0.00f;  /* 相位，度，0 = 车体 +x */
+
+/* 兼容旧的常量补偿入口，默认 0，可与 Mag/Phase 叠加 */
+volatile float Chassis_XtlCompVx = 0.00f;
+volatile float Chassis_XtlCompVy = 0.00f;
+
+/*
+ * 每轮常值偏置（修四轮跟随差），单位同轮速目标
+ * 取值 = 目标 - 实测均值，默认值来自 2026-11-10 VarScope 采集：
+ *   Wz 目标 -120，实测 FR/FL/BL/BR = -119.93 / -119.18 / -119.23 / -119.94
+ * 轮序：0=前右 1=前左 2=后左 3=后右
+ */
+volatile float Chassis_WheelBias[4] = { -0.07f, -0.82f, -0.77f, -0.06f };
 
 void Chassis_InitChassis(){
 		Chassis_ChassisTypeDef *chassis = Chassis_ChassisPtr();
@@ -176,6 +207,21 @@ void Chassis_SetChassisRef(float RC_Vx,float RC_Vy,float RC_Wz){
 			                                              +chassis_status->Chassis_Vy * arm_cos_f32(-chassis_status->Chassis_Yaw_Rad)
 			                                              -chassis_status->Chassis_Vx * arm_sin_f32(-chassis_status->Chassis_Yaw_Rad + PI/2)
 																										-chassis_status->Chassis_Wz;		
+          /*
+           * 小陀螺旋转中心补偿：车体坐标系微小平移
+           *   comp_x = -Mag*cos(Phase) + CompVx
+           *   comp_y = -Mag*sin(Phase) + CompVy
+           */
+          {
+            float comp_ph = Chassis_XtlCompPhase * (PI / 180.0f);
+            float comp_vx = -Chassis_XtlCompMag * arm_cos_f32(comp_ph) + Chassis_XtlCompVx;
+            float comp_vy = -Chassis_XtlCompMag * arm_sin_f32(comp_ph) + Chassis_XtlCompVy;
+
+            chassis_status->Chassis_FontRight_Speed += -comp_vx - comp_vy;
+            chassis_status->Chassis_FontLeft_Speed  +=  comp_vx - comp_vy;
+            chassis_status->Chassis_BackLeft_Speed  +=  comp_vx + comp_vy;
+            chassis_status->Chassis_BackRight_Speed += -comp_vx + comp_vy;
+          }
           break;
       
 			case Chassis_Fp:
@@ -192,6 +238,15 @@ void Chassis_SetChassisRef(float RC_Vx,float RC_Vy,float RC_Wz){
 
 	
 
+
+		/* 每轮常值偏置：修四轮跟随差，避免实测速度不一致带来额外平移 */
+		if (chassis_status->chassis_mode != Chassis_NULL)
+		{
+			chassis_status->Chassis_FontRight_Speed += Chassis_WheelBias[0];
+			chassis_status->Chassis_FontLeft_Speed  += Chassis_WheelBias[1];
+			chassis_status->Chassis_BackLeft_Speed  += Chassis_WheelBias[2];
+			chassis_status->Chassis_BackRight_Speed += Chassis_WheelBias[3];
+		}
 }
 
 

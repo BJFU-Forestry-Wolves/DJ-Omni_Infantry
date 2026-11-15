@@ -58,7 +58,7 @@ const float REMOTE_CHASSIS_FOLLOW_WZ_GAIN						= 4.5f;    //跟随响应速度    原定
 const float REMOTE_CHASSIS_FOLLOW_WZ_MAX						= 120.0f;
 const float REMOTE_CHASSIS_XTL_WZ_GAIN							= 1.2f;      //小陀螺速度
 const float CHASSIS_YAW_ANGLE_OFFSET							= 170.62f;    //269.62
-const float CHASSIS_XTL_WZ										= 140.0f;     //180 跟随速度
+const float CHASSIS_XTL_WZ										= 100.0f;     //180 跟随速度
 
 float Const_PITCH_UMAXANGLE                       = 10.0f;   //10.4
 float Const_PITCH_UMAXANGLE_GRYO                  = 10.0f;    //40.4
