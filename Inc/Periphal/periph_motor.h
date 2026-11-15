@@ -32,6 +32,7 @@ typedef struct {
 	  float last_speed;
     float speed;
     float current;
+    float current_a;      // 3508转矩电流的真实值，单位A（= current * 20/16384），仅供调试观察
     float temp;
     uint8_t error_code;
 
