@@ -284,6 +284,7 @@ void rm3508_encoder_callback(Motor_MotorTypeDef *pmotor, uint8_t rxbuff[], uint3
     pmotor->encoder.angle   = (float)((int16_t)((uint16_t)rxbuff[0] << 8 | (uint16_t)rxbuff[1]));
     pmotor->encoder.speed   = (float)((int16_t)((uint16_t)rxbuff[2] << 8 | (uint16_t)rxbuff[3]))/19;
     pmotor->encoder.current = (float)((int16_t)((uint16_t)rxbuff[4] << 8 | (uint16_t)rxbuff[5]));
+    pmotor->encoder.current_a = pmotor->encoder.current * (20.0f / 16384.0f);   // 原始值换算成安培（C620满量程±16384对应±20A）
     pmotor->encoder.temp    = (float)((int16_t)((uint16_t)rxbuff[6]));
 
     int diff = pmotor->encoder.angle - pmotor->encoder.last_angle;
