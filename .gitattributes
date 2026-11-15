@@ -1,0 +1,5 @@
+# Build artifacts: on merge, always keep the LOCAL version (no conflict).
+# Requires once per machine: git config --global merge.ours.driver true
+*.hex    merge=ours
+*.elf    merge=ours
+*.bak-*  merge=ours
